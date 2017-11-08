@@ -1,0 +1,398 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <meta charset="UTF-8">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:900" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Capriola" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Ewert" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="css/custom.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ 
+
+    </head>
+
+    <body>
+     <nav class="nav-extended grey darken-4">
+        <div class="container">
+            <div class="nav-wrapper">
+               <a href="#" class="brand-logo">Business</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a></li>
+                  <li><a href="#">Sign In</a></li>
+                  <li><a href="#"><i class="medium material-icons">account_circle</i></a></li>
+               </ul>
+      
+               <ul class="side-nav" id="mobile-demo">
+                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">SignUP</a></li>
+                  <li><a href="#">SignIn</a></li>
+                  <li><a href="#">Profile</a></li>
+                </ul>
+            </div>
+          <div class="nav-content">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a href="#test1">Test 1</a></li>
+        <li class="tab"><a class="active" href="#test2">Test 2</a></li>
+        <li class="tab"><a href="#test3">Disabled Tab</a></li>
+        <li class="tab"><a href="#test4">Test 4</a></li>
+      </ul>
+    </div>
+    </div>
+  </nav>
+        <div class="jumbotron">
+             <div id="particles-js">
+                 <div class="inside-text">
+                      <span class="flow-text"><h2>Our goal is to inspire<br>Tallahassee to write 
+                        1,000,000<br>lines of code_</h2></span>
+                        <p >All over the country people are taking the <strong>HOUR OF CODE</strong> challenge issued by <strong>CODE.org</strong>. Millions of lines of code are being written. In the capital of Florida, Tallahassee, the community is taking the challenge and our goal is to write 1,000,000 lines of code_
+                    </p>
+                    <a class="waves-effect waves-light btn-large grey darken-4 modal-trigger"  href="#modalbottom">Tap to find out more</a>
+              </div>
+            </div>  
+   <div id="modal1" class="modal modal-scroll">
+   <div class="modal-content form-content">
+    <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text" class="validate">
+          <label for="username">Username</label>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password2" type="password" class="validate">
+          <label for="password2">Confirm Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email" data-error="wrong" data-success="right">Email</label>
+        </div>
+      </div>
+      <div class="input-field col s12">
+    <select>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Company</option>
+      <option value="2">Individual</option>
+      <option value="3">Option 3</option>
+    </select>
+    <label>Type of account</label>
+  </div>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+        
+  <div class="row">
+  <div class="col s12">
+  <p style="text-align: center;">OR</p> 
+  </div>
+  </div>
+  <div class="row">
+  <div class="col s6">
+  <a class="waves-effect waves-light btn-large">
+<i class="fa fa-facebook" aria-hidden="true"></i> Sign in with facebook</a>                      
+  </div>
+  <div class="col s6">
+  <a class="waves-effect waves-light btn-large social google">
+<i class="fa fa-google"></i> Sign in with Google</a>                      
+  </div>
+  </div>
+
+    
+      </form>
+       </div>
+       </div>
+        </div>
+  </div>
+  <div class="Cathead" style="text-align: center; background:#8e0e00; margin:0; padding: 2%;">
+    <h2 class="font-head" style="margin:0;">CATEGORIES</h2>
+  </div>
+
+ <div class="slideWrapper" style="min-height: 450px;">
+     <div class="container">
+     <div class="carousel">
+   <div class="section scrollspy" id="top"> 
+        <% for(var i of category ){%>
+            <a class="carousel-item"><img src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
+       <%}%>
+
+
+  </div>
+</div>
+        </div>
+        </div>
+
+<!--
+    <div class="container">
+
+        <div id="placeit">
+
+            <div id="nex">
+               <i  id="next" class="large material-icons">arrow_forward</i>
+            </div>
+     
+            <div id="side1">
+                <img src="AGRA.jpg" height="100%" width="100%"/>
+            </div>
+            <div id="side2">
+                <img src="NEW%20YORK.jpg" height="100%" width="100%"/>
+            </div>
+            <div id="side3">
+                <img src="PARIS.jpg" height="100%" width="100%"/>
+            </div>
+             <div id="pre">
+                    <i  id="previous" class="large material-icons">arrow_back</i>
+                </div>
+            </div>
+   
+      </div>
+  </div>
+-->
+<!--
+  l
+-->
+
+<div class="fixed-action-btn" style="padding-top: 0; position: fixed;">
+  <a id="menu" class="waves-effect waves-light btn-large btn-floating  click-to-toggle"   onclick="$('.tap-target').tapTarget('open')"><i class="material-icons">menu</i></a>
+</div>
+
+  <!-- Tap Target Structure -->
+  <div class="tap-target" data-activates="menu">
+    <div class="tap-target-content">
+      <h5>Title</h5>
+      <p>A bunch of text</p>
+    </div>
+  </div>
+<div class="bound ">
+<div class="container bound " style="padding: 0;">
+          <div class="row ">
+              
+          <div class="section scrollspy blog-post" id="middle">
+              <% for(var j of featured ){%>
+                  <div class="col s12 m4 l4">
+                      <div class="card z-depth-5 post1">
+                          <div class="card-image waves-effect waves-block waves-light">
+                              <img class="activator" src="./data/products/<%= j.product_path %>">
+                          </div>
+                          <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4"><%= j.product_name %><i class="material-icons right">more_vert</i></span>
+                              <p><a href="#">This is a link</a></p>
+                          </div>
+                          <div class="card-reveal">
+                              <span class="card-title grey-text text-darken-4"><%= j.product_name %><i class="material-icons right">close</i></span>
+                              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                          </div>
+                      </div>
+                  </div>
+              <%}%>
+
+              <div class="col s12 m12 l12">
+                  <div class="Cathead" style="text-align: center; background:rgb(122,16,0); margin:0; padding: 2%;">
+                           <h2 class="font-head" style="margin:0; opacity: 1;">TRENDING</h2>
+                </div>
+              </div>
+
+         
+        </div>
+              
+    </div>
+  </div>
+</div>
+ <div class="containerconnection" style="padding: 38px;" id="bottom" >
+<div class="slider">
+    <ul class="slides">
+      <li>
+       <img src="Sunrise.jpg"> 
+        <div class="caption left-align">
+          <div class="hero-text">
+            <h1>Dabbu Ratnani</h1>
+            <p>And I'm a Photographer</p>
+           </div>
+        </div>
+      </li>
+      <li>
+        <img src="Sunrise.jpg"> 
+        <div class="caption right-align">
+          <div class="hero-text">
+            <h1>Amitabh Bachchan</h1>
+            <p>And I'm Actor </p>
+           </div>
+        </div>
+      </li>
+      <li>
+         <img src="Sunrise.jpg"> 
+        <div class="caption left-align">
+          <div class="hero-text">
+            <h1>Asha Bhosle</h1>
+            <p>And I'm Singer </p>
+           </div>
+        </div>
+      </li>
+     </ul>
+  </div>
+  </div> 
+<!--
+  <div class="containerfeature" style="background-color: #1f1c18;">
+      <div class="container" style="background-color: #1f1c18;">
+  <div class="row" style="margin-bottom: 0px; padding: 5%">
+  <div class="col offset-l5 offset-s6 offset-m6 s6 l6 xs6 m6">
+  <a class="waves-effect waves-light btn modal-trigger" href="#modalbottom" >Features</a>
+  </div>
+  </div>
+      </div>
+  </div>
+-->
+
+  <!-- Modal Structure -->
+  <div id="modalbottom" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Products</h4>
+      <p>A bunch of text</p>
+    </div>
+      <div class="modal-content">
+      <h4>Forums</h4>
+      <p>A bunch of text</p>
+    </div>
+      <div class="modal-content">
+      <h4>Connections</h4>
+      <p>A bunch of text</p>
+    </div>
+  </div>
+
+ <footer class="page-footer grey darken-4">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright black">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+ 
+ <!-- <div class="slideWrapper">   
+  <div class="container thiscol">
+    <div class="row">
+      <div class="col s12">
+      <div id="pre">
+            PREVIOUS
+        </div>
+        <div id="main">
+            <div id="side1">
+                <img src="AGRA.jpg" height="100%" width="100%"/>
+            </div>
+            <div id="side2">
+                <img src="NEW%20YORK.jpg" height="100%" width="100%"/>
+            </div>
+            <div id="side3">
+                <img src="PARIS.jpg" height="100%" width="100%"/>
+            </div>
+        </div>
+        <div id="nex">
+            NEXT
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+  
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/velocity.min.js"></script>
+<script src="js/dynamics.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+     
+     <script type="text/javascript" src="js/custom.js"></script>
+     <script>particlesJS.load('particles-js','particles.json',function(){
+      console.log('particles.json loaded...')
+      })</script>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript">
+        $(document).ready(function(){
+      $('.carousel').carousel();
+      $(".modal").modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .8, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 1000, // Transition out duration
+      startingTop: '50%', // Starting top style attribute
+      endingTop: '20%', // Ending top style attribute
+     /*ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        alert("Ready");
+        console.log(modal, trigger);
+      },
+      complete: function() { alert('Closed'); } // Callback for Modal close*/
+    });
+      $('select').material_select();
+
+    $(".button-collapse").sideNav({
+        menuWidth: 300, // Default is 300
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true, // Choose whether you can drag to open on touch screens,
+      onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
+      onClose: function(el) { /* Do Stuff*/ }
+    });
+            $('.carousel').carousel();
+        
+     
+    });
+//      $('fixed-action-btn .tap-target').tapTarget('open');
+//      $('fixed-action-btn .tap-target').tapTarget('close');
+           $('.slider').slider(
+        {
+          transition: 2800,
+          interval :2800
+
+        });
+    
+
+      </script>
+      
+    </body>
+  </html>

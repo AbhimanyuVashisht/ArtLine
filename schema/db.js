@@ -65,6 +65,10 @@ const Category = db.define('categories', {
     category_name: {
         type: sequelize.DataTypes.STRING,
         allowNull: false
+    },
+    category_image: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
     }
 });
 
