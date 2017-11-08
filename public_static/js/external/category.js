@@ -1,4 +1,4 @@
-let filterApplied = { lbp: 0, ubp:1000, sort:0 }; // object to store the filters
+let filterApplied = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 }; // object to store the filters
 
 $(function () {
 
@@ -89,8 +89,9 @@ function modalView(pid) {
 
 //  function to fetch the product list from db done
 function getProducts(cid) {
-    console.log('inside getProducts')
-    $.get('/products', {cat_id: cid}, (result)=>{
+    console.log('inside getProducts');
+    filterApplied.catID = cid;
+    $.get('/products', filterApplied, (result)=>{
             console.log(result);
         });
 }
@@ -106,13 +107,15 @@ $('.price-filter-button').click(()=>{
         , sort: 0};
 
 
-    applyFilter();
+    // applyFilter();
 });
 //done
 // Select dropdown
 $('#select-menu').change(()=>{
     filterApplied.sort = $('#select-menu').val();
-    applyFilter();
+    $.get('/products', filterApplied, (result)=>{
+        console.log(result);
+    })
 });
 
 
