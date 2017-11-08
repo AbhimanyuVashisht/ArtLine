@@ -16,389 +16,218 @@
  
 </head>
 <body>
-    <nav class="nav-extended grey darken-4">
+      <nav class="nav-extended grey darken-4">
         <div class="container">
             <div class="nav-wrapper">
-               <a href="#" class="brand-logo">Business</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+               <a href="index.html" class="brand-logo">Business</a>
+               <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+               <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a class="active" href="index.html">Home</a></li>
+                  <li><a href="gallery.html">Gallery</a></li>
+                  <li><a href="Categories">Category</a></li>
+                  <li><a href="AboutUs">About Us</a></li>
                   <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a></li>
                   <li><a href="#">Sign In</a></li>
                   <li><a href="#"><i class="medium material-icons">account_circle</i></a></li>
                </ul>
-      
-               <ul class="side-nav" id="mobile-demo">
-                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">SignUP</a></li>
+               <ul class="side-nav" data-activates="slide-out" id="mobile-demo" class="button-collapse">
+                   <li><a class="active" href="index.html">Home</a></li>
+                  <li><a href="StartUpFront/gallery.html">Gallery</a></li>
+                  <li><a href="Categories">Category</a></li>
+                  <li><a href="AboutUs">About Us</a></li>
+                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">SignUp</a></li>
                   <li><a href="#">SignIn</a></li>
                   <li><a href="#">Profile</a></li>
                 </ul>
             </div>
-          <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#test1">Test 1</a></li>
-        <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-        <li class="tab"><a href="#test3">Disabled Tab</a></li>
-        <li class="tab"><a href="#test4">Test 4</a></li>
-      </ul>
-    </div>
-    </div>
-  </nav>
-  <header style="background: #fceabb; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #fceabb, #f8b500); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #fceabb, #f8b500);">
-  <div class="container" style="text-align: center; padding: 5%; background: #fceabb; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #fceabb, #f8b500); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #fceabb, #f8b500);">
-  <h2 class="font-head">Gallery</h2>
-  </div>
-  </header>
+         </div>
+      </nav>
+        <header class="bound">
+          <div class="container bound">
+                <div class="slideWrapper section scrollspy" style="min-height: 450px;" id="categories">
+                    <div class="carousel">
+                      <div class="section scrollspy" id="top"> 
+                          <% for(var i of category){%>
+                            <a class="carousel-item" href="#one!"><img src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
+                          <%}%>
+                          <!--<a class="carousel-item" href="#one!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
+                          <!--<a class="carousel-item" href="#two!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
+                          <!--<a class="carousel-item" href="#three!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
+                          <!--<a class="carousel-item" href="#four!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
+                          <!--<a class="carousel-item" href="#five!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
+                      </div>
+                   </div>
+                 </div>
+              </div>
+        </header>
         <section class="page-layout">
           <div class="container">
-            <div class="row">
-              <div class="col m6 l4 xs12" style="padding-top: 25px;">
-             <ul id="slide-out" class="side-nav">
-              <div class="container" style="padding-top: 18%"><li>
-              <div class="row">
-              <div class="col xs12 ">
-                <aside class="shop-category-sidebar">
-                  <div class="widget widget-search">
-                    <div class="__widget-content">
-                    <div class="nav-wrapper">
-                    <form method="post" class="search-box">
-                          <div class="input-field">
-                              <input id="search" type="search" type="search" placeholder="Search...">
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <button class="btn" type="submit">Search</button>
-                                    <i class="material-icons">close</i>
-                           </div>
-                      </form>
-                      </div>
-
+                <div class="row">
+                    <div class="col m6 l4 xs12" style="padding-top: 25px;">
+                       <ul id="slide-out" class="side-nav">
+                         <div class="container" style="padding-top: 18%">
+                            <li>
+                               <div class="row">
+                                 <div class="col xs12 ">
+                                    <aside class="shop-category-sidebar">
+                                           <div class="widget widget-search">
+                                              <div class="__widget-content">
+                                                  <div class="nav-wrapper">
+                                                       <form method="post" class="search-box">
+                                                         <div class="input-field">
+                                                            <input id="search" type="search" type="search" placeholder="Search...">
+                                                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                                            <button class="btn" type="submit">Search</button>
+                                                            <i class="material-icons">close</i>
+                                                         </div>
+                                                       </form>
+                                                  </div>
+                                              </div>
+                                           </div>
+                                           <hr class="mb-40">
+                                           <div class="widget widget-price-filter">
+                                             <h6 class="__widget-title">FILTER BY PRICE</h6>
+                                                 <p class="range-field"><input type="range" id="test5" min="0" max="100" /></p>
+                                                  <div type="range" id="test5" from="5" to="150" min="0" max="1000" class="__widget-content price-filter">
+                                                    <div class="price-slider-range"></div>
+                                                    <div class="price-filter-detail">
+                                                     <div class="price pull-left">Price :&nbsp;&dollar;<span class="from"></span><span class="hyphen">&nbsp;-&nbsp;&dollar;</span><span class="to"></span></div><a href="#" class="pull-right btn btn-small btn-primary price-filter-button" >FILTER</a>
+                                                  </div>
+                                                  </div>
+                                        </div>
+                                           <hr class="mb-40">
+                                           <div class="widget widget-categories">
+                                         <h6 class="__widget-title">CATEGORIES</h6>
+                                            <ul class="__widget-content category">
+                                                <% for( var j of category){%>
+                                                    <li data-id="<%= j.cat_id %>"><a onclick="getProducts(<%= j.cat_id %>)"><%= j.category_name%></a></li>
+                                                <%}%>
+                                            </ul>
+                                  </div>
+                                    </aside>
+                                 </div>
+                               </div>
+                            </li>
+                         </div>
+                       </ul>
+                       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                     </div>
-                  </div>
-                
-                  <hr class="mb-40">
-                  <div class="widget widget-price-filter">
-                    <h6 class="__widget-title">FILTER BY PRICE</h6>
-                    <div type="range" id="test5" from="5" to="150" min="0" max="1000" class="__widget-content price-filter">
-                      <div class="price-slider-range"></div>
-                      <div class="price-filter-detail">
-                        <div class="price pull-left">Price :&nbsp;&dollar;<span class="from"></span><span class="hyphen">&nbsp;-&nbsp;&dollar;</span><span class="to"></span></div><a href="#" class="pull-right btn btn-small btn-primary price-filter-button" >FILTER</a>
-                      </div>
-                    </div>
-                  </div>
-                  <hr class="mb-40">
-                   <div class="widget widget-categories">
-                    <h6 class="__widget-title">CATEGORIES</h6>
-                    <ul class="__widget-content category">
+                    <div class="col m12 l3 xs12 offset-l5 offset-m6">
+                       <form>
+                         <div class="input-field col s12">
+                              <select id="select-menu">
+                                  <option value="0" disabled selected>Default Sorting</option>
+                                  <option value="1">Sort By Popularity</option>
+                                  <option value="2">Sort By Average Rating</option>
+                                  <option value="3">Sort By Newness</option>
+                                  <option value="4">Sort By Price: Low To High</option>
+                                  <option value="5">Sort By Price: High To Low</option>
+                               </select>
 
+                          </div>
+                        </form>
+                      </div>
+                </div>
+                <div id="product" class="clothes-pics">
+                    <div class="row">
+                        <% for( var k of products){%>
+                            <div class="col m3 s6 xs12 l3 shop-product-wrapper">
+                                <div class="block-shop-product font-heading">
+                                    <div class="__image overlay-container">
+                                        <img src="./data/products/<%= k.product_path %>" alt="Shop Product"/>
+                                        <div class="overlay text-center">
+                                            <div class="__layer bgc-dark-o-3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="__info text-center">
+                                        <a href="#" data-id="<%= k.prod_id%>"><%= k.product_name %></a>
+                                        <ul>
+                                            <li class="clearfix">
+                                                <a href="#shop-quickview" class="quick-view" onclick="modalView(<%= k.prod_id%>)" rel="modal:open">
+                                                    <i class="small material-icons">search</i></a>
+                                                <a href="#" class="wish-list"><i class="small material-icons">favorite</i></a>
+                                                <a href="shopping-cart.html" class="wish-list"><i class="small material-icons">shopping_cart</i></a>
+                                            </li>
+
+                                        </ul>
+                                        <div class="__price"><span><%= k.price%></span>
+                                        </div>
+                                        <div data-rating="4" class="star-ratings">
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+                <div class="col l4 m6 xs12 s12 offset-l8 right-align">
+                   <p style="opacity: 1;">Showing&nbsp;<span class="from">13</span>&nbsp;to&nbsp;<span class="to">24</span>&nbsp;of&nbsp;<span class="total">50</span>&nbsp;results</p>
+                 </div>
+                <div class="col l12 m12 s12 xs12 center-align">
+                  <ul class="pagination">
+                      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                      <li class="active"><a href="#!">1</a></li>
+                      <li class="waves-effect"><a href="#!">2</a></li>
+                      <li class="waves-effect"><a href="#!">3</a></li>
+                      <li class="waves-effect"><a href="#!">4</a></li>
+                      <li class="waves-effect"><a href="#!">5</a></li>
+                      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                   </ul>
+                </div>
+           </div>
+        </section>
+      
+        <footer class="page-footer grey darken-4">
+              <div class="container">
+                <div class="row">
+                  <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                  </div>
+                  <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                      <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
                     </ul>
                   </div>
-                </aside>
-              </div>
-            </div></li>
-            </div>
-            </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-                
-              </div>
-              <div class="col m12 l3 xs12 offset-l5 offset-m6">
-                <form>
-                <div class="input-field col s12">
-                      <select id="select-menu">
-                        <option value="0" disabled selected>Default Sorting</option>
-                          <option value="1">Sort By Popularity</option>
-                          <option value="2">Sort By Average Rating</option>
-                          <option value="3">Sort By Newness</option>
-                          <option value="4">Sort By Price: Low To High</option>
-                          <option value="5">Sort By Price: High To Low</option>
-                      </select>
-                  
-                    </div>
-                </form>
-            </div>
-        <div id="product" class="clothes-pics">
-            <div class="row">
-                <div class="col m3 s6 xs12 l3 shop-product-wrapper">
-                <div class="block-shop-product font-heading">
-                  <div class="__image overlay-container"><img src="product-img-1-m.jpg" alt="Shop Product"/>
-                    <div class="overlay text-center">
-                      <div class="__layer bgc-dark-o-3"></div>
-                      <ul>
-                        <li class="clearfix"><a href="#shop-quickview"  class="quick-view" onclick="modalView(${i})"  rel="modal:open"><i class="small material-icons">search</i><a href="#" class="wish-list"><i class="small material-icons">favorite</i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="__info text-center"><a href="#" data-id="${filterProductList[i].prod_id}"></a>
-                    <div class="__price"><span>257</span>
-                    </div>
-                    <div data-rating="4" class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                  </div>
                 </div>
               </div>
-                <div class="col m3 s6 xs12 l3 shop-product-wrapper">
-                <div class="block-shop-product font-heading">
-                  <div class="__image overlay-container"><img src="product-img-1-m.jpg" alt="Shop Product"/>
-                    <div class="overlay text-center">
-                      <div class="__layer bgc-dark-o-3"></div>
-                      <ul>
-                        <li class="clearfix"><a href="#shop-quickview"  class="quick-view" onclick="modalView(${i})"  rel="modal:open"><i class="small material-icons">search</i><a href="#" class="wish-list"><i class="small material-icons">favorite</i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="__info text-center"><a href="#" data-id="${filterProductList[i].prod_id}"></a>
-                    <div class="__price"><span>257</span>
-                    </div>
-                    <div data-rating="4" class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                  </div>
+              <div class="footer-copyright black">
+                <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
                 </div>
               </div>
-        
-            
-                <div class="col m3 s6 xs12 l3 shop-product-wrapper">
-                <div class="block-shop-product font-heading">
-                  <div class="__image overlay-container"><img src="product-img-1-m.jpg" alt="Shop Product"/>
-                    <div class="overlay text-center">
-                      <div class="__layer bgc-dark-o-3"></div>
-                      <ul>
-                        <li class="clearfix"><a href="#shop-quickview"  class="quick-view" onclick="modalView(${i})"  rel="modal:open"><i class="small material-icons">search</i><a href="#" class="wish-list"><i class="small material-icons">favorite</i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="__info text-center"><a href="#" data-id="${filterProductList[i].prod_id}"></a>
-                    <div class="__price"><span>257</span>
-                    </div>
-                    <div data-rating="4" class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                  </div>
-                </div>
-              </div>
-          
-            
-                <div class="col m3 s6 xs12 l3 shop-product-wrapper">
-                <div class="block-shop-product font-heading">
-                  <div class="__image overlay-container"><img src="product-img-1-m.jpg" alt="Shop Product"/>
-                    <div class="overlay text-center">
-                      <div class="__layer bgc-dark-o-3"></div>
-                      <ul>
-                        <li class="clearfix"><a href="#shop-quickview"  class="quick-view" onclick="modalView(${i})"  rel="modal:open"><i class="small material-icons">search</i><a href="#" class="wish-list"><i class="small material-icons">favorite</i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="__info text-center"><a href="#" data-id="${filterProductList[i].prod_id}"></a>
-                    <div class="__price"><span>257</span>
-                    </div>
-                    <div data-rating="4" class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                  </div>
-                </div>
-              </div>
-          </div>
-                
-          
-<!--
-        <div class="row">
-          <div class="col s12 xs12 l6 product-thumbnail-slider-wrapper __content-left">
-            <div class="product-thumbnail-slider">
-              <div class="product-syn-slider-1-wrapper">
-                <div class="product-syn-slider-1 syn-slider-1 direction-nav">
-                  <div class="block-product-slider">
-                    <div data-mfp-src="public_static/assets/images/shop/product-img-2-l.jpg" class="__image zoom-button img-wrapper"><img src="public_static/assets/images/shop/product-img-2-l.jpg" width="750px" height="600px" alt="Product slider image"/></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 xs12 l6 __content-right">
--->
-<!--
-            <div class="product-detail">
-              <h3 class="fz-3-l"><a href="shop-single-fullwidth.html">${filterProductList[pid].product_name}</a></h3>
-              <div class="__rating clearfix">
-                <div data-rating='4' class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                <p class="color-secondary">(1 customer review)</p>
-              </div>
-              <div class="__price fz-4 font-heading">
-                <span class="color-primary">${filterProductList[pid].price}</span>
-              </div>
-              <div class="__text">
-                <p>Nullam fringilla tristique elit id varius. Nulla lacinia quam nec venenatis dignissim. Vivamus volutpat tempus semper. Cras feugiat mi sit amet risus consectetur, non consectetur nisl finibus. Ut ac eros quis mi volutpat cursus vel non risus. In non neque lacinia, aliquet tortor sed, consectetur nibh. Nulla faucibus risus in ligula elementum bibendum.</p>
-              </div>
-              <form>
-                <div class="__option-2 clearfix">
-                  <div class="__button"><a href="shop-cart.html" class="btn btn-primary"><i class="icon-shopping111"></i>ADD TO CART</a></div>
-                </div>
-              </form>
-              <div class="__others">
-                <p>VIEWS:&nbsp;<a>${filterProductList[pid].views}</a></p>
-                <p>ARTIST:&nbsp;<a href="#"><ArtistName></a></p>
-              </div>
-              
-              <ul class="social circle secondary responsive">
-                <li><a href="#"><i class="icon icon-facebook-1"></i></a></li>
-                <li><a href="#"><i class="icon icon-twitter-1"></i></a></li>
-              </ul>
-            </div>
-          </div>
--->
-        </div>
-<!--
-            <div class="row">
-                <div class="col m3 s6 xs12 shop-product-wrapper">
-                <div class="block-shop-product font-heading">
-                  <div class="__image overlay-container"><img src="product-img-1-m.jpg" alt="Shop Product"/>
-                    <div class="overlay text-center">
-                      <div class="__layer bgc-dark-o-3"></div>
-                      <ul>
-                        <li class="clearfix"><a href="#shop-quickview"  class="quick-view" onclick="modalView(${i})"  rel="modal:open"><i class="small material-icons">search</i><a href="#" class="wish-list"><i class="small material-icons">favorite</i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="__info text-center"><a href="#" data-id="${filterProductList[i].prod_id}"></a>
-                    <div class="__price"><span>257</span>
-                    </div>
-                    <div data-rating="4" class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                  </div>
-                </div>
-              </div>
-          </div>
--->
-        </div>
-              <div class="col l4 m6 xs12 s12 offset-l8 right-align">
-               <p style="opacity: 1;">Showing&nbsp;<span class="from">13</span>&nbsp;to&nbsp;<span class="to">24</span>&nbsp;of&nbsp;<span class="total">50</span>&nbsp;results</p>
-              </div>
-             
-              <div class="col l12 m12 s12 xs12 center-align">
-              <ul class="pagination">
-                  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                  <li class="active"><a href="#!">1</a></li>
-                  <li class="waves-effect"><a href="#!">2</a></li>
-                  <li class="waves-effect"><a href="#!">3</a></li>
-                  <li class="waves-effect"><a href="#!">4</a></li>
-                  <li class="waves-effect"><a href="#!">5</a></li>
-                  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
-              </div>
-              </div>
-              </div>
-                          <!-- <div class="row">
-              <div class="col xs12 hidden-lg">
-                <aside class="shop-category-sidebar">
-                  <div class="widget widget-search">
-                    <div class="__widget-content">
-                      <form method="post" class="search-box">
-                        <input type="search" placeholder="Search..."/>
-                        <button type="submit"><i class="icon-search-icon"></i></button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="widget widget-categories">
-                    <h6 class="__widget-title">CATEGORIES</h6>
-                    <ul class="__widget-content category">
-
-                    </ul>
-                  </div>
-                  <hr class="mb-40">
-                  <div class="widget widget-price-filter">
-                    <h6 class="__widget-title">FILTER BY PRICE</h6>
-                    <div data-from="5" data-to="150" data-min="0" data-max="1000" class="__widget-content price-filter">
-                      <div class="price-slider-range"></div>
-                      <div class="price-filter-detail">
-                        <div class="price pull-left">Price :&nbsp;&dollar;<span class="from"></span><span class="hyphen">&nbsp;-&nbsp;&dollar;</span><span class="to"></span></div><a href="#" class="pull-right btn btn-small btn-primary price-filter-button" >FILTER</a>
-                      </div>
-                    </div>
-                  </div>
-                </aside>
-              </div>
-            </div> -->
-            <!-- <div class="row product-listing">
-              <div class="col xs12">
-                <div class="filter-and-sort type-1 clearfix">
-                  <div class="__content-left">
-                    <div class="__hamburger shop-sidebar-toggle"><span></span></div>
-                    <p class="font-heading fz-6-s">FILTER</p>
-                  </div>
-                  <div class="__content-right category-sorting clearfix">
-                    <div class="input-field col s6">
-                      <form>
-                        <select>
-                          <option value="0" selected="selected">Default Sorting</option>
-                          <option value="1">Sort By Popularity</option>
-                          <option value="2">Sort By Average Rating</option>
-                          <option value="3">Sort By Newness</option>
-                          <option value="4">Sort By Price: Low To High</option>
-                          <option value="5">Sort By Price: High To Low</option>
-                        </select>
-
-                      </form>
-                      </div>
-                   
-                    <p class="font-heading fz-6-s">Showing&nbsp;<span class="from">13</span>-<span class="to">24</span>&nbsp;of&nbsp;<span class="total">50</span>&nbsp;results</p>
-                  </div>
-                </div>
-              </div>
-              <div id="product">
-
-              </div>
-            </div>
-          </div>
-        </section> -->
-  <!--       <section class="page-section no-padding border-bottom-lighter border-top-lighter">
-          <div class="container">
-            <nav class="pagination-2"><a href="#" class="button-previous"><i class="icon-left-open-big"></i><span>PREVIOUS</span></a><a href="#" class="button-next"><i class="icon-right-open-big"></i><span>NEXT</span></a>
-              <ul class="text-center">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-              </ul>
-            </nav>
-          </div>
-        </section> -->
-      </section>
-      <footer class="page-footer grey darken-4">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright black">
-            <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
         </footer>
- 
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="vendors/jquery-modal/jquery.modal.min.js"></script>
-    <script src="js/custom.js"></script>
 
-<script type="text/javascript">
-   $(document).ready(function() {
-    $('select').material_select();
-  });
-    $('.button-collapse').sideNav({
-      menuWidth: 300, // Default is 300
-      edge: 'left', // Choose the horizontal origin
-      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-      draggable: true, // Choose whether you can drag to open on touch screens,
-      onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
-      onClose: function(el) { /* Do Stuff*/ }
-    }
-  );
-</script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="public_static/vendors/jquery-modal/jquery.modal.min.js"></script>
+<!--    <script src="js/custom.js"></script>-->
+        <script type="text/javascript">
+               $(document).ready(function() {
+                $('select').material_select();
+                   $('.carousel').carousel();
+                   $('.button-collapse').sideNav({
+                  menuWidth: 300, // Default is 300
+                  edge: 'left', // Choose the horizontal origin
+                  closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                  draggable: true, // Choose whether you can drag to open on touch screens,
+                  onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
+                  onClose: function(el) { /* Do Stuff*/ }
+                }
+              );
+              });
+                
+        </script>
+        <script type="text/javascript" src="js/external/category.js"></script>
 </body>
 </html>

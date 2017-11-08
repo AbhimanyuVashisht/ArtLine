@@ -1,51 +1,13 @@
-let categoryList = [];
-let categoryProductList = [];
-let filterProductList = []; // to store the filter product list after applying filterApplied
 let filterApplied = { lbp: 0, ubp:1000, sort:0 }; // object to store the filters
 
 $(function () {
-    let categoryDOM = $('.category');
-
-    categoryDOM.empty();
-    getCategory(categoryDOM);
-
 
 });
 
-// function to form the categoryDOM
-function formCategoryDOM(categoryDOM) {
-    for(let i in categoryList){
-        let listElement = createListElement(i);
-        categoryDOM.append(listElement);
-    }
-}
 
 
-// function to create the category list element
-function createListElement(i) {
-    let listElement;
-    listElement = $(`<li data-id="${categoryList[i].cat_id}"><a onclick="getProducts(${categoryList[i].cat_id})">${categoryList[i].category_name.toUpperCase()}</a></li>`);
-    return listElement;
-}
 
-// function to make the ajax request to the server to fetch the categories
-function getCategory(categoryDOM) {
-    $.get('/category', (result)=>{
-        categoryList = result;
-        formCategoryDOM(categoryDOM);
-        getProducts(categoryList[0].cat_id);
-    });
 
-}
-
-// function to from the productDOM
-function formProductDOM(productDOM) {
-    productDOM.empty();
-    for(let i in filterProductList){
-        let cardElement = createCardElement(i);
-        productDOM.append(cardElement);
-    }
-}
 
 // function to create the product list element done
 function createCardElement(i) {
@@ -127,11 +89,9 @@ function modalView(pid) {
 
 //  function to fetch the product list from db done
 function getProducts(cid) {
-    $.get('/products', {
-        cat_id: cid}, (result)=>{
-            filterProductList = categoryProductList = result;
-            let productDOM = $('#product');
-            formProductDOM(productDOM);
+    console.log('inside getProducts')
+    $.get('/products', {cat_id: cid}, (result)=>{
+            console.log(result);
         });
 }
 
@@ -156,32 +116,4 @@ $('#select-menu').change(()=>{
 });
 
 
-// function to apply the filter object
-function applyFilter() {
-    let sortValue = filterApplied.sort;
-    if(sortValue == 0){
-        // Default Sort
-        filterProductList = categoryProductList;
-    }else if(sortValue == 1){
-        // Sort by popularity
-        filterProductList = categoryProductList.sort((a,b)=> {return b.views - a.views});
-    }else if(sortValue == 2){
-        // Sort by Average Rating
-        filterProductList = categoryProductList.sort((a,b)=> {return b.rating - a.rating});
-    }else if(sortValue == 3){
-        // Sort by Newness
-        filterProductList = categoryProductList.sort((a,b)=> {return a.updatedAt - b.updatedAt});
-    }else if(sortValue == 4){
-        // Sort by Price LOW to HIGH
-        filterProductList = categoryProductList.sort((a,b)=> {return a.price - b.price});
-    }else if(sortValue == 5){
-        // Sort by Price HIGH to LOW
-        filterProductList = categoryProductList.sort((a,b)=> {return b.price - a.price});
-    }
-    // Price Filter based on Range selected
-    filterProductList = filterProductList.filter((e)=>{
-        return e.price >= filterApplied.lbp && e.price <= filterApplied.ubp;
-    });
-    formProductDOM($('#product'));
-}
 
