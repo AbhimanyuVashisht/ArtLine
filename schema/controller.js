@@ -71,8 +71,22 @@ async function chooseOrderFilter(sortValue) {
     }
 }
 
+async function modalController(pid) {
+
+    // incrementing views with each ProductView
+    db.Products.findById(pid).then((prod)=>{
+        prod.increment('views', {by: 1})
+    });
+
+    return await db.Products.findOne({
+        where: {
+            prod_id: pid
+        }
+    })
+}
 module.exports = {
     categoryController,
     featuredController,
-    productController
+    productController,
+    modalController
 };

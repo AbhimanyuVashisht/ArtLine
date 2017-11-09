@@ -10,7 +10,8 @@ const bp = require('body-parser')
 const controller = require('./schema/controller')
     , categoryController = controller.categoryController
     , featuredController = controller.featuredController
-    , productController = controller.productController;
+    , productController = controller.productController
+    , modalController = controller.modalController;
 let routes = require('./routes/index')
     , users = require('./routes/users')
     , auth = require('./routes/auth');
@@ -57,7 +58,6 @@ app.get('/gallery', async (req, res)=>{
 });
 
 app.get('/products', async (req, res)=>{
-    // let categoryList = await categoryController();
     filter = req.query;
     let productList = await productController(filter);
 
@@ -65,6 +65,11 @@ app.get('/products', async (req, res)=>{
     // res.end();
 });
 
+app.get('/modal', async (req, res)=>{
+    console.log(req.query.prodID);
+    let modalView = await modalController(req.query.prodID);
+    res.render('modal', {product: modalView});
+});
 
 app.listen(8000, function(){
     console.log("ServerRunning on http://localhost:8000/");        
