@@ -40,7 +40,7 @@ async function productController(filter) {
 
 async function chooseOrderFilter(sortValue) {
 
-    let filter = { tuple: 'prod_id', order: 'ASC'}
+    let filter = { tuple: 'prod_id', order: 'ASC'};
     if(sortValue == 0){
         // Default Sort
         return filter;
