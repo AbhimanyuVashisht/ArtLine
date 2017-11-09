@@ -10,26 +10,11 @@ $(function () {
 
 
 // function to create the product list element done
-function createCardElement(i) {
-    let cardElement;
-    cardElement = $(`<div class="col m3 s6 xs12 l3 shop-product-wrapper">
-                <div class="block-shop-product font-heading">
-                  <div class="__image overlay-container"><img src="./data/${filterProductList[i].product_path}" alt="Shop Product"/>
-                    <div class="overlay text-center">
-                      <div class="__layer bgc-dark-o-3"></div>
-                      <ul>
-                        <li class="clearfix"><a href="#shop-quickview"  class="quick-view" onclick="modalView(${i})"  rel="modal:open"><i class="small material-icons">search</i><a href="#" class="wish-list"><i class="small material-icons">favorite</i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="__info text-center"><a href="#" data-id="${filterProductList[i].prod_id}">${filterProductList[i].product_name}</a>
-                    <div class="__price"><span>$${filterProductList[i].price}</span>
-                    </div>
-                    <div data-rating="4" class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                  </div>
-                </div>
-              </div>`);
-    return cardElement;
+function changeProducts(productList) {
+    console.log('im here');
+    let div = $('#product');
+    div.empty();
+    div.html( productList );
 }
 
 
@@ -92,7 +77,7 @@ function getProducts(cid) {
     console.log('inside getProducts');
     filterApplied.catID = cid;
     $.get('/products', filterApplied, (result)=>{
-            console.log(result);
+            changeProducts(result);
         });
 }
 
@@ -106,15 +91,13 @@ $('.price-filter-button').click(()=>{
         , ubp: upperBP
         , sort: 0};
 
-
-    // applyFilter();
 });
-//done
+
 // Select dropdown
 $('#select-menu').change(()=>{
     filterApplied.sort = $('#select-menu').val();
     $.get('/products', filterApplied, (result)=>{
-        console.log(result);
+        changeProducts(result);
     })
 });
 

@@ -49,7 +49,7 @@ let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 app.get('/gallery', async (req, res)=>{
     console.log('inside gallery');
    let categoryList = await categoryController();
-   let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
+   let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 } || req.query;
    let firstProductList = await productController(filter);
 
    res.render('gallery', {category: categoryList, products: firstProductList});
@@ -57,11 +57,12 @@ app.get('/gallery', async (req, res)=>{
 });
 
 app.get('/products', async (req, res)=>{
-    let categoryList = await categoryController();
+    // let categoryList = await categoryController();
     filter = req.query;
     let productList = await productController(filter);
 
-    res.render('gallery', {category: categoryList, products: productList})
+    res.render('product', {products: productList});
+    // res.end();
 });
 
 

@@ -9,13 +9,9 @@ module.exports = function(app) {
         done(null, user);
     });
     passport.deserializeUser(function(user, done) {
-        // User.findById(id, (err, user)=>{
-        //     done(err, user);
-        // });
         done(null, user);
     });
 
     require('./strategies/google.strategy')();
-    // require('./strategies/twitter.strategy')();
     // require('./strategies/facebook.strategy')();
 };
