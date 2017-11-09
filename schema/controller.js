@@ -100,6 +100,28 @@ async function addToCartController(user, pid) {
     }else{
         return 'Login to Add'
     }
+}
+
+async function cartController() {
+    // need to add the user
+    try{
+        let joinList = await db.User.findAll({
+                include: [{
+                    model: db.Products,
+                    through: {
+                        where: { fk_member_id:'109484023739009832780' }
+                    }
+                }]
+            });
+        for( let i in joinList){
+            if( joinList[i].dataValues.member_id === '109484023739009832780' ){
+                return joinList[i].dataValues.products;
+            }
+        }
+
+    }catch (err){
+        console.log(err);
+    }
 
 }
 module.exports = {
@@ -107,5 +129,6 @@ module.exports = {
     featuredController,
     productController,
     modalController,
-    addToCartController
+    addToCartController,
+    cartController
 };

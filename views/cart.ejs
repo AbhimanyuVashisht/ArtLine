@@ -70,42 +70,28 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="cart-item">
-                          <td class="product-img"><a href="#">
-                             <div class="image overlay-container">
-                                <div class=" overlay-hover bgc-dark-o-4"></div><img src="images/product-img-1-s.jpg" alt="Cart Item"/>
-                             </div></a>
-                          </td>
-                          <td class="product-name"><a href="#">FITCH ZIP THROUGH HOODIE</a></td>
-                          <td class="product-size color-primary">-</td>
-                          <td class="product-price">$200.00</td>
-                          <td class="product-quantity">
-                            <div class="quantity-input">
-                              <input id="icon-prefix" type="number" value="1" min="0" class="number"/>      
-                            </div>
-                          </td>
-                          <td class="product-total">$200.00</td>
-                          <td class="product-remove"><a href="#">&#9587;</a></td>
-                        </tr>
-                        <tr class="cart-item">
-                          <td class="product-img">
-                              <a href="#">
-                                  <div class="image overlay-container">
-                                    <div class="overlay-hover"></div><img src="images/product-img-1-s.jpg" alt="Cart Item"/>
-                                  </div>
-                              </a>
-                          </td>
-                          <td class="product-name"><a href="#">FITCH ZIP THROUGH HOODIE</a></td>
-                          <td class="product-size color-primary">M</td>
-                          <td class="product-price">$200.00</td>
-                          <td class="product-quantity">
-                            <div class="quantity-input">
-                              <input type="number" value="1" min="0" class="number"/>
-                            </div>
-                          </td>
-                          <td class="product-total">$200.00</td>
-                          <td class="product-remove"><a href="#">&#9587;</a></td>
-                        </tr>
+                      <% let total = 0;%>
+                        <% for( let i of cart){%>
+                            <% total = total + i.dataValues.price %>
+                            <tr class="cart-item">
+                                <td class="product-img"><a href="#">
+                                        <div class="image overlay-container">
+                                            <div class=" overlay-hover bgc-dark-o-4"></div><img src="./data/products/<%= i.dataValues.product_path%>" height="75px"  alt="Cart Item"/>
+                                        </div></a>
+                                </td>
+                                <td class="product-name"><a href="#"><%= i.dataValues.product_name%></a></td>
+                                <td class="product-size color-primary">-</td>
+                                <td class="product-price"><%= i.dataValues.price%></td>
+                                <td class="product-quantity">
+                                    <div class="quantity-input">
+                                        <input id="icon-prefix" type="number" value="1" min="0" class="number"/>
+                                    </div>
+                                </td>
+                                <td class="product-total">$200.00</td>
+                                <td class="product-remove"><a href="#">&#9587;</a></td>
+                            </tr>
+                        <%}%>
+
                       </tbody>
                     </table>
                   </div>
@@ -137,7 +123,7 @@
                                 <h4 class="__title">CART TOTAL</h4>
                                 <hr/>
                                 <div class="__sub-total">
-                                  <h6>SUBTOTAL</h6><span class="price">$400.00</span>
+                                  <h6>SUBTOTAL</h6><span class="price"><%= total%></span>
                                 </div>
                                 <div class="__shipping">
                                   <h6>SHIPPING AND HANDLING</h6><span>Free Shipping</span>

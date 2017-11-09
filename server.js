@@ -12,7 +12,9 @@ const controller = require('./schema/controller')
     , featuredController = controller.featuredController
     , productController = controller.productController
     , modalController = controller.modalController
-    , addToCartController = controller.addToCartController;
+    , addToCartController = controller.addToCartController
+    , cartController = controller.cartController;
+
 let routes = require('./routes/index')
     , users = require('./routes/users')
     , auth = require('./routes/auth');
@@ -74,15 +76,22 @@ app.get('/modal', async (req, res)=>{
 
 app.post('/addToCart', async (req, res)=>{
     let sessionUser = req.session.passport.user.member_id;
-    // console.log(sessionUser);
-    // console.log(req.body);
     try{
         let done = await addToCartController(sessionUser, req.body.prodID);
         console.log(done);
     }catch(err){
         console.log(err);
     }
+});
 
+app.get('/cart', async (req, res)=>{
+     // let sessionUser = req.session.passport.user.member_id;
+     try{
+         let cartList = await cartController();
+         res.render('cart', {cart: cartList});
+     }catch (err){
+         console.log(err);
+     }
 });
 
 app.listen(8000, function(){
