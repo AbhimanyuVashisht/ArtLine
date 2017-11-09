@@ -2,6 +2,8 @@ let filterApplied = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 }; // object t
 
 $(function () {
 
+
+
 });
 
 
@@ -20,7 +22,7 @@ function changeProducts(productList) {
 
 // function to create the modal view for each product done
 function modalView(pid) {
-    console.log(pid);
+    // console.log(pid);
     // ajax request to fetech modal and update the view count with each modal view
     $.get('/modal',{prodID: pid} ,(result)=>{
         let modalDOM = $('#shop-quickview');
@@ -39,6 +41,12 @@ function getProducts(cid) {
         });
 }
 
+function addToCart(pid) {
+    // console.log(pid);
+    $.post('/addToCart', {prodID : pid}, (done)=>{
+        console.log(done);
+    })
+}
 // Price filter done
 $('.price-filter-button').click(()=>{
 

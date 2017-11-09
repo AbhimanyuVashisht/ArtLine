@@ -54,7 +54,7 @@ const Products = db.define('products', {
     },
     rating:{
         type: sequelize.DataTypes.INTEGER,
-    }
+    },
 });
 
 const Category = db.define('categories', {
@@ -69,6 +69,17 @@ const Category = db.define('categories', {
     category_image: {
         type: sequelize.DataTypes.STRING,
         allowNull: false
+    }
+});
+
+const Cart = db.define('carts', {
+   fk_member_id: {
+       type: sequelize.DataTypes.STRING,
+       primaryKey: true
+   },
+    fk_prod_id: {
+       type: sequelize.DataTypes.INTEGER,
+       primaryKey: true
     }
 });
 
@@ -92,6 +103,9 @@ Organisation.hasMany(User, {foreignKey: 'fk_organisation_id'});
 
 Category.hasMany(User, {foreignKey: 'fk_category_id'});
 
+// ManyToMany Relation
+User.belongsToMany(Products, { through: Cart, foreignKey: 'fk_member_id' });
+Products.belongsToMany(User, { through: Cart, foreignKey: 'fk_prod_id' });
 
 db.sync().then(()=>{
     console.log("Database Ready");
@@ -102,5 +116,6 @@ module.exports = {
   User,
   Products,
   Category,
-  Organisation
+  Organisation,
+  Cart
 };

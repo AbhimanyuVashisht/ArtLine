@@ -12,7 +12,7 @@
     </div>
     <div class="col s12 xs12 l6 __content-right">
         <div class="product-detail">
-            <h3 class="fz-3-l"><a href="shop-single-fullwidth.html"><%= product.product_name%></a></h3>
+            <h3 class="fz-3-l"><a><%= product.product_name%></a></h3>
             <div class="__rating clearfix">
                 <div data-rating='4' class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
                 <p class="color-secondary">(1 customer review)</p>
@@ -25,7 +25,7 @@
             </div>
             <form>
                 <div class="__option-2 clearfix">
-                    <div class="__button"><a href="shop-cart.html" class="btn btn-primary"><i class="icon-shopping111"></i>ADD TO CART</a></div>
+                    <div class="__button"><a class="btn btn-primary" onclick="addToCart(<%= product.prod_id %>)"><i class="icon-shopping111"></i>ADD TO CART</a></div>
                 </div>
             </form>
             <br>

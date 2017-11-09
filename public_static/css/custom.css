@@ -710,7 +710,7 @@ table tbody{
     transform: translate(-100px, 20px);
 }
 .clothes-pics img{
-    opacity: 0;
+    opacity: 1;
     transform: translateX(-20px);
     transition: all 0.3 ease-in-out;
 }

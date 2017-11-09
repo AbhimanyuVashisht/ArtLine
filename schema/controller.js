@@ -84,9 +84,28 @@ async function modalController(pid) {
         }
     })
 }
+
+async function addToCartController(user, pid) {
+    console.log(user);
+    if( typeof user !== 'undefined' ){
+        console.log('yea');
+        try{
+            await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
+
+            return 'Done';
+        } catch (err){
+            console.log(err);
+            return 'Already Added';
+        }
+    }else{
+        return 'Login to Add'
+    }
+
+}
 module.exports = {
     categoryController,
     featuredController,
     productController,
-    modalController
+    modalController,
+    addToCartController
 };

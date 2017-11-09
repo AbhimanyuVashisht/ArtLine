@@ -11,7 +11,8 @@ const controller = require('./schema/controller')
     , categoryController = controller.categoryController
     , featuredController = controller.featuredController
     , productController = controller.productController
-    , modalController = controller.modalController;
+    , modalController = controller.modalController
+    , addToCartController = controller.addToCartController;
 let routes = require('./routes/index')
     , users = require('./routes/users')
     , auth = require('./routes/auth');
@@ -69,6 +70,19 @@ app.get('/modal', async (req, res)=>{
     console.log(req.query.prodID);
     let modalView = await modalController(req.query.prodID);
     res.render('modal', {product: modalView});
+});
+
+app.post('/addToCart', async (req, res)=>{
+    let sessionUser = req.session.passport.user.member_id;
+    // console.log(sessionUser);
+    // console.log(req.body);
+    try{
+        let done = await addToCartController(sessionUser, req.body.prodID);
+        console.log(done);
+    }catch(err){
+        console.log(err);
+    }
+
 });
 
 app.listen(8000, function(){
