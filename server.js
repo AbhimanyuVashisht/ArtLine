@@ -4,7 +4,6 @@ const path = require('path');
 const bp = require('body-parser')
     , ejs = require('ejs')
     , cookieParser = require('cookie-parser')
-    , passport = require('passport')
     , session = require('express-session');
 
 const controller = require('./schema/controller')
@@ -18,6 +17,8 @@ const controller = require('./schema/controller')
 let routes = require('./routes/index')
     , users = require('./routes/users')
     , auth = require('./routes/auth');
+
+let gateway = require('./paymentconfig/stripestrategy');
 
 const app = express();
 // view engine setup
@@ -38,11 +39,13 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
 
+app.use('/gateway', gateway);
+
 
 
 
 app.get('/', async (req, res)=>{
-    console.log('inside index');
+    // console.log('inside index');
 
     let categoryList = await categoryController();
     let featuredList = await featuredController();

@@ -88,7 +88,7 @@
                                     </div>
                                 </td>
                                 <td class="product-total">$200.00</td>
-                                <td class="product-remove"><a href="#">&#9587;</a></td>
+                                <td class="product-remove"><a onclick="deleteCartEle(<%= i.dataValues.prod_id%>)">&#9587;</a></td>
                             </tr>
                         <%}%>
 
@@ -174,5 +174,6 @@
        $('select').material_select();
          });
   </script>
+  <script type="text/javascript" src="js/external/cart.js"></script>
 </body>
 </html>
