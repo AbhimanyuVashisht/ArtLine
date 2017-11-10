@@ -1,6 +1,7 @@
 let GoogleStrategy = require('passport-google-oauth20').Strategy
     , passport = require('passport')
-    , sequelize = require('sequelize');
+    , mailController = require('../../sendgrid/controller');
+
 let User = require('../../schema/db').User;
 let secrets = require('../../secrets.json');
 
@@ -11,30 +12,35 @@ module.exports = function() {
             callbackURL: secrets.GOOGLE_CALLBACK
         },
         function(accessToken, refreshToken, profile, done) {
-            // console.log(req ,accessToken , refreshToken , profile , done);
+            // console.log(accessToken , refreshToken , profile , done);
             User.findOne({
                 where: { member_id: profile.id }
-            }).then((user)=>{
-                console.log('found');
-                done(null, user);
-            }).catch((err)=>{
-                console.log('not found');
-                let user = new User({
-                    member_id: profile.id,
-                    token: accessToken,
-                    username : profile.displayName,
-                    profile_dp : profile._json.image.url,
-                    email : profile.emails[0].value
-                });
-                user.save(user , function(err ,user){
-                    if(err){
-                        console.log("date base error");
+            }).then(async (user)=>{
+                if(user === null){
+                    console.log('not found');
+                    try{
+                        let user = await User.create({
+                            member_id: profile.id,
+                            token: accessToken,
+                            url: profile._json.url,
+                            username : profile.displayName,
+                            email : profile.emails[0].value,
+                            profile_dp : profile._json.image.url
+                        });
+                        // console.log(user);
+                        mailController.welcomeMailController(user.email);
+                        done(null, user);
+                    }catch (err){
+                        console.log("data base error");
                         done(err);
                     }
-                    else{
-                        done(null,user);
-                    }
-                });
+
+                }else {
+                    console.log('found');
+                    done(null, user);
+                }
+            }).catch((err)=>{
+                console.log(err);
             });
         }
     ));

@@ -77,11 +77,13 @@ app.get('/modal', async (req, res)=>{
     res.render('modal', {product: modalView});
 });
 
+
+
 app.post('/addToCart', async (req, res)=>{
     let sessionUser = req.session.passport.user.member_id;
     try{
         let done = await addToCartController(sessionUser, req.body.prodID);
-        console.log(done);
+        console.log('this one'+done);
     }catch(err){
         console.log(err);
     }

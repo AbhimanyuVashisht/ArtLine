@@ -1,5 +1,6 @@
-const db = require('./db')
-    , sequelize = require('sequelize');
+const db = require('./db');
+
+
 
 async function categoryController(){
 
@@ -89,14 +90,29 @@ async function addToCartController(user, pid) {
     console.log(user);
     if( typeof user !== 'undefined' ){
         console.log('yea');
-        try{
-            await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
-
+        // try{
+        //     // await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
+        //
+        //     return 'Done';
+        // } catch (err){
+        //     console.log(err);
+        //     return 'Already Added';
+        // }
+        db.Cart.findOne({
+            where: {
+                $and: {
+                    fk_member_id: user,
+                    fk_prod_id: pid
+                }
+            }
+        })
+            .then((elem)=>{
             return 'Done';
-        } catch (err){
-            console.log(err);
-            return 'Already Added';
-        }
+            })
+            .catch(async (err)=>{
+                await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
+                return 'Added';
+            })
     }else{
         return 'Login to Add'
     }
