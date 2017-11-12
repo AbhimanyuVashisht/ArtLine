@@ -22,7 +22,7 @@ async function featuredController() {
 async function productController(filter) {
     let orderFilter = await chooseOrderFilter(filter.sort);
     let offset = ( filter.page - 1 ) * 8;
-    return await db.Products.findAll({
+    return await db.Products.findAndCountAll({
         where: {
             $and: {
                 fk_category_id: filter.catID,

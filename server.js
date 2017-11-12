@@ -61,14 +61,15 @@ app.get('/gallery', async (req, res)=>{
    let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 } || req.query;
    let firstProductList = await productController(filter);
 
-   res.render('gallery', {category: categoryList, products: firstProductList});
+   res.render('gallery', {category: categoryList, products: firstProductList.rows});
 });
 
 app.get('/products', async (req, res)=>{
     filter = req.query;
     let productList = await productController(filter);
+    console.log('Product Count'+productList.count);
 
-    res.render('product', {products: productList});
+    res.render('product', {products: productList.rows});
     // res.end();
 });
 
