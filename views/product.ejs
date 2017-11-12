@@ -15,20 +15,15 @@
                     <li class="clearfix">
                         <a href="#shop-quickview" class="quick-view" onclick="modalView(<%= k.prod_id%>)" rel="modal:open">
                             <i class="small material-icons">search</i></a>
-                        <a href="#" class="wish-list"><i class="small material-icons">favorite</i></a>
-                        <a href="shopping-cart.html" class="wish-list"><i class="small material-icons">shopping_cart</i></a>
+                        <!--<a href="#" class="wish-list"><i class="small material-icons">favorite</i></a>-->
+                        <a class="wish-list" onclick="addToCart(<%= product.prod_id %>)"><i class="small material-icons">shopping_cart</i></a>
                     </li>
 
                 </ul>
-                <div class="__price"><span><%= k.price%></span>
+                <div class="__price">$<span><%= k.price%></span>
                 </div>
-                <div data-rating="4" class="star-ratings">
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                </div>
+                <!--<div>Likes- -->
+                <!--</div>-->
             </div>
         </div>
     </div>

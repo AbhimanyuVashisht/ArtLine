@@ -14,7 +14,8 @@ const controller = require('./schema/controller')
     , addToCartController = controller.addToCartController
     , cartController = controller.cartController
     , fetchUserController = controller.fetchUserController
-    , followController = controller.followController;
+    , followController = controller.followController
+    , removeFromCartController = controller.removeFromCartController;
 
 let routes = require('./routes/index')
     , users = require('./routes/users')
@@ -37,7 +38,7 @@ app.use(session({
 }));
 
 require('./config/passport')(app);
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
 
@@ -55,17 +56,19 @@ app.get('/', async (req, res)=>{
 });
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 
-app.get('/gallery', async (req, res)=>{
+app.get('/gallery/:page?', async (req, res)=>{
     console.log('inside gallery');
    let categoryList = await categoryController();
    let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 } || req.query;
+   // filter.page = req.query.page;
    let firstProductList = await productController(filter);
 
-   res.render('gallery', {category: categoryList, products: firstProductList.rows});
+   res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1)});
 });
 
 app.get('/products', async (req, res)=>{
     filter = req.query;
+    console.log(filter);
     let productList = await productController(filter);
     console.log('Product Count'+productList.count);
 
@@ -76,18 +79,19 @@ app.get('/products', async (req, res)=>{
 app.get('/modal', async (req, res)=>{
     console.log(req.query.prodID);
     let modalView = await modalController(req.query.prodID);
-    // console.log(modalView);
-    // console.log(modalView.users[0].member_id)
-    res.render('modal', {product: modalView});
+    // console.log(modalView[0][0]);
+    // console.log(modalView.users[0].member_id);
+    res.render('modal', { product: modalView[0][0] });
 });
 
 
 
 app.post('/addToCart', async (req, res)=>{
-    let sessionUser = req.session.passport.user.member_id;
+    // let sessionUser = req.session.passport.user.member_id;
+    let sessionUser = '109484023739009832780';
     try{
-        let done = await addToCartController(sessionUser, req.body.prodID);
-        console.log('this one'+done);
+        await addToCartController(sessionUser, req.body.prodID);
+        console.log('this one');
     }catch(err){
         console.log(err);
     }
@@ -101,6 +105,10 @@ app.get('/cart', async (req, res)=>{
      }catch (err){
          console.log(err);
      }
+});
+
+app.get('/billing', (req, res)=>{
+    res.render('billing');
 });
 
 app.get('/user/:id', async (req, res)=>{
@@ -126,6 +134,20 @@ app.post('/follow', (req, res)=>{
     }
     // res.end()
 });
+
+app.post('/removeFromCart', async (req, res)=>{
+    // console.log(req.body);
+    user = 109484023739009832780;
+    try {
+        await removeFromCartController(user, req.body.prodID);
+        let cartList = await cartController();
+        res.render('cart', {cart: cartList});
+
+    }catch (err){
+        console.log(err);
+    }
+
+})
 
 app.listen(8000, function(){
     console.log("ServerRunning on http://localhost:8000/");        

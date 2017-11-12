@@ -130,6 +130,7 @@ db.sync().then(()=>{
 
 
 module.exports = {
+    db,
   User,
   Products,
   Category,

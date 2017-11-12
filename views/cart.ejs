@@ -22,28 +22,20 @@
   <nav class="nav-extended grey darken-4">
     <div class="container">
             <div class="nav-wrapper">
-               <a href="#" class="brand-logo">Business</a>
+               <a href="/" class="brand-logo">Business</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a></li>
-                  <li><a href="#">Sign In</a></li>
+                  <li><a class="active" href="/">Home</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
                   <li><a href="#"><i class="medium material-icons">account_circle</i></a></li>
                </ul>
       
                <ul class="side-nav" id="mobile-demo">
-                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">SignUP</a></li>
-                  <li><a href="#">SignIn</a></li>
+                  <li><a class="active" href="/">Home</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
                   <li><a href="#">Profile</a></li>
                 </ul>
             </div>
-          <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#test1">Test 1</a></li>
-        <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-        <li class="tab"><a href="#test3">Disabled Tab</a></li>
-        <li class="tab"><a href="#test4">Test 4</a></li>
-      </ul>
-    </div>
     </div>
 </nav>
   <header class="bound">
@@ -62,14 +54,12 @@
                         <tr>
                           <th class="product-img">PRODUCT</th>
                           <th class="product-name">NAME</th>
-                          <th class="product-size">SIZE</th>
                           <th class="product-price">PRICE</th>
-                          <th class="product-quantity">QUANTITY</th>
                           <th class="product-total">TOTAL</th>
                           <th class="product-remove">&nbsp;</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="cartbody">
                       <% let total = 0;%>
                         <% for( let i of cart){%>
                             <% total = total + i.dataValues.price %>
@@ -80,13 +70,7 @@
                                         </div></a>
                                 </td>
                                 <td class="product-name"><a href="#"><%= i.dataValues.product_name%></a></td>
-                                <td class="product-size color-primary">-</td>
                                 <td class="product-price"><%= i.dataValues.price%></td>
-                                <td class="product-quantity">
-                                    <div class="quantity-input">
-                                        <input id="icon-prefix" type="number" value="1" min="0" class="number"/>
-                                    </div>
-                                </td>
                                 <td class="product-total">$200.00</td>
                                 <td class="product-remove"><a onclick="deleteCartEle(<%= i.dataValues.prod_id%>)">&#9587;</a></td>
                             </tr>
@@ -98,9 +82,9 @@
                 </div>
               </div>
               <div class="row">
-                    <div class="col l4 m6 xs12 pt-55">
+                    <div class="col l4 m6 xs12 pt-55 last-padd">
                       <div class="shop-cart-shipping">
-                        <h4 class="title">CALCULATE SHIPPING</h4>
+                        <h4 class="title"><b>Shipping Address</b></h4>
                         <div class="input-field col s12">
                           <select>
                             <option value="" disabled selected>Choose Your Country</option>
@@ -115,10 +99,10 @@
                           <label>Country</label>
                         </div>
                         <input type="text" name="address" placeholder="Address" class="mb-20">
-                        <input type="text" name="postcode" placeholder="Postcode / Zip"><a href="#" class="btn btn-primary no-border">UPDATE TOTALS</a>
+                        <input type="text" name="postcode" placeholder="Postcode / Zip">
                       </div>
                     </div>
-                    <div class="col l5 offset-l3 xs12 m6 pt-55">
+                    <div class="col l5 offset-l3 xs12 m6 pt-55 last-padd">
                             <div class="shop-cart-total">
                                 <h4 class="__title">CART TOTAL</h4>
                                 <hr/>
@@ -134,6 +118,7 @@
                                 <hr class="no-margin"/>
                                 <div class="__total">
                                   <h4>TOTAL</h4><span class="price">$516.00</span>
+                                   <span id="paym"><a href="/billing" class="btn btn-primary no-border">Payment</a></span>
                                 </div>
                             </div>
                     </div>

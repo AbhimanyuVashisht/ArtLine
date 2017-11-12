@@ -1,7 +1,5 @@
 const db = require('./db');
 
-
-
 async function categoryController(){
 
     return await db.Category.findAll({
@@ -79,14 +77,18 @@ async function modalController(pid) {
         prod.increment('views', {by: 1})
     });
 
-    return await db.Products.findOne({
-        where: {
-            prod_id: pid
-        },
-        include: [{
-            model: db.User
-        }]
-    });
+    // return await db.User.findOne({
+    //
+    //     include: [{
+    //         model: db.Products,
+    //         required: true,
+    //         where: {
+    //             prod_id: pid
+    //         },
+    //     }]
+    // });
+
+    return await db.db.query("SELECT * FROM users, products WHERE products.prod_id = '"+ pid + "' AND users.member_id = products.fk_member_id;");
 }
 
 async function addToCartController(user, pid) {
@@ -101,8 +103,14 @@ async function addToCartController(user, pid) {
                 }
             }
         })
-            .then((elem)=>{
-            return 'Done';
+            .then(async (elem)=>{
+                if(elem) {
+                    return 'Already Added';
+                }else{
+                    console.log('hey here');
+                    await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
+                    return 'Added';
+                }
             })
             .catch(async (err)=>{
                 await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
@@ -110,6 +118,25 @@ async function addToCartController(user, pid) {
             })
     }else{
         return 'Login to Add'
+    }
+}
+
+async function removeFromCartController(user, pid) {
+    console.log(user);
+    // user = 105864670115367217760;
+    if( user ){
+        try {
+            return await db.Cart.destroy({
+                where:{
+                    fk_member_id: user,
+                    fk_prod_id: pid
+                }
+            })
+        }catch (err){
+            console.log(err);
+        }
+    }else{
+        console.log('Login To Remove')
     }
 }
 
@@ -206,5 +233,6 @@ module.exports = {
     addToCartController,
     cartController,
     fetchUserController,
-    followController
+    followController,
+    removeFromCartController
 };

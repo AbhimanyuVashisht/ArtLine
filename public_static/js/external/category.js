@@ -50,12 +50,15 @@ function addToCart(pid) {
 // Price filter done
 $('.price-filter-button').click(()=>{
 
-    let lowerBP = $('.from').html();
-    let upperBP = $('.to').html();
-    // this filter will act as a array filter
-    filterApplied = {lbp: lowerBP
-        , ubp: upperBP
-        , sort: 0};
+    let lowerBP = $('.irs-from').html();
+    let upperBP = $('.irs-to').html();
+
+    filterApplied.lbp = Number(lowerBP.split('$')[1]);
+    filterApplied.ubp = Number(upperBP.split('$')[1]);
+
+    $.get('/products', filterApplied, (result)=>{
+        changeProducts(result);
+    })
 
 });
 

@@ -8,6 +8,9 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
       <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/ion.rangeSlider.css">
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="/css/ion.rangeSlider.skinHTML5.css">
       <link rel="stylesheet" type="text/css" href="css/custom.css">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -19,20 +22,21 @@
       <nav class="nav-extended grey darken-4">
         <div class="container">
             <div class="nav-wrapper">
-               <a href="index.html" class="brand-logo">Business</a>
+               <a href="/" class="brand-logo">Business</a>
                <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li><a class="active" href="index.html">Home</a></li>
-                  <li><a href="gallery.html">Gallery</a></li>
-                  <li><a href="Categories">Category</a></li>
-                  <li><a href="AboutUs">About Us</a></li>
-                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a></li>
-                  <li><a href="#">Sign In</a></li>
+                  <li><a class="active" href="/">Home</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
+                  <ul id="dropdown3" class="dropdown-content">
+                        <li><a href="/cart">Items:<span class="new badge">1</span></a></li>
+                    </ul>
+                  <li><a class="waves-effect waves-block waves-light dropdown-button" data-activates="dropdown3">
+                        <i class="medium material-icons">shopping_cart</i></a></li>
                   <li><a href="#"><i class="medium material-icons">account_circle</i></a></li>
                </ul>
                <ul class="side-nav" data-activates="slide-out" id="mobile-demo" class="button-collapse">
-                   <li><a class="active" href="index.html">Home</a></li>
-                  <li><a href="StartUpFront/gallery.html">Gallery</a></li>
+                   <li><a class="active" href="/">Home</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
                   <li><a href="Categories">Category</a></li>
                   <li><a href="AboutUs">About Us</a></li>
                   <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">SignUp</a></li>
@@ -66,6 +70,14 @@
                     <div class="col m6 l4 xs12" style="padding-top: 25px;">
                        <ul id="slide-out" class="side-nav">
                          <div class="container" style="padding-top: 18%">
+                             <li><a class="active" href="index.html">Home</a></li>
+                             <li><a href="StartUpFront/gallery.html">Gallery</a></li>
+                               <ul id="dropdown2" class="dropdown-content">
+                                 <li><a href="#!"><span class="new badge">1</span></a></li>
+                               </ul>
+                            <li><a class="waves-effect waves-block waves-light dropdown-button" data-activates="dropdown2">
+                           <i class="small material-icons">shopping_cart</i></a></li>
+                            <li><a href="#">Profile</a></li>
                             <li>
                                <div class="row">
                                  <div class="col xs12 ">
@@ -87,11 +99,11 @@
                                            <hr class="mb-40">
                                            <div class="widget widget-price-filter">
                                              <h6 class="__widget-title">FILTER BY PRICE</h6>
-                                                 <p class="range-field"><input type="range" id="test5" min="0" max="100" /></p>
+                                               <p class="range-field"><div><input type="range" id="test5"></div></p>
                                                   <div type="range" id="test5" from="5" to="150" min="0" max="1000" class="__widget-content price-filter">
                                                     <div class="price-slider-range"></div>
                                                     <div class="price-filter-detail">
-                                                     <div class="price pull-left">Price :&nbsp;&dollar;<span class="from"></span><span class="hyphen">&nbsp;-&nbsp;&dollar;</span><span class="to"></span></div><a href="#" class="pull-right btn btn-small btn-primary price-filter-button" >FILTER</a>
+                                                     <a href="#" class="pull-right btn btn-small btn-primary price-filter-button" >FILTER</a>
                                                   </div>
                                                   </div>
                                         </div>
@@ -145,20 +157,14 @@
                                             <li class="clearfix">
                                                 <a href="#shop-quickview" class="quick-view" onclick="modalView(<%= k.prod_id%>)" rel="modal:open">
                                                     <i class="small material-icons">search</i></a>
-                                                <a href="#" class="wish-list"><i class="small material-icons">favorite</i></a>
-                                                <a href="shopping-cart.html" class="wish-list"><i class="small material-icons">shopping_cart</i></a>
+                                                <!--<a href="#" class="wish-list"><i class="small material-icons">favorite</i></a>-->
+                                                <a class="wish-list" onclick="addToCart(<%= k.prod_id %>)"><i class="small material-icons">shopping_cart</i></a>
                                             </li>
 
                                         </ul>
-                                        <div class="__price"><span><%= k.price%></span>
+                                        <div class="__price">$<span><%= k.price%></span>
                                         </div>
-                                        <div data-rating="4" class="star-ratings">
-                                            <span>&#9733;</span>
-                                            <span>&#9733;</span>
-                                            <span>&#9733;</span>
-                                            <span>&#9733;</span>
-                                            <span>&#9733;</span>
-                                        </div>
+                                       <!--<div>Likes-</div>-->
                                     </div>
                                 </div>
                             </div>
@@ -170,13 +176,7 @@
                  </div>
                 <div class="col l12 m12 s12 xs12 center-align">
                   <ul class="pagination">
-                      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                      <li class="active"><a href="#!">1</a></li>
-                      <li class="waves-effect"><a href="#!">2</a></li>
-                      <li class="waves-effect"><a href="#!">3</a></li>
-                      <li class="waves-effect"><a href="#!">4</a></li>
-                      <li class="waves-effect"><a href="#!">5</a></li>
-                      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                      
                    </ul>
                 </div>
            </div>
@@ -212,10 +212,25 @@
 
       </div>
 
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script src="/js/materialize-pagination.js"></script>
         <script type="text/javascript" src="js/jquery-modal/jquery.modal.min.js"></script>
+        <script src="/js/ion.rangeSlider.min.js"></script>
+        <script>
+            $('.pagination').materializePagination({
+                align: 'center',
+                lastPage: <%= pages%>,
+                firstPage:  1,
+                urlParameter: 'page',
+                useUrlParameter: true,
+                onClickCallback: function(requestedPage){
+                    console.log('Requested page is '+ requestedPage);
+                }
+            }); 
+        </script>
 <!--    <script src="js/custom.js"></script>-->
+    
         <script type="text/javascript">
                $(document).ready(function() {
                 $('select').material_select();
@@ -229,6 +244,26 @@
                   onClose: function(el) { /* Do Stuff*/ }
                 }
               );
+                   $("#test5").ionRangeSlider({
+                        type: "double",
+                        grid: true,
+                        min: 0,
+                        max: 999,
+                        from: 200,
+                        to: 800,
+                        prefix: "$"
+                    });
+                   $('.dropdown-button').dropdown({
+                              inDuration: 300,
+                              outDuration: 225,
+                              constrainWidth: false, // Does not change width of dropdown to that of the activator
+                              hover: true, // Activate on hover
+                              gutter: 0, // Spacing from edge
+                              belowOrigin: false, // Displays dropdown below the button
+                              alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                              stopPropagation: false // Stops event propagation
+                            }
+                   );
               });
                 
         </script>

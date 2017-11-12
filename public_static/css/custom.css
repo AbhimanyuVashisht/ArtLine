@@ -718,3 +718,16 @@ table tbody{
     opacity: 1;
     transform: translateX(0px);
 }
+#paym{
+    padding-left: 20px;
+}
+.last-padd{
+    margin-bottom: 30px;
+}
+.top-padd{
+    background-color:#eceff1;
+    padding: 15%;
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+

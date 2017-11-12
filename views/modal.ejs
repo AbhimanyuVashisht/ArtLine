@@ -4,7 +4,7 @@
             <div class="product-syn-slider-1-wrapper">
                 <div class="product-syn-slider-1 syn-slider-1 direction-nav">
                     <div class="block-product-slider">
-                        <div data-mfp-src="assets/images/shop/product-img-2-l.jpg" class="__image zoom-button img-wrapper"><img src="./data/products/<%= product.product_path%>" width="750px" height="600px" alt="Product slider image"/></div>
+                        <div data-mfp-src="assets/images/shop/product-img-2-l.jpg" class="__image zoom-button img-wrapper"><img src="./data/products/<%= product.product_path %>" width="750px" height="600px" alt="Product slider image"/></div>
                     </div>
                 </div>
             </div>
@@ -13,10 +13,10 @@
     <div class="col s12 xs12 l6 __content-right">
         <div class="product-detail">
             <h3 class="fz-3-l"><a><%= product.product_name%></a></h3>
-            <div class="__rating clearfix">
-                <div data-rating='4' class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                <p class="color-secondary">(1 customer review)</p>
-            </div>
+            <!--<div class="__rating clearfix">-->
+                <!--<div data-rating='4' class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>-->
+                <!--<p class="color-secondary">(1 customer review)</p>-->
+            <!--</div>-->
             <div class="__price fz-4 font-heading">
                 <span class="color-primary"><%= product.price %></span>
             </div>
@@ -31,7 +31,7 @@
             <br>
             <div class="__others">
                 <p>VIEWS:&nbsp;<a><%= product.views%></a></p>
-                <p>ARTIST:&nbsp;<a href="/user/<%= product.users[0].member_id%>"><%= product.users[0].username %></a></p>
+                <p>ARTIST:&nbsp;<a href="/user/<%= product.member_id%>"><%= product.username %></a></p>
             </div>
 
             <ul class="social circle secondary responsive">

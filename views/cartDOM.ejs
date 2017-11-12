@@ -1,0 +1,15 @@
+<% let total = 0;%>
+<% for( let i of cart){%>
+<% total = total + i.dataValues.price %>
+<tr class="cart-item">
+    <td class="product-img"><a href="#">
+            <div class="image overlay-container">
+                <div class=" overlay-hover bgc-dark-o-4"></div><img src="./data/products/<%= i.dataValues.product_path%>" height="75px"  alt="Cart Item"/>
+            </div></a>
+    </td>
+    <td class="product-name"><a href="#"><%= i.dataValues.product_name%></a></td>
+    <td class="product-price"><%= i.dataValues.price%></td>
+    <td class="product-total">$200.00</td>
+    <td class="product-remove"><a onclick="deleteCartEle(<%= i.dataValues.prod_id%>)">&#9587;</a></td>
+</tr>
+<%}%>

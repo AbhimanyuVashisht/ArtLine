@@ -23,29 +23,26 @@
      <nav class="nav-extended grey darken-4">
         <div class="container">
             <div class="nav-wrapper">
-               <a href="#" class="brand-logo">Business</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a></li>
-                  <li><a href="#">Sign In</a></li>
+               <a href="/" class="brand-logo">Business</a>
+               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+               <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a class="active" href="/">Home</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
+                  <li><a href="#categories">Category</a></li>
+                  <li><a href="#bottom">About Us</a></li>
+                  <li><a class="waves-effect waves-light btn" id="btnClick">Sign In With Google</a></li>
                   <li><a href="#"><i class="medium material-icons">account_circle</i></a></li>
                </ul>
-      
                <ul class="side-nav" id="mobile-demo">
-                  <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">SignUP</a></li>
-                  <li><a href="#">SignIn</a></li>
+                   <li><a class="active" href="/">Home</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
+                  <li><a href="#categories">Category</a></li>
+                  <li><a href="AboutUs">About Us</a></li>
+                  <li><a class="waves-effect waves-light btn" id="btnClick">SignIn</a></li>
                   <li><a href="#">Profile</a></li>
                 </ul>
             </div>
-          <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#test1">Test 1</a></li>
-        <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-        <li class="tab"><a href="#test3">Disabled Tab</a></li>
-        <li class="tab"><a href="#test4">Test 4</a></li>
-      </ul>
-    </div>
-    </div>
+        </div>
   </nav>
         <div class="jumbotron">
              <div id="particles-js">
@@ -57,11 +54,12 @@
                     <a class="waves-effect waves-light btn-large grey darken-4 modal-trigger"  href="#modalbottom">Tap to find out more</a>
               </div>
             </div>  
+
    <div id="modal1" class="modal modal-scroll">
    <div class="modal-content form-content">
     <div class="row">
     <form class="col s12">
-      <div class="row">
+     <!-- <div class="row">
         <div class="input-field col s6">
           <input placeholder="Placeholder" id="first_name" type="text" class="validate">
           <label for="first_name">First Name</label>
@@ -124,16 +122,17 @@
   <a class="waves-effect waves-light btn-large social google">
 <i class="fa fa-google"></i> Sign in with Google</a>                      
   </div>
-  </div>
+  </div>-->
 
     
       </form>
        </div>
        </div>
         </div>
+
   </div>
   <div class="Cathead" style="text-align: center; background:#8e0e00; margin:0; padding: 2%;">
-    <h2 class="font-head" style="margin:0;">CATEGORIES</h2>
+    <h2 class="font-head" id="categories" style="margin:0;">CATEGORIES</h2>
   </div>
 
  <div class="slideWrapper" style="min-height: 450px;">
@@ -341,7 +340,6 @@
   
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/velocity.min.js"></script>
 <script src="js/dynamics.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
       
@@ -379,17 +377,47 @@
       onClose: function(el) { /* Do Stuff*/ }
     });
             $('.carousel').carousel();
-        
-     
-    });
-//      $('fixed-action-btn .tap-target').tapTarget('open');
-//      $('fixed-action-btn .tap-target').tapTarget('close');
-           $('.slider').slider(
+        $('.slider').slider(
         {
           transition: 2800,
           interval :2800
 
         });
+            $('.scrollspy').scrollSpy({
+            scrollOffset: 0
+         });
+            $("#btnClick").click(function () {  
+  
+            $.ajax({  
+
+                type: 'POST',  
+                dataType: 'json',  
+                contentType: 'application/json',  
+                url: '/Home/checkSession',  
+                data: 'session:"true"',  
+                success: function (data) {    
+                    if (data.sessionValue==true)  
+                    {  
+                        $("#btnClick").attr('value', 'SignOut');  
+                    }  
+                    else  
+                    {  
+                        $("btnClick").attr('value', 'SignIn With Google');
+                    }  
+                },  
+                error: function (xhr) {  
+                    alert('error');  
+                }  
+            });  
+
+        });
+    
+        
+     
+    });
+//      $('fixed-action-btn .tap-target').tapTarget('open');
+//      $('fixed-action-btn .tap-target').tapTarget('close');
+          
     
 
       </script>
