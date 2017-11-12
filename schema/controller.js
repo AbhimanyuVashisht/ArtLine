@@ -82,22 +82,17 @@ async function modalController(pid) {
     return await db.Products.findOne({
         where: {
             prod_id: pid
-        }
-    })
+        },
+        include: [{
+            model: db.User
+        }]
+    });
 }
 
 async function addToCartController(user, pid) {
     console.log(user);
-    if( typeof user !== 'undefined' ){
+    if( user ){
         console.log('yea');
-        // try{
-        //     // await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
-        //
-        //     return 'Done';
-        // } catch (err){
-        //     console.log(err);
-        //     return 'Already Added';
-        // }
         db.Cart.findOne({
             where: {
                 $and: {
@@ -138,13 +133,78 @@ async function cartController() {
     }catch (err){
         console.log(err);
     }
-
 }
+
+function followController(userSession, followingID) {
+        db.Follow.findOne({
+            where: {
+                $and: {
+                    fk_follower_id: userSession,
+                    fk_following_id: followingID
+                }
+            }
+        }).then((done)=>{
+            if(done){
+                db.Follow.destroy({
+                    where:{
+                        $and:{
+                            fk_follower_id: userSession,
+                            fk_following_id: followingID
+                        }
+                    }
+                });
+                console.log('Unfollowing');
+            }else{
+                db.Follow.create({
+                    fk_follower_id: userSession,
+                    fk_following_id: followingID
+                }).then(()=>{
+                    console.log('Following');
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            }
+        }).catch((err)=>{
+            console.log(err);
+        })
+}
+
+
+async function fetchUserController(userID) {
+    try {
+        let user = await db.User.findOne({
+            where: {
+                member_id: userID
+            }
+        });
+        let countFollower = await db.Follow.count({
+            where: {
+                fk_following_id: userID
+            }
+        });
+        let countFollowing = await db.Follow.count({
+            where: {
+                fk_follower_id: userID
+            }
+        });
+        return {
+            userDetail: user,
+            followerCount: countFollower,
+            followingCount: countFollowing
+        };
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
 module.exports = {
     categoryController,
     featuredController,
     productController,
     modalController,
     addToCartController,
-    cartController
+    cartController,
+    fetchUserController,
+    followController
 };

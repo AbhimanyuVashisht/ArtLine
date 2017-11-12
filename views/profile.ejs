@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<%= user.userDetail.username%>
+<br>
+FollowerCount: <%= user.followerCount%>
+<br>
+FollowingCount: <%= user.followingCount%>
+<button id="follow" data-id="<%= user.userDetail.member_id%>">Follow</button>
+
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+<script type="text/javascript" src="/js/external/profile.js"></script>
+</body>
+
+</html>

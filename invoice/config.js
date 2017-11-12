@@ -1,3 +1,5 @@
+
+// To Create the Purchase Invoice after the purchase of the item
 const PDFDocument = require('pdfkit')
     , fs = require('fs');
 

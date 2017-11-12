@@ -83,6 +83,19 @@ const Cart = db.define('carts', {
     }
 });
 
+const Follow = db.define('follows', {
+   fk_follower_id: {
+       type: sequelize.DataTypes.STRING,
+       primaryKey: true,
+       foreignKey: User
+   },
+    fk_following_id: {
+       type: sequelize.DataTypes.STRING,
+        primaryKey: true,
+        foreignKey: User
+    }
+});
+
 const Organisation = db.define('organisations', {
     organization_id: {
         type: sequelize.DataTypes.INTEGER,
@@ -107,6 +120,10 @@ Category.hasMany(User, {foreignKey: 'fk_category_id'});
 User.belongsToMany(Products, { through: Cart, foreignKey: 'fk_member_id' });
 Products.belongsToMany(User, { through: Cart, foreignKey: 'fk_prod_id' });
 
+User.belongsToMany(User, { as: 'follower', through: Follow });
+
+
+
 db.sync().then(()=>{
     console.log("Database Ready");
 });
@@ -117,5 +134,6 @@ module.exports = {
   Products,
   Category,
   Organisation,
-  Cart
+  Cart,
+  Follow
 };

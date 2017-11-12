@@ -31,7 +31,7 @@
             <br>
             <div class="__others">
                 <p>VIEWS:&nbsp;<a><%= product.views%></a></p>
-                <p>ARTIST:&nbsp;<a href="#"><ArtistName></a></p>
+                <p>ARTIST:&nbsp;<a href="/user/<%= product.users[0].member_id%>"><%= product.users[0].username %></a></p>
             </div>
 
             <ul class="social circle secondary responsive">
