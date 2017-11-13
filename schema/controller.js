@@ -225,6 +225,42 @@ async function fetchUserController(userID) {
 }
 
 
+async function orderInfoController(orderObj) {
+    console.log(orderObj.charge.id);
+    try {
+        let orderDetails = await db.OrderInfo.create({
+            order_id: orderObj.stripeBody.stripeToken,
+            fk_member_id: orderObj.userID,
+            stripe_trans_id: orderObj.charge.id,
+            stripe_cust_id: orderObj.charge.customer,
+            stripe_token: orderObj.stripeBody.stripeToken,
+            stripe_email: orderObj.stripeBody.stripeEmail,
+            amount_paid: orderObj.charge.amount,
+            billing_address: orderObj.storeLocal.data.address,
+            billing_pincode: orderObj.storeLocal.data.postcode,
+            billing_phone_no: orderObj.storeLocal.data.tell,
+            billing_secondary_phone_no: orderObj.storeLocal.data.tell2,
+            billing_country: orderObj.storeLocal.data.country
+        });
+
+
+
+            // await db.Cart.destroy({
+            //     where:{
+            //         fk_member_id: orderObj.userID
+            //     }
+            // });
+            //
+
+
+
+        // console.log(orderDetails)
+    }catch (err){
+        console.log(err);
+    }
+}
+
+
 module.exports = {
     categoryController,
     featuredController,
@@ -234,5 +270,6 @@ module.exports = {
     cartController,
     fetchUserController,
     followController,
-    removeFromCartController
+    removeFromCartController,
+    orderInfoController
 };

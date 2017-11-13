@@ -124,7 +124,7 @@ app.get('/user/:id', async (req, res)=>{
 app.post('/follow', (req, res)=>{
     console.log(req.body);
     // add session control here
-    let userSession = 105864670115367217760;
+    let userSession = '105864670115367217760';
     // let userSession = req.session.passport.user.member_id ;
     if( userSession ){
         console.log(true);
@@ -138,7 +138,7 @@ app.post('/follow', (req, res)=>{
 
 app.post('/removeFromCart', async (req, res)=>{
     // console.log(req.body);
-    user = 109484023739009832780;
+    user = '109484023739009832780';
     try {
         await removeFromCartController(user, req.body.prodID);
         let cartList = await cartController();

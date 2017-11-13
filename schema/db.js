@@ -107,16 +107,17 @@ const Organisation = db.define('organisations', {
     }
 });
 
-const OrderInfo = db.define('orderinfo', {
+const OrderInfo = db.define('orderinfos', {
     order_id: {
-        type: sequelize.DataTypes.INTEGER,
-        primaryKey: true
+        type: sequelize.DataTypes.STRING,
+        // autoIncrement: true,
+        primaryKey: true,
     },
     fk_member_id: {
         type: sequelize.DataTypes.STRING,
         allowNull: false
     },
-    stripe_tans_id: {
+    stripe_trans_id: {
         type: sequelize.DataTypes.STRING,
         allowNull: false
     },
@@ -145,11 +146,11 @@ const OrderInfo = db.define('orderinfo', {
         allowNull: false
     },
     billing_phone_no: {
-        type: sequelize.DataTypes.INTEGER,
+        type: sequelize.DataTypes.STRING,
         allowNull: false
     },
     billing_secondary_phone_no: {
-        type: sequelize.DataTypes.INTEGER,
+        type: sequelize.DataTypes.STRING,
         allowNull: false
     },
     billing_country: {
@@ -189,5 +190,6 @@ module.exports = {
   Category,
   Organisation,
   Cart,
-  Follow
+  Follow,
+  OrderInfo
 };
