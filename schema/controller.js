@@ -1,4 +1,6 @@
-const db = require('./db');
+const db = require('./db')
+    , invoice = require('../invoice/config')
+    , orderMailController = require('../sendgrid/controller').orderMailController;
 
 async function categoryController(){
 
@@ -243,14 +245,26 @@ async function orderInfoController(orderObj) {
             billing_country: orderObj.storeLocal.data.country
         });
 
+        let purchaseList = await cartController(orderObj.userID);
+
+        let invoiceObj = {
+            order: orderObj,
+            purchase: purchaseList
+        };
+
+        await invoice(invoiceObj);
+
+        orderMailController({ userEmail: orderObj.stripeBody.stripeEmail, orderID: orderObj.stripeBody.stripeToken});
 
 
-            // await db.Cart.destroy({
-            //     where:{
-            //         fk_member_id: orderObj.userID
-            //     }
-            // });
-            //
+
+
+        await db.Cart.destroy({
+            where:{
+                fk_member_id: orderObj.userID
+            }
+        });
+
 
 
 

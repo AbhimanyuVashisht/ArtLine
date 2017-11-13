@@ -16,7 +16,7 @@ let storeLocal = {};
 //     next()
 // })
 router.post('/', async (req, res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     // let userSession = req.session.passport.user.member_id
     let userSession =  '109484023739009832780';
     if( userSession ){
@@ -36,7 +36,7 @@ router.post('/', async (req, res)=>{
 });
 
 router.post('/charge', async (req, res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     // console.log(storeLocal);
     let amount = await storeLocal.total;
 

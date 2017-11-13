@@ -15,7 +15,19 @@ function welcomeMailController(userEmail) {
 }
 
 
+function orderMailController(orderMailObj) {
+    const msg = {
+        to: orderMailObj.userEmail,
+        from: 'abhimanyuvashisht.av@gmail.com',
+        subject: 'Order Placed for OrderID: ' + orderMailObj.orderID,
+        text: 'Thanks for choosing Artist-Hub. \n Your Order is confirmed with OrderID: '+ orderMailObj.orderID+'\n-Team Artist Hub',
+        html: '<strong>Thanks for choosing Artist-Hub. <br> Your Order is confirmed with OrderID: \'+ orderMailObj.orderID<br>-Team Artist Hub</strong>',
+    };
+    sgMail.send(msg)
+}
+
 module.exports = {
-    welcomeMailController
+    welcomeMailController,
+    orderMailController
 };
 
