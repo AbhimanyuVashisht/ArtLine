@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const secrets = require('../secrets.json');
+const secrets = require('../secrets.json')
+    , cartController = require('../schema/controller').cartController;
 
 let keyPublishable = 'pk_test_ltiSAJzRVAjed7OyjCeLJ9x8';
 let keySecret = secrets.STRIPE_KEY_SECRET_TEST;
@@ -7,13 +8,36 @@ let keySecret = secrets.STRIPE_KEY_SECRET_TEST;
 
 let stripe = require('stripe')(keySecret);
 
-router.post('/', (req, res)=>{
+let storeLocal = {};
+
+// router.use((req, res, next)=>{
+//     console.log(req.body);
+//     next()
+// })
+router.post('/', async (req, res)=>{
     // console.log(req);
-    res.render("checkout", {keyPublishable: keyPublishable});
+    // let userSession = req.session.passport.user.member_id
+    let userSession =  '109484023739009832780';
+    if( userSession ){
+        let cartItems = await cartController(userSession);
+        let total = 0;
+        for( let i of cartItems){
+            total = total + i.dataValues.price
+        }
+        storeLocal.data = req.body;
+        storeLocal.total = total;
+        console.log(total);
+        res.render("checkout", {keyPublishable: keyPublishable, amount: total });
+    }else{
+        res.render("Login to pay");
+    }
+
 });
 
-router.post('/charge', (req, res)=>{
-    let amount = 100;
+router.post('/charge', async (req, res)=>{
+    console.log(req.body);
+    // console.log(storeLocal);
+    let amount = await storeLocal.total;
 
     stripe.customers.create({
         email: req.body.stripeEmail,
@@ -26,7 +50,10 @@ router.post('/charge', (req, res)=>{
             currency: 'usd',
             customer: customer.id
         }))
-        .then(charge => res.render("paymentdone.ejs"));
+        .then((charge) => {
+        console.log(charge);
+        res.render("paymentdone")
+    });
 });
 
 

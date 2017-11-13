@@ -140,19 +140,19 @@ async function removeFromCartController(user, pid) {
     }
 }
 
-async function cartController() {
+async function cartController(userID) {
     // need to add the user
     try{
         let joinList = await db.User.findAll({
                 include: [{
                     model: db.Products,
                     through: {
-                        where: { fk_member_id:'109484023739009832780' }
+                        where: { fk_member_id: userID }
                     }
                 }]
             });
         for( let i in joinList){
-            if( joinList[i].dataValues.member_id === '109484023739009832780' ){
+            if( joinList[i].dataValues.member_id === userID ){
                 return joinList[i].dataValues.products;
             }
         }

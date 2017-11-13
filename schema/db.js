@@ -107,6 +107,57 @@ const Organisation = db.define('organisations', {
     }
 });
 
+const OrderInfo = db.define('orderinfo', {
+    order_id: {
+        type: sequelize.DataTypes.INTEGER,
+        primaryKey: true
+    },
+    fk_member_id: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    stripe_tans_id: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    stripe_cust_id: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    stripe_token: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    stripe_email: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    amount_paid: {
+        type: sequelize.DataTypes.INTEGER,
+        allowNull: false
+    },
+    billing_address: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    billing_pincode: {
+        type: sequelize.DataTypes.INTEGER,
+        allowNull: false
+    },
+    billing_phone_no: {
+        type: sequelize.DataTypes.INTEGER,
+        allowNull: false
+    },
+    billing_secondary_phone_no: {
+        type: sequelize.DataTypes.INTEGER,
+        allowNull: false
+    },
+    billing_country: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    }
+});
+
 // One to Many Relation
 Category.hasMany(Products, {foreignKey: 'fk_category_id'});
 
@@ -115,6 +166,8 @@ User.hasMany(Products, {foreignKey: 'fk_member_id'});
 Organisation.hasMany(User, {foreignKey: 'fk_organisation_id'});
 
 Category.hasMany(User, {foreignKey: 'fk_category_id'});
+
+User.hasMany(OrderInfo, {foreignKey: 'fk_member_id'});
 
 // ManyToMany Relation
 User.belongsToMany(Products, { through: Cart, foreignKey: 'fk_member_id' });
