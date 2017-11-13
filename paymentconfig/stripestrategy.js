@@ -7,7 +7,8 @@ let keySecret = secrets.STRIPE_KEY_SECRET_TEST;
 
 let stripe = require('stripe')(keySecret);
 
-router.get('/', (req, res)=>{
+router.post('/', (req, res)=>{
+    // console.log(req);
     res.render("checkout", {keyPublishable: keyPublishable});
 });
 

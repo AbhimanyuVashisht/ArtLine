@@ -9,7 +9,10 @@ function changeCart(cartList) {
 function deleteCartEle(pid) {
     console.log(pid);
     $.post('/removeFromCart', {prodID: pid}, (result)=>{
+        // console.log(result);
         changeCart(result);
+
     })
 }
+
 

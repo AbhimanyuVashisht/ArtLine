@@ -101,6 +101,7 @@ app.get('/cart', async (req, res)=>{
      // let sessionUser = req.session.passport.user.member_id;
      try{
          let cartList = await cartController();
+         // console.log(cartList)
          res.render('cart', {cart: cartList});
      }catch (err){
          console.log(err);
@@ -141,7 +142,9 @@ app.post('/removeFromCart', async (req, res)=>{
     try {
         await removeFromCartController(user, req.body.prodID);
         let cartList = await cartController();
-        res.render('cart', {cart: cartList});
+        // console.log(cartList);
+        res.render('cartDOM', {cart: cartList});
+        // res.send({total: 50});
 
     }catch (err){
         console.log(err);

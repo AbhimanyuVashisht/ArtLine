@@ -55,7 +55,7 @@
                           <th class="product-img">PRODUCT</th>
                           <th class="product-name">NAME</th>
                           <th class="product-price">PRICE</th>
-                          <th class="product-total">TOTAL</th>
+                          <!--<th class="product-total">TOTAL</th>-->
                           <th class="product-remove">&nbsp;</th>
                         </tr>
                       </thead>
@@ -71,7 +71,7 @@
                                 </td>
                                 <td class="product-name"><a href="#"><%= i.dataValues.product_name%></a></td>
                                 <td class="product-price"><%= i.dataValues.price%></td>
-                                <td class="product-total">$200.00</td>
+                                <!--<td class="product-total">$200.00</td>-->
                                 <td class="product-remove"><a onclick="deleteCartEle(<%= i.dataValues.prod_id%>)">&#9587;</a></td>
                             </tr>
                         <%}%>
@@ -107,18 +107,18 @@
                                 <h4 class="__title">CART TOTAL</h4>
                                 <hr/>
                                 <div class="__sub-total">
-                                  <h6>SUBTOTAL</h6><span class="price"><%= total%></span>
+                                  <h6>SUBTOTAL</h6>$<span class="price"><%= total%></span>
                                 </div>
                                 <div class="__shipping">
                                   <h6>SHIPPING AND HANDLING</h6><span>Free Shipping</span>
                                 </div>
                                 <div class="__order-total">
-                                  <h6>ORDER TOTAL</h6><span>$116.00</span>
+                                  <h6>ORDER TOTAL</h6>$<span><%= total%></span>
                                 </div>
                                 <hr class="no-margin"/>
                                 <div class="__total">
                                   <h4>TOTAL</h4><span class="price">$516.00</span>
-                                   <span id="paym"><a href="/billing" class="btn btn-primary no-border">Payment</a></span>
+                                   <span id="paym"><a href="/billing"  class="btn btn-primary no-border">Payment</a></span>
                                 </div>
                             </div>
                     </div>

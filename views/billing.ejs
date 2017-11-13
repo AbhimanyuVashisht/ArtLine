@@ -42,12 +42,12 @@
     </div>
   </header>
   <div class="container">
-      <form>
+      <form method="post" action="/gateway">
           <div class="col l4 m6 s6 xs12 pt-55 top-padd">
                       <div class="shop-cart-shipping">
                         <h4 class="title"><b>Billing Address</b></h4>
                         <div class="input-field col s6" style="margin-top: 30px;">
-                          <select>
+                          <select required>
                             <option value="" disabled selected>Choose Your Country</option>
                             <option value="1">Australia</option>
                             <option value="2">Canada</option>
@@ -59,21 +59,21 @@
                           </select>
                           <label>Country</label>
                         </div>
-                        <input type="text" name="address" placeholder="Address" class="mb-20">
-                        <input type="text" name="postcode" placeholder="Postcode / Zip">
+                        <input type="text" name="address" placeholder="Address" class="mb-20" required>
+                        <input type="text" name="postcode" placeholder="Postcode / Zip" required>
                         <div class="input-field">
                           <label for="email" data-error="wrong" data-success="right">Email</label>
-                          <input type="email" id="email" class="validate">
+                          <input type="email" name="email" id="email" class="validate" required>
                         </div>
                         <div class="input-field">
                           <label for="tel1" data-error="wrong" data-success="right">Mobile Number</label>
-                          <input type="tel" id="tel1"  class="validate" pattern="^\d{10}$" required>
+                          <input type="tel" id="tel1"  name="tell" class="validate" pattern="^\d{10}$" required>
                         </div>
                        <div class="input-field">
                             <label for="tel2" data-error="wrong" data-success="right">Secondry Mobile Number</label>
-                            <input type="tel" id="tel2" pattern="^\d{10}$" class="validate">
+                            <input type="tel" id="tel2" name="tell2"pattern="^\d{10}$" class="validate">
                         </div>
-                        <span><a href="/gateway" class="btn btn-primary no-border">Payment</a></span>
+                        <span><button type="submit" class="btn btn-primary no-border">Payment</button></span>
                       </div>
                     </div>
       </form>
@@ -111,5 +111,6 @@
        $('select').material_select();
          });
   </script>
+ <script type="text/javascript" src="js/external/billing.js"></script>
  </body>
 </html>
