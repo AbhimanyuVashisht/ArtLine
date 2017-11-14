@@ -38,7 +38,7 @@ app.use(session({
 }));
 
 require('./config/passport')(app);
-// app.use('/', routes);
+app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
 
@@ -46,7 +46,7 @@ app.use('/gateway', gateway);
 
 
 
-
+// TODO: Manage routing
 app.get('/', async (req, res)=>{
     // console.log('inside index');
 
@@ -87,6 +87,7 @@ app.get('/modal', async (req, res)=>{
 
 
 app.post('/addToCart', async (req, res)=>{
+    // TODO: add session  control here
     // let sessionUser = req.session.passport.user.member_id;
     let sessionUser = '109484023739009832780';
     try{
@@ -98,6 +99,7 @@ app.post('/addToCart', async (req, res)=>{
 });
 
 app.get('/cart', async (req, res)=>{
+        // TODO: add session  control here
      // let sessionUser = req.session.passport.user.member_id;
      try{
          let cartList = await cartController();
@@ -123,7 +125,7 @@ app.get('/user/:id', async (req, res)=>{
 
 app.post('/follow', (req, res)=>{
     console.log(req.body);
-    // add session control here
+    // TODO: add session control here
     let userSession = '105864670115367217760';
     // let userSession = req.session.passport.user.member_id ;
     if( userSession ){
@@ -138,7 +140,8 @@ app.post('/follow', (req, res)=>{
 
 app.post('/removeFromCart', async (req, res)=>{
     // console.log(req.body);
-    user = '109484023739009832780';
+    // TODO: add session  control here
+    let user = '109484023739009832780';
     try {
         await removeFromCartController(user, req.body.prodID);
         let cartList = await cartController();
@@ -150,7 +153,7 @@ app.post('/removeFromCart', async (req, res)=>{
         console.log(err);
     }
 
-})
+});
 
 app.listen(8000, function(){
     console.log("ServerRunning on http://localhost:8000/");        

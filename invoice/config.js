@@ -27,6 +27,7 @@ async function createInvoice(invoiceObj) {
 
     doc.moveDown();
 
+    // TODO: Find the logic to fetch the username and DOP
     let purchasedBy = 'Abhimanyu Vashisht';
     let email = invoiceObj.order.stripeBody.stripeEmail;
     let phoneNumber = invoiceObj.order.storeLocal.data.tell;

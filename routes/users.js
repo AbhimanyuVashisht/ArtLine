@@ -1,7 +1,7 @@
 let express = require('express')
     , router = express.Router()
-    , sequelize = require('sequelize')
-    , db = require('../schema/db');
+    , fetchUserController = require('../schema/controller').fetchUserController;
+
 /* GET users listing. */
 router.use('/', function(req, res, next) {
   if (!req.user)
@@ -10,10 +10,12 @@ router.use('/', function(req, res, next) {
     next();
 });
 
-router.get('/', function(req, res) {
+router.get('/', async function(req, res) {
   // res.send('respond with a resource');
   console.log(req.user  , "this");
-  res.render('user', req.user);
+  let user = await fetchUserController(req.user.member_id);
+  // console.log(user);
+  res.render('user', { user: user }); // TODO: Can send req.user instead of user, sending this inorder to fetch follow-following
 });
 router.get('/logout',function(req,res){
         req.session.destroy(); //Destroy current session. this generate new session for next req.
