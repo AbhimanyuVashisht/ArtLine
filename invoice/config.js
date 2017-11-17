@@ -3,6 +3,7 @@
 const PDFDocument = require('pdfkit')
     , fs = require('fs');
 
+let date = new Date();
 
 async function createInvoice(invoiceObj) {
 
@@ -27,16 +28,14 @@ async function createInvoice(invoiceObj) {
 
     doc.moveDown();
 
-    // TODO: Find the logic to fetch the username and DOP
-    let purchasedBy = 'Abhimanyu Vashisht';
+    let purchasedBy = invoiceObj.order.username;
     let email = invoiceObj.order.stripeBody.stripeEmail;
     let phoneNumber = invoiceObj.order.storeLocal.data.tell;
     let paymentMode = invoiceObj.order.stripeBody.stripeTokenType;
     let billingAddress = invoiceObj.order.storeLocal.data.address;
     let shippingAddress = invoiceObj.order.storeLocal.data.address;
-    let dataOfPurchase = 'DD-MM-YYYY HH:MM:SS';
     doc.font('Times-Roman', 13)
-        .text('Date Time of purchase: '+ dataOfPurchase)
+        .text('Date Time of purchase: '+ date)
         .moveDown()
         .text(purchasedBy)
         .moveDown()

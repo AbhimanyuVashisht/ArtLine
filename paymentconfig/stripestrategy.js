@@ -18,6 +18,7 @@ let storeLocal = {};
 router.post('/', async (req, res)=>{
     // console.log(req.body);
     // let userSession = req.session.passport.user.member_id
+    // TODO: to add the user session
     let userSession =  '109484023739009832780';
     if( userSession ){
         let cartItems = await cartController(userSession);
@@ -58,7 +59,8 @@ router.post('/charge', async (req, res)=>{
                 charge: charge,
                 storeLocal: storeLocal,
                 stripeBody: req.body,
-                userID: '109484023739009832780' // need to add the user session
+                userID: '109484023739009832780', // need to add the user session   TODO: Add the usersession here
+                username: 'Abhimanyu Vashisht'  //req.session.passport.user.username
             };
             await orderInfoController(info);
             res.render("paymentdone");
