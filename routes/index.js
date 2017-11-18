@@ -1,22 +1,22 @@
 let express = require('express')
     , router = express.Router()
     , fs = require('fs')
-    , path = require('path')
-    , passport = require('passport');
+    , path = require('path');
+
+const controller = require('../schema/controller')
+    , categoryController = controller.categoryController
+    , featuredController = controller.featuredController;
 
 /* GET home page. */
 
-router.get('/', function(req, res) {
+router.get('/', async function(req, res) {
    if(req.isAuthenticated()){
     res.redirect('/users');
   }
   else{
-    fs.readFile(path.join(__dirname , '..' ,'views/index.html'),'utf-8',function(err,index){
-        if(err)
-          res.send(err);
-        else
-          res.send(index);
-    });
+       let categoryList = await categoryController();
+       let featuredList = await featuredController();
+       res.render('index', {category: categoryList, featured: featuredList});
   }
 });
 

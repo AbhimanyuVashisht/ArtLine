@@ -1,26 +1,24 @@
 
 const express = require('express');
-const path = require('path');
 const bp = require('body-parser')
     , ejs = require('ejs')
+    , path =require('path')
     , cookieParser = require('cookie-parser')
     , session = require('express-session');
 
 const controller = require('./schema/controller')
     , categoryController = controller.categoryController
-    , featuredController = controller.featuredController
     , productController = controller.productController
     , modalController = controller.modalController
     , addToCartController = controller.addToCartController
     , cartController = controller.cartController
-    , fetchUserController = controller.fetchUserController
-    , followController = controller.followController
     , removeFromCartController = controller.removeFromCartController;
 
 let routes = require('./routes/index')
     , users = require('./routes/users')
     , auth = require('./routes/auth')
-    , upload = require('./uploads/index');
+    , upload = require('./uploads/index')
+    , profile = require('./routes/profile');
 
 let gateway = require('./paymentconfig/stripestrategy');
 
@@ -45,16 +43,10 @@ app.use('/auth', auth);
 
 app.use('/gateway', gateway);
 app.use('/application', upload);
-
+app.use('/user', profile);
 
 // TODO: Manage routing
-app.get('/', async (req, res)=>{
-    // console.log('inside index');
 
-    let categoryList = await categoryController();
-    let featuredList = await featuredController();
-    res.render('index', {category: categoryList, featured: featuredList});
-});
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 
 app.get('/gallery/:page?', async (req, res)=>{
@@ -74,14 +66,11 @@ app.get('/products', async (req, res)=>{
     console.log('Product Count'+productList.count);
 
     res.render('product', {products: productList.rows});
-    // res.end();
 });
 
 app.get('/modal', async (req, res)=>{
     console.log(req.query.prodID);
     let modalView = await modalController(req.query.prodID);
-    // console.log(modalView[0][0]);
-    // console.log(modalView.users[0].member_id);
     res.render('modal', { product: modalView[0][0] });
 });
 
@@ -112,32 +101,9 @@ app.get('/cart', async (req, res)=>{
 });
 
 app.get('/billing', (req, res)=>{
-    res.render('billing');
+    res.sendFile(path.join(__dirname + '/views/billing.html'));
 });
 
-app.get('/user/:id', async (req, res)=>{
-
-    // console.log(req.params.id);
-    let user = await fetchUserController(req.params.id);
-    // console.log(user);
-    res.render('profile', {user: user});
-    // res.end();
-});
-
-app.post('/follow', (req, res)=>{
-    console.log(req.body);
-    // TODO: add session control here
-    let userSession = '105864670115367217760';
-    // let userSession = req.session.passport.user.member_id ;
-    if( userSession ){
-        console.log(true);
-        followController(userSession, req.body.followID);
-
-    }else{
-        console.log(false);
-    }
-    // res.end()
-});
 
 app.post('/removeFromCart', async (req, res)=>{
     // console.log(req.body);
