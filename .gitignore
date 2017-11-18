@@ -3,3 +3,4 @@ node_modules
 secrets.json
 admin/importCategory.csv
 admin/importProduct.csv
+uploads/diskStorage

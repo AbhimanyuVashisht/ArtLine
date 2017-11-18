@@ -264,16 +264,30 @@ async function orderInfoController(orderObj) {
                 fk_member_id: orderObj.userID
             }
         });
-
-
-
-
-        // console.log(orderDetails)
     }catch (err){
         console.log(err);
     }
 }
 
+async function uploadController(uploadObj) {
+    try {
+        let done = await db.Uploads.create({
+                upload_id: uploadObj.userID + '-' + Date.now(),
+                email: uploadObj.userEmail,
+                title: uploadObj.title,
+                description: uploadObj.description,
+                mobile_no: uploadObj.mobile,
+                category: uploadObj.category,
+                type: uploadObj.type,
+                filename: uploadObj.filename,
+                fk_member_id: uploadObj.userID
+            });
+
+        return { uploadID: done.upload_id, email: done.email };
+    } catch(err){
+        console.log(err);
+    }
+}
 
 module.exports = {
     categoryController,
@@ -285,5 +299,6 @@ module.exports = {
     fetchUserController,
     followController,
     removeFromCartController,
-    orderInfoController
+    orderInfoController,
+    uploadController
 };

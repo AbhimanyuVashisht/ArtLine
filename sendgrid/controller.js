@@ -26,8 +26,20 @@ function orderMailController(orderMailObj) {
     sgMail.send(msg)
 }
 
+function uploadMailController(uploadMailObj) {
+    const msg = {
+        to: uploadMailObj.email,
+        from: 'abhimanyuvashisht.av@gmail.com',
+        subject: 'Application submitted with UploadID: ' + uploadMailObj.uploadID,
+        text: 'Thanks for submitting your application. \n Your application is under process',
+        html: '<strong>Thanks for submitting your application. <br> Your application is under process <br>- Team Artist Hub</strong>'
+    };
+    sgMail.send(msg)
+}
+
 module.exports = {
     welcomeMailController,
-    orderMailController
+    orderMailController,
+    uploadMailController
 };
 

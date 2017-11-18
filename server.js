@@ -19,7 +19,8 @@ const controller = require('./schema/controller')
 
 let routes = require('./routes/index')
     , users = require('./routes/users')
-    , auth = require('./routes/auth');
+    , auth = require('./routes/auth')
+    , upload = require('./uploads/index');
 
 let gateway = require('./paymentconfig/stripestrategy');
 
@@ -43,7 +44,7 @@ app.use('/users', users);
 app.use('/auth', auth);
 
 app.use('/gateway', gateway);
-
+app.use('/application', upload);
 
 
 // TODO: Manage routing
@@ -154,6 +155,9 @@ app.post('/removeFromCart', async (req, res)=>{
     }
 
 });
+
+
+
 
 app.listen(8000, function(){
     console.log("ServerRunning on http://localhost:8000/");        

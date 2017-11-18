@@ -107,6 +107,38 @@ const Organisation = db.define('organisations', {
     }
 });
 
+const Uploads = db.define('uploads', {
+    upload_id: {
+        type: sequelize.DataTypes.STRING,
+        primaryKey: true
+    },
+    email: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: true
+    },
+    title: {
+        type: sequelize.DataTypes.STRING,
+    },
+    description: {
+        type: sequelize.DataTypes.STRING,
+    },
+    mobile_no: {
+        type: sequelize.DataTypes.STRING,
+    },
+    category: {
+        type: sequelize.DataTypes.STRING
+    },
+    type: {
+        type: sequelize.DataTypes.STRING
+    },
+    filename: {
+        type: sequelize.DataTypes.STRING,
+    },
+    fk_member_id: {
+        type: sequelize.DataTypes.STRING
+    }
+});
+
 const OrderInfo = db.define('orderinfos', {
     order_id: {
         type: sequelize.DataTypes.STRING,
@@ -166,6 +198,8 @@ User.hasMany(Products, {foreignKey: 'fk_member_id'});
 
 Organisation.hasMany(User, {foreignKey: 'fk_organisation_id'});
 
+User.hasMany(Uploads, {foreignKey: 'fk_member_id'});
+
 Category.hasMany(User, {foreignKey: 'fk_category_id'});
 
 User.hasMany(OrderInfo, {foreignKey: 'fk_member_id'});
@@ -191,5 +225,6 @@ module.exports = {
   Organisation,
   Cart,
   Follow,
-  OrderInfo
+  OrderInfo,
+  Uploads
 };
