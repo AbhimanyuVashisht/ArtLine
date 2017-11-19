@@ -10,10 +10,7 @@ const bp = require('body-parser')
 const controller = require('./schema/controller')
     , categoryController = controller.categoryController
     , productController = controller.productController
-    , modalController = controller.modalController
-    , addToCartController = controller.addToCartController
-    , cartController = controller.cartController
-    , removeFromCartController = controller.removeFromCartController;
+    , modalController = controller.modalController;
 
 let routes = require('./routes/index')
     , users = require('./routes/users')
@@ -82,45 +79,6 @@ app.get('/modal', async (req, res)=>{
     let modalView = await modalController(req.query.prodID);
     res.render('modal', { product: modalView[0][0] });
 });
-
-
-
-app.post('/addToCart', async (req, res)=>{
-    // TODO: add session  control here
-    // let sessionUser = req.session.passport.user.member_id;
-    let sessionUser = '109484023739009832780';
-    try{
-        await addToCartController(sessionUser, req.body.prodID);
-        console.log('this one');
-    }catch(err){
-        console.log(err);
-    }
-});
-
-app.get('/billing', (req, res)=>{
-    res.sendFile(path.join(__dirname + '/views/billing.html'));
-});
-
-
-app.post('/removeFromCart', async (req, res)=>{
-    // console.log(req.body);
-    // TODO: add session  control here
-    let user = '109484023739009832780';
-    try {
-        await removeFromCartController(user, req.body.prodID);
-        let cartList = await cartController();
-        // console.log(cartList);
-        res.render('cartDOM', {cart: cartList});
-        // res.send({total: 50});
-
-    }catch (err){
-        console.log(err);
-    }
-
-});
-
-
-
 
 app.listen(8000, function(){
     console.log("ServerRunning on http://localhost:8000/");        

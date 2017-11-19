@@ -42,7 +42,7 @@ function getProducts(cid) {
 
 function addToCart(pid) {
     // console.log(pid);
-    $.post('/addToCart', {prodID : pid}, (done)=>{
+    $.post('cart/addToCart', {prodID : pid}, (done)=>{
         console.log(done);
     })
 }

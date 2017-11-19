@@ -4,3 +4,4 @@ secrets.json
 admin/importCategory.csv
 admin/importProduct.csv
 uploads/diskStorage
+public_static/generatedInvoice
