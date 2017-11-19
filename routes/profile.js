@@ -2,11 +2,14 @@ let router = require('express').Router();
 
 let controller = require('../schema/controller')
     , fetchUserController = controller.fetchUserController
-    , followController = controller.followController;
+    , followController = controller.followController
+    , fetchUserProductFeedController = controller.fetchUserProductFeed;
 
 
 router.get('/:id', async (req, res)=>{
     let user = await fetchUserController(req.params.id);
+    let userProductFeed = await fetchUserProductFeedController(req.params.id);
+    console.log(userProductFeed); // TODO: profile card Feed
     res.render('profile', {user: user});
 });
 

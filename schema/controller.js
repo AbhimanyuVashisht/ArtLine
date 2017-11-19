@@ -79,17 +79,6 @@ async function modalController(pid) {
         prod.increment('views', {by: 1})
     });
 
-    // return await db.User.findOne({
-    //
-    //     include: [{
-    //         model: db.Products,
-    //         required: true,
-    //         where: {
-    //             prod_id: pid
-    //         },
-    //     }]
-    // });
-
     return await db.db.query("SELECT * FROM users, products WHERE products.prod_id = '"+ pid + "' AND users.member_id = products.fk_member_id;");
 }
 
@@ -160,7 +149,7 @@ async function cartController(userID) {
         }
 
     }catch (err){
-        console.log(err);
+        throw err;
     }
 }
 
@@ -190,11 +179,11 @@ function followController(userSession, followingID) {
                 }).then(()=>{
                     console.log('Following');
                 }).catch((err)=>{
-                    console.log(err);
+                    throw err;
                 })
             }
         }).catch((err)=>{
-            console.log(err);
+            throw err;
         })
 }
 
@@ -222,7 +211,17 @@ async function fetchUserController(userID) {
             followingCount: countFollowing
         };
     } catch (err) {
-        console.log(err);
+        throw err;
+    }
+}
+
+async function fetchUserProductFeed(userID) {
+    try {
+        return await db.Products.findAll({where: {
+            fk_member_id: userID
+        }});
+    }catch (err){
+        throw err;
     }
 }
 
@@ -256,16 +255,13 @@ async function orderInfoController(orderObj) {
 
         orderMailController({ userEmail: orderObj.stripeBody.stripeEmail, orderID: orderObj.stripeBody.stripeToken});
 
-
-
-
         await db.Cart.destroy({
             where:{
                 fk_member_id: orderObj.userID
             }
         });
     }catch (err){
-        console.log(err);
+        throw err;
     }
 }
 
@@ -285,7 +281,7 @@ async function uploadController(uploadObj) {
 
         return { uploadID: done.upload_id, email: done.email };
     } catch(err){
-        console.log(err);
+        throw err;
     }
 }
 
@@ -300,5 +296,6 @@ module.exports = {
     followController,
     removeFromCartController,
     orderInfoController,
-    uploadController
+    uploadController,
+    fetchUserProductFeed
 };
