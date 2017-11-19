@@ -2,7 +2,6 @@
 const express = require('express');
 const bp = require('body-parser')
     , ejs = require('ejs')
-    , path =require('path')
     , cookieParser = require('cookie-parser')
     , session = require('express-session')
     , mongoose = require('mongoose');
@@ -26,7 +25,11 @@ const app = express();
 // view engine setup
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://localhost/projectx');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/projectx', {
+    useMongoClient: true
+});
+
 
 app.use(bp.json());
 app.use(bp.urlencoded({extended: true}));

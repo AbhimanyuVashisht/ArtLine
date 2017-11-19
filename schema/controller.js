@@ -113,8 +113,6 @@ async function addToCartController(user, pid) {
 }
 
 async function removeFromCartController(user, pid) {
-    console.log(user);
-    // user = 105864670115367217760;
     if( user ){
         try {
             return await db.Cart.destroy({
@@ -132,7 +130,6 @@ async function removeFromCartController(user, pid) {
 }
 
 async function cartController(userID) {
-    // need to add the user
     try{
         let joinList = await db.User.findAll({
                 include: [{

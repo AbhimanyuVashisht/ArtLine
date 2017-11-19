@@ -40,15 +40,15 @@ router.get('/billing', (req, res)=>{
 
 
 
-router.post('/removeFromCart', async (req, res)=>{
+router.get('/removeFromCart', async (req, res)=>{
+    console.log(req.query.prodID);
     let userSession = req.session.passport.user.member_id;
     try {
-        await removeFromCartController(userSession, req.body.prodID);
-        let cartList = await cartController();
+        await removeFromCartController(userSession, req.query.prodID);
+        // let cartList = await cartController();
         // console.log(cartList);
-        res.render('cartDOM', {cart: cartList});
-        // res.send({total: 50});
-
+        // res.render('cartDOM', {cart: cartList});
+        res.redirect('/cart');
     }catch (err){
         console.log(err);
     }

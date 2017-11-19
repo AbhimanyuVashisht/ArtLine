@@ -8,9 +8,9 @@ function changeCart(cartList) {
 }
 function deleteCartEle(pid) {
     console.log(pid);
-    $.post('/cart/removeFromCart', {prodID: pid}, (result)=>{
+    $.get('/cart/removeFromCart', {prodID: pid}, (result)=>{
         // console.log(result);
-        changeCart(result);
+        window.location.href = '/cart';
 
     })
 }

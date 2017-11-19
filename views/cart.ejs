@@ -70,7 +70,7 @@
                                         </div></a>
                                 </td>
                                 <td class="product-name"><a href="#"><%= i.dataValues.product_name%></a></td>
-                                <td class="product-price"><%= i.dataValues.price%></td>
+                                <td class="product-price">$<%= i.dataValues.price%></td>
                                 <!--<td class="product-total">$200.00</td>-->
                                 <td class="product-remove"><a onclick="deleteCartEle(<%= i.dataValues.prod_id%>)">&#9587;</a></td>
                             </tr>
@@ -117,7 +117,7 @@
                                 </div>
                                 <hr class="no-margin"/>
                                 <div class="__total">
-                                  <h4>TOTAL</h4><span class="price">$516.00</span>
+                                  <h4>TOTAL</h4><span class="price">$<%= total%></span>
                                    <span id="paym"><a href="cart/billing"  class="btn btn-primary no-border">Payment</a></span>
                                 </div>
                             </div>
