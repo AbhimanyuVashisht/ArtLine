@@ -13,9 +13,9 @@ router.get('/', (req, res)=>{
 
 router.post('/insert', (req, res)=>{
     let blogObj = {
-        title: 'Title',
-        author: 'Id of the user',
-        body: 'body',
+        title: req.body.title,
+        author: req.session.passport.user.member_id,
+        body: req.body.body,
         meta: {
             upVotes: 1,
             downVotes: 2
@@ -23,7 +23,7 @@ router.post('/insert', (req, res)=>{
     };
     db.insertBlog(blogObj, (err, blog)=>{
         if(err) throw err;
-        res.send(blog);
+        res.redirect('/users');
     })
 });
 

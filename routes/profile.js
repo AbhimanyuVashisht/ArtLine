@@ -10,13 +10,29 @@ let controller = require('../schema/controller')
 
 
 router.get('/:id', async (req, res)=>{
-    let user = await fetchUserController(req.params.id);
-    let userProductFeed = await fetchUserProductFeedController(req.params.id);
-    // TODO: user profile problem
-    db.findByUser( req.params.id, (err, blog)=>{
-       if(err) throw err;
-       res.render('profile', { user: user, product: userProductFeed, blog: blog });
-    });
+    try {
+        if( req.params.id === req.session.passport.user.member_id){
+            res.redirect('/');
+        }else {
+            let user = await fetchUserController(req.params.id);
+            let userProductFeed = await fetchUserProductFeedController(req.params.id);
+            // TODO: user profile problem
+            db.findByUser(req.params.id, (err, blog) => {
+                if (err) throw err;
+                res.render('profile', {user: user, product: userProductFeed, blog: blog});
+            });
+        }
+    }catch(err){
+
+        let user = await fetchUserController(req.params.id);
+        let userProductFeed = await fetchUserProductFeedController(req.params.id);
+        // TODO: user profile problem
+        db.findByUser(req.params.id, (err, blog) => {
+            if (err) throw err;
+            res.render('profile', {user: user, product: userProductFeed, blog: blog});
+        });
+    }
+
 });
 
 router.post('/follow', (req, res)=>{
