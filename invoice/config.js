@@ -1,7 +1,8 @@
 
 // To Create the Purchase Invoice after the purchase of the item
 const PDFDocument = require('pdfkit')
-    , fs = require('fs');
+    , fs = require('fs')
+    , path = require('path');
 
 let date = new Date();
 
@@ -9,7 +10,7 @@ async function createInvoice(invoiceObj) {
 
     let doc = new PDFDocument;
     let orderId = invoiceObj.order.stripeBody.stripeToken + '_' + invoiceObj.order.userID;
-    doc.pipe(fs.createWriteStream( 'invoice/generatedInvoice/'+ orderId +'.pdf'));
+    doc.pipe(fs.createWriteStream( path.join(__dirname + '/../public_static/generatedInvoice/' + orderId +'.pdf')));
     // doc.pipe(res);
     doc.fontSize(30)
         .text('Artist-Hub', {

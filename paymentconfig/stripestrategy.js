@@ -19,6 +19,7 @@ router.post('/', async (req, res)=>{
     // console.log(req.body);
     // let userSession = req.session.passport.user.member_id
     // TODO: to add the user session
+
     let userSession =  '109484023739009832780';
     if( userSession ){
         let cartItems = await cartController(userSession);
@@ -62,8 +63,9 @@ router.post('/charge', async (req, res)=>{
                 userID: '109484023739009832780', // need to add the user session   TODO: Add the usersession here
                 username: 'Abhimanyu Vashisht'  //req.session.passport.user.username
             };
+            let invoiceFilename = req.body.stripeToken + '_'+ info.userID + '.pdf';
             await orderInfoController(info);
-            res.render("paymentdone");
+            res.render("paymentdone", { invoice: invoiceFilename});
         }catch (err){
             console.log(err);
             res.send("Transaction failed");
