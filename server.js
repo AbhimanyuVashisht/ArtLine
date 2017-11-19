@@ -4,7 +4,8 @@ const bp = require('body-parser')
     , ejs = require('ejs')
     , path =require('path')
     , cookieParser = require('cookie-parser')
-    , session = require('express-session');
+    , session = require('express-session')
+    , mongoose = require('mongoose');
 
 const controller = require('./schema/controller')
     , categoryController = controller.categoryController
@@ -18,13 +19,16 @@ let routes = require('./routes/index')
     , users = require('./routes/users')
     , auth = require('./routes/auth')
     , upload = require('./uploads/index')
-    , profile = require('./routes/profile');
+    , profile = require('./routes/profile')
+    , blogs = require('./routes/blogs');
 
 let gateway = require('./paymentconfig/stripestrategy');
 
 const app = express();
 // view engine setup
 app.set('view engine', 'ejs');
+
+mongoose.connect('mongodb://localhost/projectx');
 
 app.use(bp.json());
 app.use(bp.urlencoded({extended: true}));
@@ -45,6 +49,7 @@ app.use('/auth', auth);
 app.use('/gateway', gateway);
 app.use('/application', upload);
 app.use('/user', profile);
+app.use('/blog', blogs);
 
 // TODO: Manage routing
 
@@ -91,7 +96,7 @@ app.post('/addToCart', async (req, res)=>{
 });
 
 app.get('/cart', async (req, res)=>{
-        // TODO: add session  control here
+    // TODO: add session  control here
      // let sessionUser = req.session.passport.user.member_id;
      try{
          let cartList = await cartController();

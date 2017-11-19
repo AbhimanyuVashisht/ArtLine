@@ -49,7 +49,7 @@
             </div>
         </ul>
     </div>
-    <div class="col s8 l8 offset-l3 offset-s1">
+    <div class="col s12 l8 offset-l3">
         <div id="profile-page-header" class="card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="/images/Purple%20Bliss.jpg" alt="user background">
@@ -80,7 +80,7 @@
 
 </div>
 <div class="row">
-    <div class="col s8 l8 offset-l3 offset-s1">
+    <div class="col s12 l8 offset-l3">
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
                 <span class="card-title yellow-text">About My Work</span>
@@ -90,41 +90,83 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col s4 l4 offset-l3">
-        <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="images/Nighthawk.jpg.png">
+ <div class="row">
+    <div class=" col s12 l8 offset-l3">
+
+        <% for(let i of product){%>
+            <div class="col s12 l6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="/data/products/<%= i.product_path %>">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
             </div>
-            <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-                <p><a href="#">This is a link</a></p>
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col s4 l4 ">
-        <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="images/Nighthawk.jpg.png">
-            </div>
-            <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-                <p><a href="#">This is a link</a></p>
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-            </div>
-        </div>
+        <%}%>
     </div>
 </div>
+<div class="row">
+     <div class="col s12 l8 offset-l3">
+        <h1><b>Blog Posts</b></h1>
+     </div>
+     <div class="col s12 l8 offset-l3">    
+          <ul class="collapsible popout" data-collapsible="accordion">
+            <% for(let k of blog){%>
+              <li>
+                  <div class="collapsible-header"><h2><%= k.title %></h2>
+                      <div class=" col l3">
+                          <form><i class="small material-icons ">arrow_drop_up</i><span>No.</span><i class="small material-icons ">arrow_drop_down</i><span>No.</span>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="collapsible-body"><span><%= k.body%></span></div>
+              </li>
+
+              <%}%>
+          </ul>
+     </div>
+     <div class="col s12 l8 offset-l3">
+         <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Post<i class="material-icons right">send</i></a>
+         <div id="modal1" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="textarea2" class="materialize-textarea"></textarea>
+                      <label for="textarea2">Title</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">mode_edit</i>
+                      <textarea id="textarea1" class="materialize-textarea"></textarea>
+                      <label for="textarea1">Textarea</label>
+                    </div>
+                  </div>
+                  <div>   
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+         </div>
+     </div>
+</div>
+
+
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.button-collapse').sideNav({
@@ -136,6 +178,9 @@
                 onClose: function(el) { /* Do Stuff*/ }
             }
         );
+        $('.collapsible').collapsible();
+        $('.modal').modal();
+        $('#textarea1').trigger('autoresize');
     });
 </script>
 <script type="text/javascript" src="/js/external/profile.js"></script>

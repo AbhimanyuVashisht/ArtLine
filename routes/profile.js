@@ -1,4 +1,7 @@
 let router = require('express').Router();
+// fetchinf mongo Database
+let db = require('../schema/models/config/database');
+
 
 let controller = require('../schema/controller')
     , fetchUserController = controller.fetchUserController
@@ -9,8 +12,11 @@ let controller = require('../schema/controller')
 router.get('/:id', async (req, res)=>{
     let user = await fetchUserController(req.params.id);
     let userProductFeed = await fetchUserProductFeedController(req.params.id);
-    console.log(userProductFeed); // TODO: profile card Feed
-    res.render('profile', {user: user});
+    // TODO: user profile problem
+    db.findByUser( req.params.id, (err, blog)=>{
+       if(err) throw err;
+       res.render('profile', { user: user, product: userProductFeed, blog: blog });
+    });
 });
 
 router.post('/follow', (req, res)=>{
@@ -25,4 +31,5 @@ router.post('/follow', (req, res)=>{
         console.log(false);
     }
 });
+
 module.exports = router;
