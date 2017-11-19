@@ -20,7 +20,8 @@ let routes = require('./routes/index')
     , auth = require('./routes/auth')
     , upload = require('./uploads/index')
     , profile = require('./routes/profile')
-    , blogs = require('./routes/blogs');
+    , blogs = require('./routes/blogs')
+    , cart = require('./routes/cart');
 
 let gateway = require('./paymentconfig/stripestrategy');
 
@@ -50,6 +51,7 @@ app.use('/gateway', gateway);
 app.use('/application', upload);
 app.use('/user', profile);
 app.use('/blog', blogs);
+app.use('/cart', cart);
 
 // TODO: Manage routing
 
@@ -93,18 +95,6 @@ app.post('/addToCart', async (req, res)=>{
     }catch(err){
         console.log(err);
     }
-});
-
-app.get('/cart', async (req, res)=>{
-    // TODO: add session  control here
-     // let sessionUser = req.session.passport.user.member_id;
-     try{
-         let cartList = await cartController();
-         // console.log(cartList)
-         res.render('cart', {cart: cartList});
-     }catch (err){
-         console.log(err);
-     }
 });
 
 app.get('/billing', (req, res)=>{
