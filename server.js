@@ -37,6 +37,7 @@ app.use(session({
 }));
 
 require('./config/passport')(app);
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
@@ -49,11 +50,12 @@ app.use('/user', profile);
 
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 
-app.get('/gallery/:page?', async (req, res)=>{
-    console.log('inside gallery');
+app.get('/gallery', async (req, res)=>{
+    console.log(req.query);
    let categoryList = await categoryController();
    let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 } || req.query;
    // filter.page = req.query.page;
+   // filter.catID = req.query.q;
    let firstProductList = await productController(filter);
 
    res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1)});

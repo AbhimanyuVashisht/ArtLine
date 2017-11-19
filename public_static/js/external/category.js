@@ -10,7 +10,6 @@ $(function () {
 
 
 
-
 // function to create the product list element done
 function changeProducts(productList) {
     console.log('im here');

@@ -18,7 +18,6 @@ router.post('/follow', (req, res)=>{
     if( userSession ){
         console.log(true);
         followController(userSession, req.body.followID);
-
     }else{
         console.log(false);
     }

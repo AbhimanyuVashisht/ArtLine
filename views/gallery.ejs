@@ -52,7 +52,7 @@
                     <div class="carousel">
                       <div class="section scrollspy" id="top"> 
                           <% for(var i of category){%>
-                            <a class="carousel-item" href="#one!"><img src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
+                            <a class="carousel-item" onclick="getProducts(<%= i.cat_id %>)"><img  src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
                           <%}%>
                           <!--<a class="carousel-item" href="#one!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
                           <!--<a class="carousel-item" href="#two!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
