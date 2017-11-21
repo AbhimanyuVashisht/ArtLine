@@ -35,11 +35,17 @@ router.get('/:id', async (req, res)=>{
 
 });
 
+// router.use('/', (req, res, next)=>{
+//     if (!req.user)
+//         res.redirect('/'); // TODO: login Page
+//     else
+//         next();
+// });
+
 router.post('/follow', (req, res)=>{
     console.log(req.body);
     // TODO: add session control here
-    let userSession = '105864670115367217760';
-    // let userSession = req.session.passport.user.member_id ;
+    let userSession = req.session.passport.user.member_id;
     if( userSession ){
         console.log(true);
         followController(userSession, req.body.followID);

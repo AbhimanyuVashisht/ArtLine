@@ -182,7 +182,7 @@
 @media screen and (max-width: 765px){
 
 .jumbotron p{
-	font-size: 15px
+	font-size: 15px;
 	margin-bottom: 20px;
 }
 .jumbotron h2{
@@ -660,8 +660,8 @@ table tbody{
 }
 */
 .product-detail .__others {
-  margin-bottom: 25px;
-    margin-left:50%;
+  margin-top: 35px;
+    margin-left:5%;
 }
 .product-detail .__others > p {
   font-family: "Montserrat", sans-serif;

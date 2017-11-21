@@ -17,8 +17,8 @@ router.post('/insert', (req, res)=>{
         author: req.session.passport.user.member_id,
         body: req.body.body,
         meta: {
-            upVotes: 1,
-            downVotes: 2
+            upVotes: 0,
+            downVotes: 0
         }
     };
     db.insertBlog(blogObj, (err, blog)=>{
@@ -35,6 +35,37 @@ router.post('/insert', (req, res)=>{
 // TODO: delete router
 router.post('/delete', (req, res)=>{
     db.remove(req.body.id);
+});
+
+router.use((req, res, next)=>{
+    if(!req.user){
+        res.send('786');
+    }else {
+        next();
+
+});
+
+router.post('/upvote', (req, res)=>{
+    let voterID = req.session.passport.user.member_id;
+    // let voterID = "10586467011536721776";
+    let blogID = req.body.blogID;
+    db.upvote(voterID, blogID, (err, doc)=>{
+        if(err) throw err;
+        console.log('This is the doc in post' + doc);
+        res.send(doc[0].meta);
+    })
+});
+
+
+router.post('/downvote', (req, res)=>{
+    let voterID = req.session.passport.user.member_id;
+    // let voterID = "10586467011536721776";
+    let blogID = req.body.blogID;
+    db.downvote(voterID, blogID, (err, doc)=>{
+        if(err) throw err;
+        console.log('This is the doc in downvote' + doc)
+        res.send(doc[0].meta);
+    })
 });
 
 

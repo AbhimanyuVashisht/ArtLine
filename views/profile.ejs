@@ -42,8 +42,8 @@
                     <li><a href="/gallery"><i class="small material-icons">apps</i>Gallery</a></li>
                     <li><a href="#"><i class="small material-icons">forum</i>Forum</a></li>
                     <li><a href="#"><i class="small material-icons">chat_bubble</i>Chat</a></li>
-                    <li><a id="follow" data-id="<%= user.userDetail.member_id%>"><i class="small material-icons">contacts</i>Followers</a><%= user.followerCount%></li>
-                    <li><a href=""><i class="small material-icons">person_add</i>Following</a><%= user.followingCount%></li>
+                    <li><a href="" id="follow" data-id="<%= user.userDetail.member_id%>"><i class="small material-icons">contacts</i>Followers</a><span><%= user.followerCount%></span></li>
+                    <li><a href=""><i class="small material-icons">person_add</i>Following</a><span><%= user.followingCount%></span></li>
                     <li><a href="/cart"><i class="small material-icons">shopping_cart</i>Purchases</a></li>
                 </ul>
             </div>
@@ -122,7 +122,8 @@
               <li>
                   <div class="collapsible-header"><h2><%= k.title %></h2>
                       <div class=" col l3">
-                          <form><i class="small material-icons ">arrow_drop_up</i><span>No.</span><i class="small material-icons ">arrow_drop_down</i><span>No.</span>
+                          <form>
+                              <a class="upvote" data-id="<%= k._id %>"><i class="small material-icons ">arrow_drop_up</i></a><span id="nuup"><%= k.meta.upVotes%></span><a class="downvote" data-id="<%= k._id%>"><i class="small material-icons ">arrow_drop_down</i></a><span id="nudown"><%= k.meta.downVotes%></span>
                           </form>
                       </div>
                   </div>

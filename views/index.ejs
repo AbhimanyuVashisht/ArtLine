@@ -140,7 +140,7 @@
      <div class="carousel">
    <div class="section scrollspy" id="top"> 
         <% for(var i of category ){%>
-            <a class="carousel-item"><img src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
+            <a class="carousel-item"><img class="category" data-id="<%= i.cat_id %>" src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
        <%}%>
 
 
@@ -149,35 +149,7 @@
         </div>
         </div>
 
-<!--
-    <div class="container">
 
-        <div id="placeit">
-
-            <div id="nex">
-               <i  id="next" class="large material-icons">arrow_forward</i>
-            </div>
-     
-            <div id="side1">
-                <img src="AGRA.jpg" height="100%" width="100%"/>
-            </div>
-            <div id="side2">
-                <img src="NEW%20YORK.jpg" height="100%" width="100%"/>
-            </div>
-            <div id="side3">
-                <img src="PARIS.jpg" height="100%" width="100%"/>
-            </div>
-             <div id="pre">
-                    <i  id="previous" class="large material-icons">arrow_back</i>
-                </div>
-            </div>
-   
-      </div>
-  </div>
--->
-<!--
-  l
--->
 
 <div class="fixed-action-btn" style="padding-top: 0; position: fixed;">
   <a id="menu" class="waves-effect waves-light btn-large btn-floating  click-to-toggle"   onclick="$('.tap-target').tapTarget('open')"><i class="material-icons">menu</i></a>
@@ -192,38 +164,65 @@
   </div>
 <div class="bound ">
 <div class="container bound " style="padding: 0;">
-          <div class="row ">
-              
-          <div class="section scrollspy blog-post" id="middle">
-              <% for(var j of featured ){%>
-                  <div class="col s12 m4 l4">
-                      <div class="card z-depth-5 post1">
-                          <div class="card-image waves-effect waves-block waves-light">
-                              <img class="activator" src="./data/products/<%= j.product_path %>">
-                          </div>
-                          <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4"><%= j.product_name %><i class="material-icons right">more_vert</i></span>
-                              <p><a href="#">This is a link</a></p>
-                          </div>
-                          <div class="card-reveal">
-                              <span class="card-title grey-text text-darken-4"><%= j.product_name %><i class="material-icons right">close</i></span>
-                              <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                          </div>
-                      </div>
-                  </div>
-              <%}%>
+    <div class="row ">
 
-              <div class="col s12 m12 l12">
-                  <div class="Cathead" style="text-align: center; background:rgb(122,16,0); margin:0; padding: 2%;">
-                           <h2 class="font-head" style="margin:0; opacity: 1;">TRENDING</h2>
+        <div class="section scrollspy blog-post" id="middle">
+            <div class="col s12 m4 l4">
+                <div class="card z-depth-5 post1">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./data/products/<%= featured[0].product_path %>">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= featured[0].product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= featured[0].product_name %><i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
                 </div>
-              </div>
+            </div>
 
-         
+
+            <div class="col s12 m4 l4">
+                <div class="card z-depth-5 post2">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src=./data/products/<%= featured[1].product_path %>>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= featured[1].product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= featured[1].product_name %><i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="card z-depth-5 post3">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./data/products/<%= featured[2].product_path %>">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= featured[2].product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= featured[2].product_name %><i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l12">
+                <div class="Cathead" style="text-align: center; background:rgb(122,16,0); margin:0; padding: 2%;">
+                    <h2 class="font-head" style="margin:0; opacity: 1;">TRENDING</h2>
+                </div>
+            </div>
         </div>
-              
     </div>
-  </div>
+</div>
 </div>
  <div class="containerconnection" style="padding: 38px;" id="bottom" >
 <div class="slider">
@@ -406,7 +405,7 @@
                     }  
                 },  
                 error: function (xhr) {  
-                    alert('error');  
+//                    alert('error');
                 }  
             });  
 
@@ -415,12 +414,11 @@
         
      
     });
-//      $('fixed-action-btn .tap-target').tapTarget('open');
-//      $('fixed-action-btn .tap-target').tapTarget('close');
-          
+
     
 
       </script>
+    <script type="text/javascript" src="/js/external/index.js"></script>
       
     </body>
   </html>

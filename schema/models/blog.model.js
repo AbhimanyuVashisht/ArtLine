@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+
 let blogSchema = new Schema({
     title: String,
     author: String,
