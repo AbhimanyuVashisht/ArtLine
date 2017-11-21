@@ -29,6 +29,12 @@ methods.findAndUpdate = function (id, blogObj, cb) {
     })
 };
 
+methods.findFollowedUser = function (idList, cb) {
+    Blog.find({'author':  idList}, (err, blogList)=>{
+        cb(err, blogList);
+    })
+};
+
 methods.findAndUpdateVotes = function (id, choice, cb) {
     // Increase in upvote
     if(choice === 1){
@@ -120,11 +126,9 @@ methods.downvote = function (voterID, blogID, cb) {
                     if(err) throw err;
                     methods.findAndUpdateVotes(blogID, 2, cb);
                 });
-
             }
             else{
                 if (doc.vote === 0) {
-                    // cb(err, doc);
                     methods.findByBlog(blogID, cb);
                 } else {
                     doc.vote = 0;
@@ -137,5 +141,6 @@ methods.downvote = function (voterID, blogID, cb) {
         }
     })
 };
+
 
 module.exports = methods;

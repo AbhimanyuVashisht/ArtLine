@@ -37,12 +37,12 @@ router.post('/delete', (req, res)=>{
     db.remove(req.body.id);
 });
 
-router.use((req, res, next)=>{
-    if(!req.user){
+router.use((req, res, next)=> {
+    if (!req.user) {
         res.send('786');
-    }else {
+    } else {
         next();
-
+    }
 });
 
 router.post('/upvote', (req, res)=>{

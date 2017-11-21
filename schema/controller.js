@@ -282,6 +282,34 @@ async function uploadController(uploadObj) {
     }
 }
 
+// Fetching the following_ids
+async function userProfileFeedController() {
+
+    try{
+        return await db.Follow.findAll({
+            where: {
+                fk_follower_id: "105864670115367217760"
+            },
+            attributes: [ 'fk_following_id']
+        })
+    }catch (err){
+        throw err;
+    }
+}
+
+async function userProductController(ListOfFollowing) {
+    try{
+        return await db.Products.findAll({
+            where: {
+                fk_member_id: { $or: ListOfFollowing }
+            }
+        })
+    }catch (err){
+        console.log(err);
+    }
+}
+
+
 module.exports = {
     categoryController,
     featuredController,
@@ -294,5 +322,7 @@ module.exports = {
     removeFromCartController,
     orderInfoController,
     uploadController,
-    fetchUserProductFeed
+    fetchUserProductFeed,
+    userProfileFeedController,
+    userProductController
 };
