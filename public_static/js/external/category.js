@@ -44,6 +44,12 @@ function addToCart(pid) {
     // console.log(pid);
     $.post('cart/addToCart', {prodID : pid}, (done)=>{
         console.log(done);
+        if(done.status){
+            $('.new.badge').html(done.cartCount);
+            window.alert('Item Successfully added');
+        }else{
+            window.alert('Item Already added in the cart');
+        }
     })
 }
 // Price filter done

@@ -4,7 +4,8 @@ let path = require('path');
 let controller = require('../schema/controller')
     , cartController = controller.cartController
     , addToCartController = controller.addToCartController
-    , removeFromCartController = controller.removeFromCartController;
+    , removeFromCartController = controller.removeFromCartController
+    , countCartItemController = controller.countCartItemController;
 
 router.use('/', (req, res, next)=>{
     if (!req.user)
@@ -27,8 +28,13 @@ router.get('/', async (req, res)=>{
 router.post('/addToCart', async (req, res)=>{
     let sessionUser = req.session.passport.user.member_id;
     try{
-        await addToCartController(sessionUser, req.body.prodID);
-        console.log('this one');
+        let status = await addToCartController(sessionUser, req.body.prodID);
+        if(status){
+            let cartCount = await countCartItemController(sessionUser);
+            res.send({status: status, cartCount: cartCount});
+        }else{
+            res.send({status: status});
+        }
     }catch(err){
         console.log(err);
     }

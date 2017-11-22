@@ -84,31 +84,27 @@ async function modalController(pid) {
 
 async function addToCartController(user, pid) {
     console.log(user);
-    if( user ){
+    try {
         console.log('yea');
-        db.Cart.findOne({
+        let searchInCart = await db.Cart.findOne({
             where: {
                 $and: {
                     fk_member_id: user,
                     fk_prod_id: pid
                 }
             }
-        })
-            .then(async (elem)=>{
-                if(elem) {
-                    return 'Already Added';
-                }else{
-                    console.log('hey here');
-                    await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
-                    return 'Added';
-                }
-            })
-            .catch(async (err)=>{
-                await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
-                return 'Added';
-            })
-    }else{
-        return 'Login to Add'
+        });
+
+        if(searchInCart){
+            return 0; //status code for already added
+        }else{
+            console.log('hey here');
+            await db.Cart.create({fk_member_id: user, fk_prod_id: pid});
+            return 1; //status code for item added
+        }
+
+    }catch (err){
+        throw err;
     }
 }
 
@@ -126,6 +122,14 @@ async function removeFromCartController(user, pid) {
         }
     }else{
         console.log('Login To Remove')
+    }
+}
+
+async function countCartItemController(user) {
+    try {
+        return await db.Cart.count({where: { fk_member_id: user}});
+    }catch (err){
+        throw err;
     }
 }
 
@@ -250,7 +254,7 @@ async function orderInfoController(orderObj) {
 
         await invoice(invoiceObj);
 
-        orderMailController({ userEmail: orderObj.stripeBody.stripeEmail, orderID: orderObj.stripeBody.stripeToken});
+        orderMailController({ userEmail: orderObj.stripeBody.stripeEmail, orderID: orderObj.stripeBody.stripeToken, userID: orderObj.userID});
 
         await db.Cart.destroy({
             where:{
@@ -324,5 +328,6 @@ module.exports = {
     uploadController,
     fetchUserProductFeed,
     userProfileFeedController,
-    userProductController
+    userProductController,
+    countCartItemController
 };
