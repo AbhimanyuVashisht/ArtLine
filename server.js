@@ -9,7 +9,8 @@ const bp = require('body-parser')
 const controller = require('./schema/controller')
     , categoryController = controller.categoryController
     , productController = controller.productController
-    , modalController = controller.modalController;
+    , modalController = controller.modalController
+    , countCartProductController = controller.countCartItemController;
 
 let routes = require('./routes/index')
     , users = require('./routes/users')
@@ -64,8 +65,12 @@ app.get('/gallery', async (req, res)=>{
    // filter.page = req.query.page;
    // filter.catID = req.query.q;
    let firstProductList = await productController(filter);
-
-   res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1)});
+   if(req.user){
+       let cartCount = await countCartProductController(req.session.passport.user.member_id);
+       res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1), cartCount: cartCount});
+   }else{
+       res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1), cartCount: 0});
+   }
 });
 
 app.get('/products', async (req, res)=>{

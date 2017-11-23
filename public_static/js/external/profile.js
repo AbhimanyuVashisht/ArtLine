@@ -17,8 +17,11 @@ $('.upvote').click((ev)=>{
             window.alert('Please login to vote');
         }
         console.log(done);
-        $('#nuup').html(done.upVotes);
-        $('#nudown').html(done.downVotes);
+        // $('#nuup').html(done.upVotes);
+        // $('#nudown').html(done.downVotes);
+
+        console.log($(ev.target.parentNode.nextSibling).html(done.upVotes));
+        console.log($(ev.target.parentNode.nextSibling.nextSibling.nextSibling).html(done.downVotes));
     })
 });
 
@@ -29,7 +32,7 @@ $('.downvote').click((ev)=>{
            window.alert('Please login to vote');
        }
        console.log(done);
-       $('#nuup').html(done.upVotes);
-       $('#nudown').html(done.downVotes);
+       $(ev.target.parentNode.previousSibling).html(done.upVotes);
+       $(ev.target.parentNode.nextSibling).html(done.downVotes);
    })
 });
