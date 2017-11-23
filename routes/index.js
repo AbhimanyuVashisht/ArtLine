@@ -1,7 +1,5 @@
 let express = require('express')
-    , router = express.Router()
-    , fs = require('fs')
-    , path = require('path');
+    , router = express.Router();
 
 const controller = require('../schema/controller')
     , categoryController = controller.categoryController

@@ -730,4 +730,6 @@ table tbody{
     margin-top:50px;
     margin-bottom: 50px;
 }
-
+.card-reveal p{
+    opacity: 1;
+}

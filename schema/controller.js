@@ -11,7 +11,7 @@ async function categoryController(){
 
 async function featuredController() {
     return await db.Products.findAll({
-        attributes: ['prod_id', 'product_name', 'product_path'],
+        attributes: ['prod_id', 'product_name', 'description', 'product_path'],
         order: [
             ['views', 'DESC']
         ],
@@ -276,6 +276,7 @@ async function uploadController(uploadObj) {
                 mobile_no: uploadObj.mobile,
                 category: uploadObj.category,
                 type: uploadObj.type,
+                price: uploadObj.price,
                 filename: uploadObj.filename,
                 fk_member_id: uploadObj.userID
             });
@@ -287,12 +288,12 @@ async function uploadController(uploadObj) {
 }
 
 // Fetching the following_ids
-async function userProfileFeedController() {
+async function userProfileFeedController(sessionUser) {
 
     try{
         return await db.Follow.findAll({
             where: {
-                fk_follower_id: "105864670115367217760"
+                fk_follower_id: sessionUser
             },
             attributes: [ 'fk_following_id']
         })
@@ -300,19 +301,6 @@ async function userProfileFeedController() {
         throw err;
     }
 }
-
-async function userProductController(ListOfFollowing) {
-    try{
-        return await db.Products.findAll({
-            where: {
-                fk_member_id: { $or: ListOfFollowing }
-            }
-        })
-    }catch (err){
-        console.log(err);
-    }
-}
-
 
 module.exports = {
     categoryController,
@@ -328,6 +316,5 @@ module.exports = {
     uploadController,
     fetchUserProductFeed,
     userProfileFeedController,
-    userProductController,
     countCartItemController
 };

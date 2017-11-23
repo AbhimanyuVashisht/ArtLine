@@ -16,6 +16,51 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="/js/materialize-pagination.js"></script>
+    <script type="text/javascript" src="/js/jquery-modal/jquery.modal.min.js"></script>
+    <script src="/js/ion.rangeSlider.min.js"></script>
+
+    <!--    <script src="js/custom.js"></script>-->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').material_select();
+            $('.carousel').carousel();
+            $('.button-collapse').sideNav({
+                    menuWidth: 300, // Default is 300
+                    edge: 'left', // Choose the horizontal origin
+                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                    draggable: true, // Choose whether you can drag to open on touch screens,
+                    onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
+                    onClose: function(el) { /* Do Stuff*/ }
+                }
+            );
+            $("#test5").ionRangeSlider({
+                type: "double",
+                grid: true,
+                min: 0,
+                max: 999,
+                from: 200,
+                to: 800,
+                prefix: "$"
+            });
+            $('.dropdown-button').dropdown({
+                    inDuration: 300,
+                    outDuration: 225,
+                    constrainWidth: false, // Does not change width of dropdown to that of the activator
+                    hover: true, // Activate on hover
+                    gutter: 0, // Spacing from edge
+                    belowOrigin: false, // Displays dropdown below the button
+                    alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                    stopPropagation: false // Stops event propagation
+                }
+            );
+        });
+
+    </script>
  
 </head>
 <body>
@@ -54,11 +99,6 @@
                           <% for(var i of category){%>
                             <a class="carousel-item" onclick="getProducts(<%= i.cat_id %>)"><img  src="./data/category/<%= i.category_image %>" style="transform: scale(2);"></a>
                           <%}%>
-                          <!--<a class="carousel-item" href="#one!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
-                          <!--<a class="carousel-item" href="#two!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
-                          <!--<a class="carousel-item" href="#three!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
-                          <!--<a class="carousel-item" href="#four!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
-                          <!--<a class="carousel-item" href="#five!"><img src="images/AGRA.jpg" style="transform: scale(2);"></a>-->
                       </div>
                    </div>
                  </div>
@@ -157,14 +197,12 @@
                                             <li class="clearfix">
                                                 <a href="#shop-quickview" class="quick-view" onclick="modalView(<%= k.prod_id%>)" rel="modal:open">
                                                     <i class="small material-icons">search</i></a>
-                                                <!--<a href="#" class="wish-list"><i class="small material-icons">favorite</i></a>-->
                                                 <a class="wish-list" onclick="addToCart(<%= k.prod_id %>)"><i class="small material-icons">shopping_cart</i></a>
                                             </li>
 
                                         </ul>
                                         <div class="__price">$<span><%= k.price%></span>
                                         </div>
-                                       <!--<div>Likes-</div>-->
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +217,7 @@
                       
                    </ul>
                 </div>
+
            </div>
         </section>
       
@@ -207,66 +246,23 @@
                 </div>
               </div>
         </footer>
-      <!--Modal View-->
-      <div id="shop-quickview" style="display:none;" class="shop-quick-view clearfix">
+          <!--Modal View-->
+          <div id="shop-quickview" style="display:none;" class="shop-quick-view clearfix">
 
-      </div>
+          </div>
+      <script>
+          $('.pagination').materializePagination({
+              align: 'center',
+              lastPage: <%= pages%>,
+              firstPage:  1,
+              urlParameter: 'page',
+              useUrlParameter: true,
+              onClickCallback: function(requestedPage){
+                  changePage(requestedPage);
+              }
+          });
+      </script>
 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script src="/js/materialize-pagination.js"></script>
-        <script type="text/javascript" src="js/jquery-modal/jquery.modal.min.js"></script>
-        <script src="/js/ion.rangeSlider.min.js"></script>
-        <script>
-            $('.pagination').materializePagination({
-                align: 'center',
-                lastPage: <%= pages%>,
-                firstPage:  1,
-                urlParameter: 'page',
-                useUrlParameter: true,
-                onClickCallback: function(requestedPage){
-                    console.log('Requested page is '+ requestedPage);
-                }
-            }); 
-        </script>
-<!--    <script src="js/custom.js"></script>-->
-    
-        <script type="text/javascript">
-               $(document).ready(function() {
-                $('select').material_select();
-                   $('.carousel').carousel();
-                   $('.button-collapse').sideNav({
-                  menuWidth: 300, // Default is 300
-                  edge: 'left', // Choose the horizontal origin
-                  closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                  draggable: true, // Choose whether you can drag to open on touch screens,
-                  onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
-                  onClose: function(el) { /* Do Stuff*/ }
-                }
-              );
-                   $("#test5").ionRangeSlider({
-                        type: "double",
-                        grid: true,
-                        min: 0,
-                        max: 999,
-                        from: 200,
-                        to: 800,
-                        prefix: "$"
-                    });
-                   $('.dropdown-button').dropdown({
-                              inDuration: 300,
-                              outDuration: 225,
-                              constrainWidth: false, // Does not change width of dropdown to that of the activator
-                              hover: true, // Activate on hover
-                              gutter: 0, // Spacing from edge
-                              belowOrigin: false, // Displays dropdown below the button
-                              alignment: 'left', // Displays dropdown with edge aligned to the left of button
-                              stopPropagation: false // Stops event propagation
-                            }
-                   );
-              });
-                
-        </script>
         <script type="text/javascript" src="js/external/category.js"></script>
 </body>
 </html>

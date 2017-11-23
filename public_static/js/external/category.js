@@ -1,13 +1,13 @@
 let filterApplied = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 }; // object to store the filters
 
-$(function () {
+function changePage(page) {
+    console.log('Requested Page' + page);
+    filterApplied.page = page;
+    $.get('/products', filterApplied, (result)=>{
+        changeProducts(result);
+    })
 
-
-
-});
-
-
-
+}
 
 
 // function to create the product list element done
@@ -42,7 +42,7 @@ function getProducts(cid) {
 
 function addToCart(pid) {
     // console.log(pid);
-    $.post('cart/addToCart', {prodID : pid}, (done)=>{
+    $.post('/cart/addToCart', {prodID : pid}, (done)=>{
         console.log(done);
         if(done.status){
             $('.new.badge').html(done.cartCount);

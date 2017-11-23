@@ -90,6 +90,10 @@ rl.question("Enter \n <1> Importing Category \n  <2> Importing Product \n Enter 
                 type: sequelize.DataTypes.STRING,
                 allowNull: false
             },
+            description: {
+                type: sequelize.DataTypes.STRING,
+                allowNull: false
+            },
             product_path: {
                 type: sequelize.DataTypes.STRING,
             },
@@ -116,6 +120,7 @@ rl.question("Enter \n <1> Importing Category \n  <2> Importing Product \n Enter 
                     if(done){
                         Products.update({
                             product_name: prodObj.product_name,
+                            description: prodObj.description,
                             product_path: prodObj.product_path,
                             price: prodObj.price,
                             fk_category_id: prodObj.fk_category_id,

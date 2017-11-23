@@ -32,7 +32,8 @@ router.post('/upload',multer({ storage: storage}).single('fileToUpload'), async 
         userID: userSession.member_id || '109484023739009832780',
         userEmail: userSession.email || 'abhimanyuvashisht.av@gmail.com',
         filename: req.file.filename,
-        mobile: req.body.tell
+        mobile: req.body.tell,
+        price: req.body.price
     };
     try {
         let upload = await uploadController(uploadObj);

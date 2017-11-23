@@ -42,6 +42,10 @@ const Products = db.define('products', {
         type: sequelize.DataTypes.STRING,
         allowNull: false
     },
+    description: {
+        type: sequelize.DataTypes.STRING,
+        allowNull: false
+    },
     product_path: {
         type: sequelize.DataTypes.STRING,
     },
@@ -130,6 +134,9 @@ const Uploads = db.define('uploads', {
     },
     type: {
         type: sequelize.DataTypes.STRING
+    },
+    price: {
+        type: sequelize.DataTypes.INTEGER,
     },
     filename: {
         type: sequelize.DataTypes.STRING,

@@ -53,7 +53,8 @@
             <div class="profile-head">
                 <ul>
                     <li ><img class="demo-avtar" src="<%= user.userDetail.profile_dp%>"></li>
-                    <li><%= user.userDetail.email%></li>
+                    <li style="color: white;"><%= user.userDetail.email%></li>
+                    <li><a id="follow" data-id="<%= user.userDetail.member_id%>" class="waves-effect waves-light btn">Follow</a></li>
                 </ul>
             </div>
             <div class="down-left">
@@ -61,8 +62,8 @@
                     <li><a href="/gallery"><i class="small material-icons">apps</i>Gallery</a></li>
                     <li><a href="#"><i class="small material-icons">forum</i>Forum</a></li>
                     <li><a href="#"><i class="small material-icons">chat_bubble</i>Chat</a></li>
-                    <li><a href="" id="follow" data-id="<%= user.userDetail.member_id%>"><i class="small material-icons">contacts</i>Followers</a><span><%= user.followerCount%></span></li>
-                    <li><a href=""><i class="small material-icons">person_add</i>Following</a><span><%= user.followingCount%></span></li>
+                    <li><a ><i class="small material-icons">contacts</i>Followers: <b><span><%= user.followerCount%></span></b></a></li>
+                    <li><a ><i class="small material-icons">person_add</i>Following: <b><span><%= user.followingCount%></span></b></a></li>
                     <li><a href="/cart"><i class="small material-icons">shopping_cart</i>Purchases</a></li>
                 </ul>
             </div>
@@ -120,11 +121,11 @@
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">more_vert</i></span>
-                        <p><a href="#">This is a link</a></p>
+                        <!--<p><a href="#">This is a link</a></p>-->
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                        <p><%= i.description %></p>
                     </div>
                 </div>
             </div>
@@ -139,11 +140,11 @@
           <ul class="collapsible popout" data-collapsible="accordion">
             <% for(let k of blog){%>
               <li>
-                  <div class="collapsible-header"><h2><%= k.title %></h2>
+                  <div class="collapsible-header"><h5><%= k.title %></h5>
                       <div class=" col l3">
-                          <form>
-                              <a class="upvote" data-id="<%= k._id %>"><i class="small material-icons ">arrow_drop_up</i></a><span id="nuup"><%= k.meta.upVotes%></span><a class="downvote" data-id="<%= k._id%>"><i class="small material-icons ">arrow_drop_down</i></a><span id="nudown"><%= k.meta.downVotes%></span>
-                          </form>
+                          <div>
+                              <a class="upvote" data-id="<%= k._id %>"><i class="medium material-icons" style="font-size:45px;">arrow_drop_up</i></a><span id="nuup"><%= k.meta.upVotes%></span><a class="downvote" data-id="<%= k._id%>"><i class="medium material-icons " style="font-size: 45px;">arrow_drop_down</i></a><span id="nudown"><%= k.meta.downVotes%></span>
+                          </div>
                       </div>
                   </div>
                   <div class="collapsible-body"><span><%= k.body%></span></div>

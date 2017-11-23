@@ -52,8 +52,8 @@
                      <input type="text" name="description" placeholder="Description" required>
 
                      <div class="input-field">
-                         <label for="tel1" data-error="wrong" data-success="right" required>Mobile Number</label>
-                         <input type="tel" name="tel1"  class="validate" pattern="^\d{10}$" required>
+                         <label for="tell" data-error="wrong" data-success="right" required>Mobile Number</label>
+                         <input type="tel" name="tell"  class="validate" pattern="^\d{10}$" required>
                      </div>
 
                      <div class="input-field col s12"  >
@@ -76,6 +76,11 @@
                          <input name="group" type="radio" value="video" id="test2" />
                          <label for="test2">Video</label>
                      </p>
+                 </div>
+                 <div class="input-field">
+                     <label for="price" data-error="wrong" data-success="right" required>Price</label>
+                     <input type="text" name="price"  class="validate" pattern="^\d{1-10}$" required>
+
                  </div>
                  <div id="upload">
                      <input type="file" name="fileToUpload" id="file" accept="image/jpeg, video/mp4" multiple>
@@ -117,6 +122,13 @@
      <script type="text/javascript">
          $(document).ready(function() {
              $('select').material_select();
+             $('.button-collapse').sideNav({
+                 menuWidth: 300, // Default is 300
+                 edge: 'left', // Choose the horizontal origin
+                 closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                 draggable: true
+                  }
+                 );
          });
 
          $(document).ready(function(){

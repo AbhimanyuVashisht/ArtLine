@@ -14,6 +14,31 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.button-collapse').sideNav({
+                    menuWidth: 300, // Default is 300
+                    edge: 'left', // Choose the horizontal origin
+                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                    draggable: true, // Choose whether you can drag to open on touch screens,
+                    onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
+                    onClose: function(el) { /* Do Stuff*/ }
+                }
+            );
+            $('.collapsible').collapsible();
+            $('.modal').modal();
+            $('#textarea1').trigger('autoresize');
+            $('ul.tabs').tabs({
+                swipeable:true,
+                responsiveThreshold: 768
+
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -34,17 +59,36 @@
             <div class="profile-head">
                 <ul>
                     <li ><img class="demo-avtar" src="<%= user.userDetail.profile_dp%>"></li>
-                    <li><%= user.userDetail.email%></li>
+                    <li style="color:white;"><%= user.userDetail.email%></li>
                 </ul>
             </div>
-            <div class="down-left">
+            <div class="down-left" style="margin-bottom:75px;">
                 <ul>
                     <li><a href="/gallery"><i class="small material-icons">apps</i>Gallery</a></li>
-                    <li><a href=""><i class="small material-icons">forum</i>Forum</a></li>
-                    <li><a href=""><i class="small material-icons">chat_bubble</i>Chat</a></li>
-                    <li><a href=""><i class="small material-icons">contacts</i>Followers</a><span><%= user.followerCount%></span></li>
-                    <li><a href=""><i class="small material-icons">person_add</i>Following</a><span><%= user.followingCount%></span></li>
+                    <li><a href="#"><i class="small material-icons">forum</i>Community-Forum</a></li>
+                    <li><a href="#"><i class="small material-icons">chat_bubble</i>Chat</a></li>
+                    <li><a ><i class="small material-icons">contacts</i>Followers: <span><b><%= user.followerCount%></b></span></a></li>
+                    <li><a href=""><i class="small material-icons">person_add</i>Following: <span><b><%= user.followingCount%></b></span></a></li>
                     <li><a href="/cart"><i class="small material-icons">shopping_cart</i>Purchases</a></li>
+                    <li class="no-padding">
+                        <ul class="collapsible collapsible-accordion">
+                            <li><a class="collapsible-header" style="margin-left:20px">Community-Forum<i class="small material-icons">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li><a href="#!">First</a></li>
+                                        <li><a href="#!">Second</a></li>
+                                        <li><a href="#!">Third</a></li>
+                                        <li><a href="#!">Fourth</a></li>
+                                        <li><a href="#!">Firfth</a></li>
+                                        <li><a href="#!">Sixth</a></li>
+                                        <li><a href="#!">Seventh</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="users/logout" class="waves-effect waves-light btn small">Logout</a></li>
+                    <li><a href="/application" class="waves-effect waves-light btn small">ArtPost</a></li>
                 </ul>
             </div>
         </ul>
@@ -90,103 +134,117 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class=" col s12 l8 offset-l3">
-
-        <% for(let i of product){%>
-        <div class="col s12 l6">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="/data/products/<%= i.product_path %>">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-        <%}%>
+<div class="row" style="margin-top:50px">
+    <div class="col s12 l8 offset-l3">
+        <ul id="tabs-swipe-demo" class="tabs">
+            <li class="tab col s3"><a class="active" href="#test-swipe-1">Profile</a></li>
+            <li class="tab col s3"><a href="#test-swipe-2">Feed</a></li>
+        </ul>
     </div>
 </div>
-<div class="row">
-    <div class="col s12 l8 offset-l3">
-        <h1><b>Blog Posts</b></h1>
+<div id="test-swipe-1" class="col s12">
+    <div class="row" style="padding-top:50px; padding-bottom: 50px;">
+        <div class=" col s12 l8 offset-l3">
+            <% for(let i of product){%>
+            <div class="col s12 l6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="/data/products/<%= i.product_path %>">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">close</i></span>
+                        <p><%= i.description%></p>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+        </div>
     </div>
-    <div class="col s12 l8 offset-l3">
-        <ul class="collapsible popout" data-collapsible="accordion">
-            <% for(let k of blog){%>
-            <li>
-                <div class="collapsible-header"><h2><%= k.title %></h2>
-                    <div class=" col l3">
-                        <form><i class="small material-icons ">arrow_drop_up</i><span><%= k.meta.downVotes%></span><i class="small material-icons ">arrow_drop_down</i><span><%= k.meta.upVotes%></span>
+    <div class="row">
+        <div class="col s12 l8 offset-l3">
+            <h1><b>Blog Posts</b></h1>
+        </div>
+        <div class="col s12 l8 offset-l3">
+            <ul class="collapsible popout" data-collapsible="accordion">
+                <% for(let k of blog){%>
+                <li>
+                    <div class="collapsible-header"><h5><%= k.title %></h5>
+                        <div class=" col l3">
+                            <div><i class="small material-icons " style="font-size: 45px">arrow_drop_up</i><span><%= k.meta.downVotes%></span><i class="small material-icons " style="font-size: 45px">arrow_drop_down</i><span><%= k.meta.upVotes%></span><i class="material-icons" style="margin-left:25px;margin-right: 0px;">clear</i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="collapsible-body"><span><%= k.body%></span></div>
+                </li>
+
+                <%}%>
+            </ul>
+        </div>
+        <div class="col s12 l8 offset-l3">
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Post<i class="material-icons right">send</i></a>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="textarea2" class="materialize-textarea"></textarea>
+                                    <label for="textarea2">Title</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mode_edit</i>
+                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                    <label for="textarea1">Textarea</label>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="collapsible-body"><span><%= k.body%></span></div>
-            </li>
-
-            <%}%>
-        </ul>
-    </div>
-    <div class="col s12 l8 offset-l3">
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Post<i class="material-icons right">send</i></a>
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <div class="row">
-                    <form class="col s12" action="/blog/insert" method="post" id="blog">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="textarea2" name="title" class="materialize-textarea" required></textarea>
-                                <label for="textarea2">Title</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">mode_edit</i>
-                                <textarea id="textarea1" name="body" class="materialize-textarea" required></textarea>
-                                <label for="textarea1">Textarea</label>
-                            </div>
-                        </div>
-                        <div>
-                            <button class="btn waves-effect waves-light" type="submit" name="action" >Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
             </div>
+        </div>
+    </div>
+</div>
+<div id="test-swipe-2" class="col s12">
+    <div class="row">
+        <div class="col s12 l8 offset-l3">
+            <h1><b>Blog Posts</b></h1>
+        </div>
+        <div class="col s12 l8 offset-l3">
+            <ul class="collapsible popout" data-collapsible="accordion">
+                <% for(let k of feedBlog){%>
+                <li>
+                    <div class="collapsible-header"><h5><%= k.title %></h5>
+                        <div class=" col l3">
+                            <div>
+                                <a class="upvote" data-id="<%= k._id %>"><i class="medium material-icons" style="font-size:45px;">arrow_drop_up</i></a><span id="nuup"><%= k.meta.upVotes%></span><a class="downvote" data-id="<%= k._id%>"><i class="medium material-icons " style="font-size: 45px;">arrow_drop_down</i></a><span id="nudown"><%= k.meta.downVotes%></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapsible-body"><span><%= k.body%></span><br><a href="/user/<%= k.author%>">Author</a></div>
+                </li>
+
+                <%}%>
+            </ul>
         </div>
     </div>
 </div>
 
 
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/js/materialize.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $('.button-collapse').sideNav({
-                menuWidth: 300, // Default is 300
-                edge: 'left', // Choose the horizontal origin
-                closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                draggable: true, // Choose whether you can drag to open on touch screens,
-                onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
-                onClose: function(el) { /* Do Stuff*/ }
-            }
-        );
-        $('.collapsible').collapsible();
-        $('.modal').modal();
-        $('#textarea1').trigger('autoresize');
-    });
-</script>
-
+<script type="text/javascript" src="/js/external/profile.js"></script>
 </body>
 </html>
-
 
 
 
