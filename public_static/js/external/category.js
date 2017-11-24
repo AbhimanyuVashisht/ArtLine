@@ -14,6 +14,7 @@ function changePage(page) {
 function changeProducts(productList) {
     console.log('im here');
     let div = $('#product');
+    console.log(productList);
     div.empty();
     div.html( productList );
 }
@@ -36,6 +37,8 @@ function getProducts(cid) {
     console.log('inside getProducts');
     filterApplied.catID = cid;
     $.get('/products', filterApplied, (result)=>{
+
+            console.log(result);
             changeProducts(result);
         });
 }

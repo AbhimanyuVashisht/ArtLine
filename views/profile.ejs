@@ -55,6 +55,7 @@
                     <li ><img class="demo-avtar" src="<%= user.userDetail.profile_dp%>"></li>
                     <li style="color: white;"><%= user.userDetail.email%></li>
                     <li><a id="follow" data-id="<%= user.userDetail.member_id%>" class="waves-effect waves-light btn">Follow</a></li>
+                    <li><a id="hire" data-id="<%= user.userDetail.email%>" class="waves-effect waves-light btn">Hire Me</a></li>
                 </ul>
             </div>
             <div class="down-left">
@@ -114,6 +115,23 @@
     <div class=" col s12 l8 offset-l3">
 
         <% for(let i of product){%>
+            <% if(i.fk_category_id == 2 || i.fk_category_id == 3 || i.fk_category_id == 5 || i.fk_category_id == 6){%>
+            <div class="col s12 l6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="http://i.ytimg.com/vi/<%= i.product_path%>/hqdefault.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">more_vert</i></span>
+                        <!--<p><a href="#">This is a link</a></p>-->
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= i.product_name %><i class="material-icons right">close</i></span>
+                        <p><%= i.description %></p>
+                    </div>
+                </div>
+            </div>
+            <%}else{%>
             <div class="col s12 l6">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
@@ -129,6 +147,7 @@
                     </div>
                 </div>
             </div>
+            <%}%>
         <%}%>
     </div>
 </div>
@@ -160,11 +179,3 @@
 <script type="text/javascript" src="/js/external/profile.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-

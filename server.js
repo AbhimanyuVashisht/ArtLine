@@ -60,11 +60,8 @@ app.use('/cart', cart);
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 
 app.get('/gallery', async (req, res)=>{
-    console.log(req.query);
    let categoryList = await categoryController();
    let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 } || req.query;
-   // filter.page = req.query.page;
-   // filter.catID = req.query.q;
    let firstProductList = await productController(filter);
    if(req.user){
        let cartCount = await countCartProductController(req.session.passport.user.member_id);

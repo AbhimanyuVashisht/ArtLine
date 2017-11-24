@@ -2,10 +2,6 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost/projectx', {
-//     useMongoClient: true
-// });
 
 let blogSchema = new Schema({
     title: String,

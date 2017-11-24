@@ -3,8 +3,12 @@
 
 $('#follow').click((ev)=>{
     let userID = $(ev.target).attr('data-id');
-    $.post('/user/follow', {followID: userID},()=>{
-        console.log('done');
+    $.post('/user/follow', {followID: userID},(status)=>{
+        if(status === '47' ){
+            window.alert('Login to follow');
+        }else{
+            window.alert('Follow done');
+        }
     })
 });
 
@@ -45,4 +49,17 @@ $('.delete').click((ev)=>{
        // $('.collapsible.popout').html(done);
        location.reload();
    })
+});
+
+$('#hire').click((ev)=>{
+   let userEmail = $(ev.target).attr('data-id');
+   console.log(userEmail);
+    $.post('/user/hire', {userEmail: userEmail}, (status)=>{
+        // console.log(status);
+        if(status === '47'){
+            window.alert('Login To hire');
+        }else{
+            window.alert('Email has been send to the candidate');
+        }
+    })
 });
