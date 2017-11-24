@@ -18,7 +18,6 @@ methods.findByUser = function (user, cb) {
 
 methods.findByBlog = function (id, cb) {
     Blog.find({_id: id}, (err, blog)=>{
-        console.log(blog);
         cb(err, blog);
     })
 };
@@ -67,13 +66,11 @@ methods.findAndUpdateVotes = function (id, choice, cb) {
     }
 };
 
-methods.remove = function (id) {
+methods.remove = function (id, userID, cb) {
     Blog.remove({ _id: id}, (err)=>{
-        if(!err){
-            console.log('Done');
-        }else{
-            console.log(err);
-        }
+        if(err) throw err;
+
+        methods.findByUser(userID, cb);
     })
 };
 

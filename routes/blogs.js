@@ -34,7 +34,11 @@ router.post('/insert', (req, res)=>{
 
 // TODO: delete router
 router.post('/delete', (req, res)=>{
-    db.remove(req.body.id);
+    db.remove(req.body.id, req.user.member_id,(err, blogList)=>{
+        // res.render('userBlogList', {blog: blogList})
+        // res.redirect('/users');
+        res.sendStatus(200);
+    });
 });
 
 router.use((req, res, next)=> {

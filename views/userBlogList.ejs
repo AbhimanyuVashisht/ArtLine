@@ -1,0 +1,13 @@
+<% for(let k of blog){%>
+<li>
+    <div class="collapsible-header"><h5><%= k.title %></h5>
+        <div class=" col l3">
+            <div><i class="small material-icons " style="font-size: 45px">arrow_drop_up</i><span><%= k.meta.downVotes%></span><i class="small material-icons " style="font-size: 45px">arrow_drop_down</i><span><%= k.meta.upVotes%></span><a class="delete" data-id="<%= k._id%>"><i class="material-icons" style="margin-left:25px;margin-right: 0px;">clear</i></a>
+            </div>
+
+        </div>
+    </div>
+    <div class="collapsible-body"><span><%= k.body%></span></div>
+</li>
+
+<%}%>

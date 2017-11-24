@@ -75,7 +75,7 @@
                             <li><a class="collapsible-header" style="margin-left:20px">Community-Forum<i class="small material-icons">arrow_drop_down</i></a>
                                 <div class="collapsible-body">
                                     <ul>
-                                        <li><a href="#!">First</a></li>
+                                        <li><a href="https://community-forum.herokuapp.com/">First</a></li>
                                         <li><a href="#!">Second</a></li>
                                         <li><a href="#!">Third</a></li>
                                         <li><a href="#!">Fourth</a></li>
@@ -174,7 +174,7 @@
                 <li>
                     <div class="collapsible-header"><h5><%= k.title %></h5>
                         <div class=" col l3">
-                            <div><i class="small material-icons " style="font-size: 45px">arrow_drop_up</i><span><%= k.meta.downVotes%></span><i class="small material-icons " style="font-size: 45px">arrow_drop_down</i><span><%= k.meta.upVotes%></span><i class="material-icons" style="margin-left:25px;margin-right: 0px;">clear</i>
+                            <div><i class="small material-icons " style="font-size: 45px">arrow_drop_up</i><span><%= k.meta.downVotes%></span><i class="small material-icons " style="font-size: 45px">arrow_drop_down</i><span><%= k.meta.upVotes%></span><a class="delete" data-id="<%= k._id%>"><i class="material-icons" style="margin-left:25px;margin-right: 0px;">clear</i></a>
                             </div>
 
                         </div>
@@ -190,17 +190,17 @@
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     <div class="row">
-                        <form class="col s12">
+                        <form class="col s12" action="/blog/insert" method="post" id="blog">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="textarea2" class="materialize-textarea"></textarea>
+                                    <textarea id="textarea2" name="title" class="materialize-textarea" required></textarea>
                                     <label for="textarea2">Title</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mode_edit</i>
-                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                    <textarea id="textarea1" name="body"  class="materialize-textarea" required></textarea>
                                     <label for="textarea1">Textarea</label>
                                 </div>
                             </div>

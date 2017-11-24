@@ -36,3 +36,13 @@ $('.downvote').click((ev)=>{
        $(ev.target.parentNode.nextSibling).html(done.downVotes);
    })
 });
+
+$('.delete').click((ev)=>{
+   let blogID = $(ev.target.parentNode).attr('data-id');
+   console.log(blogID);
+   $.post('/blog/delete', {id: blogID}, (done)=>{
+       // console.log(done);
+       // $('.collapsible.popout').html(done);
+       location.reload();
+   })
+});
