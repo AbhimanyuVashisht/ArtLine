@@ -4,7 +4,8 @@ const bp = require('body-parser')
     , ejs = require('ejs')
     , cookieParser = require('cookie-parser')
     , session = require('express-session')
-    , mongoose = require('mongoose');
+    , mongoose = require('mongoose')
+    , path = require('path');
 
 const controller = require('./schema/controller')
     , categoryController = controller.categoryController
@@ -79,13 +80,23 @@ app.get('/products', async (req, res)=>{
     let productList = await productController(filter);
     console.log('Product Count'+productList.count);
 
-    res.render('product', {products: productList.rows});
+    if( filter.catID == 2 || filter.catID == 3 || filter.catID == 5 || filter.catID == 6 ){ //Reserving Few categories to the video section
+        res.render('productYT', {product: productList.rows});
+    }else{
+        res.render('product', {products: productList.rows});
+    }
+
 });
 
 app.get('/modal', async (req, res)=>{
     console.log(req.query.prodID);
     let modalView = await modalController(req.query.prodID);
-    res.render('modal', { product: modalView[0][0] });
+    let modalContent = modalView[0][0];
+    if(modalContent.fk_category_id == 2 || modalContent.fk_category_id == 3 || modalContent.fk_category_id == 5 || modalContent.fk_category_id == 6){
+        res.render('modalYT', {product: modalContent});
+    }else{
+        res.render('modal', { product: modalView[0][0] });
+    }
 });
 
 /// catch 404 and forwarding to error handler
