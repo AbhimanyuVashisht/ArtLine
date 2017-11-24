@@ -32,8 +32,15 @@
           <div class="container" class="bound">
               <h2 class="font-head" style="opacity: 1; text-align: center;">hey payment done</h2>
               <br>
-              <a href= "/generatedInvoice/<%= invoice %>" download="invoice">Invoice</a>
           </div>
       </header>
+      <div class="invoice">
+          <h3>Email has been send to your registered Mail</h3>
+          <h4>Download Invoice from here</h4>
+          <div>
+              <a class="waves-effect waves-light btn-large" href= "/generatedInvoice/<%= invoice %>" download="invoice"><i class="material-icons left">cloud_download</i>Invoice</a>
+              <a class="waves-effect waves-light btn-large" href="/"><i class="material-icons left">check</i>Home</a>
+          </div>
+      </div>
 </body>
 </html>

@@ -733,3 +733,17 @@ table tbody{
 .card-reveal p{
     opacity: 1;
 }
+
+/* RajaBabu CSS*/
+
+.invoice h3{
+    padding-left: 15%;
+}
+
+.invoice h4{
+    padding-left: 34%;
+}
+
+.invoice div{
+    margin-left: 40%;
+}
