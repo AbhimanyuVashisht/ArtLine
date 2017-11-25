@@ -14,7 +14,13 @@ let storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
-
+router.use((req, res, next)=>{
+   if(!req.user){
+       res.redirect('/');
+   }else{
+       next();
+   }
+});
 /*Get home page*/
 router.get('/', (req, res)=>{
     res.sendFile(path.join(__dirname +'/../views/upload.html'));
@@ -38,7 +44,16 @@ router.post('/upload',multer({ storage: storage}).single('fileToUpload'), async 
     try {
         let upload = await uploadController(uploadObj);
         uploadMailController(upload);
-        res.send('Upload Done ' + upload.uploadID);
+        res.send('<!DOCTYPE html>' +
+            '<html lang="en">' +
+            '<head>' +
+            '<meta charset="UTF-8">' +
+            '<title>Upload Successful</title>' +
+            '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">' +
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">' +
+            '</script></head><body><h2>Upload Successful</h2> <h3>UploadID: '+ upload.uploadID+'</h3> <a class="waves-effect waves-light btn" href="/">HOME</a>' +
+            '</body>' +
+            '</html>');
     }catch (err){
         console.log(err);
     }
