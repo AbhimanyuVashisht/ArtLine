@@ -24,7 +24,7 @@ let routes = require('./routes/index')
 let gateway = require('./paymentconfig/stripestrategy');
 
 const app = express();
-let server = require('http').Server(app);
+
 // view engine setup
 app.set('view engine', 'ejs');
 
@@ -55,6 +55,7 @@ app.use('/application', upload);
 app.use('/user', profile);
 app.use('/blog', blogs);
 app.use('/cart', cart);
+
 
 // TODO: Manage routing
 
@@ -129,6 +130,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-server.listen(8000, function(){
+app.listen(8000, function(){
     console.log("ServerRunning on http://localhost:8000/");        
 });
