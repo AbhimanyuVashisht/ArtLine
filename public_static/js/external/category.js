@@ -47,10 +47,12 @@ function addToCart(pid) {
     // console.log(pid);
     $.post('/cart/addToCart', {prodID : pid}, (done)=>{
         console.log(done);
-        if(done.status){
+        if(done.status === '200'){
             $('.new.badge').html(done.cartCount);
             window.alert('Item Successfully added');
-        }else{
+        }else if(done.status === '403'){
+            window.alert('Login to add to the cart');
+        }else if(done.status === '302'){
             window.alert('Item Already added in the cart');
         }
     })

@@ -24,22 +24,6 @@ router.get('/', async (req, res)=>{
     }
 });
 
-
-router.post('/addToCart', async (req, res)=>{
-    let sessionUser = req.session.passport.user.member_id;
-    try{
-        let status = await addToCartController(sessionUser, req.body.prodID);
-        if(status){
-            let cartCount = await countCartItemController(sessionUser);
-            res.send({status: status, cartCount: cartCount});
-        }else{
-            res.send({status: status});
-        }
-    }catch(err){
-        console.log(err);
-    }
-});
-
 router.get('/billing', (req, res)=>{
     res.sendFile(path.join(__dirname + '/../views/billing.html'));
 });
@@ -61,6 +45,21 @@ router.get('/removeFromCart', async (req, res)=>{
 
 });
 
+router.post('/addToCart', async (req, res)=>{
+    let sessionUser = req.session.passport.user.member_id;
+    try{
+        let status = await addToCartController(sessionUser, req.body.prodID);
+        console.log(status);
+        if(status){
+            let cartCount = await countCartItemController(sessionUser);
+            res.send({status: '200', cartCount: cartCount});
+        }else{
+            res.send({status: '302'});
+        }
+    }catch(err){
+        console.log(err);
+    }
+});
 
 module.exports = router;
 
