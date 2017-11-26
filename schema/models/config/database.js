@@ -11,7 +11,7 @@ methods.insertBlog = function (blogObj, cb) {
 };
 
 methods.findByUser = function (user, cb) {
-    Blog.find({'author': user}, (err, blog)=>{
+    Blog.find({'author': user}, null, {sort: {date: -1}}, (err, blog)=>{
         cb(err, blog)
     })
 };
@@ -29,7 +29,8 @@ methods.findAndUpdate = function (id, blogObj, cb) {
 };
 
 methods.findFollowedUser = function (idList, cb) {
-    Blog.find({'author':  idList}, (err, blogList)=>{
+    Blog.find({'author':  idList}, null, {sort: {date: -1}}, (err, blogList)=>{
+        console.log(blogList);
         cb(err, blogList);
     })
 };
@@ -46,21 +47,21 @@ methods.findAndUpdateVotes = function (id, choice, cb) {
         // Increase in downvote
         Blog.update({_id: id}, { $inc: { "meta.downVotes": -1}}, (err)=>{
             if(err) throw err;
-            console.log('Decrementing votes')
+            console.log('Decrementing votes');
             methods.findByBlog(id, cb);
         })
     } else if(choice === 3){
         // Increment in upVotes and Decrement in DownVotes
         Blog.update({_id: id}, { $inc: { "meta.upVotes": 1, "meta.downVotes": -1}}, (err)=>{
             if(err) throw err;
-            console.log('Increase votes and decreasing votes')
+            console.log('Increase upVotes and decreasing downVotes');
             methods.findByBlog(id, cb);
         })
     } else if(choice === 4){
         // Decrement in upVotes and Decrement in DownVotes
         Blog.update({_id: id}, { $inc: { "meta.upVotes": -1, "meta.downVotes": 1}}, (err)=>{
             if(err) throw err;
-            console.log('icrement in down and decrement in');
+            console.log('increment in downVote and decrement in upVote');
             methods.findByBlog(id, cb);
         })
     }

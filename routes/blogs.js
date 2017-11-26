@@ -51,7 +51,6 @@ router.use((req, res, next)=> {
 
 router.post('/upvote', (req, res)=>{
     let voterID = req.session.passport.user.member_id;
-    // let voterID = "10586467011536721776";
     let blogID = req.body.blogID;
     db.upvote(voterID, blogID, (err, doc)=>{
         if(err) throw err;
@@ -63,7 +62,6 @@ router.post('/upvote', (req, res)=>{
 
 router.post('/downvote', (req, res)=>{
     let voterID = req.session.passport.user.member_id;
-    // let voterID = "10586467011536721776";
     let blogID = req.body.blogID;
     db.downvote(voterID, blogID, (err, doc)=>{
         if(err) throw err;
