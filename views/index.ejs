@@ -240,10 +240,11 @@
     <div class="row ">
 
         <div class="section scrollspy blog-post" id="middle">
+            <% if(featured[0].fk_category_id == 2 || featured[0].fk_category_id == 3 || featured[0].fk_category_id == 5 || featured[0].fk_category_id == 6){%>
             <div class="col s12 m4 l4">
                 <div class="card z-depth-5 post1">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="./data/products/<%= featured[0].product_path %>">
+                        <img class="activator" src="http://i.ytimg.com/vi/<%= featured[0].product_path%>/hqdefault.jpg" height="350px">
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4"><%= featured[0].product_name %><i class="material-icons right">more_vert</i></span>
@@ -255,12 +256,29 @@
                     </div>
                 </div>
             </div>
+            <%}else{%>
+            <div class="col s12 m4 l4">
+                <div class="card z-depth-5 post1">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./data/products/<%= featured[0].product_path %>" height="350px">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= featured[0].product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= featured[0].product_name %><i class="material-icons right">close</i></span>
+                        <p><%= featured[0].description%></p>
+                    </div>
+                </div>
+            </div>
+            <%}%>
 
-
+            <% if(featured[1].fk_category_id == 2 || featured[1].fk_category_id == 3 || featured[1].fk_category_id == 5 || featured[1].fk_category_id == 6){%>
             <div class="col s12 m4 l4">
                 <div class="card z-depth-5 post2">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src=./data/products/<%= featured[1].product_path %>>
+                        <img class="activator" src="http://i.ytimg.com/vi/<%= featured[1].product_path%>/hqdefault.jpg" height="350px">
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4"><%= featured[1].product_name %><i class="material-icons right">more_vert</i></span>
@@ -272,10 +290,29 @@
                     </div>
                 </div>
             </div>
+            <%}else{%>
             <div class="col s12 m4 l4">
-                <div class="card z-depth-5 post3">
+                <div class="card z-depth-5 post2">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="./data/products/<%= featured[2].product_path %>">
+                        <img class="activator" src=./data/products/<%= featured[1].product_path %> height="350px">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= featured[1].product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= featured[1].product_name %><i class="material-icons right">close</i></span>
+                        <p><%= featured[1].description%></p>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+
+            <% if(featured[2].fk_category_id == 2 || featured[2].fk_category_id == 3 || featured[2].fk_category_id == 5 || featured[2].fk_category_id == 6){%>
+            <div class="col s12 m4 l4">
+                <div class="card z-depth-5 post1">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="http://i.ytimg.com/vi/<%= featured[2].product_path%>/hqdefault.jpg" height="350px">
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4"><%= featured[2].product_name %><i class="material-icons right">more_vert</i></span>
@@ -287,6 +324,23 @@
                     </div>
                 </div>
             </div>
+            <%}else{%>
+            <div class="col s12 m4 l4">
+                <div class="card z-depth-5 post3">
+                    <div class="card-image waves-effect waves-block waves-light" >
+                        <img class="activator" src="./data/products/<%= featured[2].product_path %>" height="350px">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= featured[2].product_name %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= featured[2].product_name %><i class="material-icons right">close</i></span>
+                        <p><%= featured[2].description%></p>
+                    </div>
+                </div>
+            </div>
+            <%}%>
 
             <div class="col s12 m12 l12">
                 <div class="Cathead" style="text-align: center; background:rgb(122,16,0); margin:0; padding: 2%;">

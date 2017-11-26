@@ -107,14 +107,21 @@ rl.question("Enter \n <1> Importing Category \n  <2> Importing Product \n Enter 
             rating:{
                 type: sequelize.DataTypes.INTEGER,
             },
+            fk_category_id:{
+                type: sequelize.DataTypes.INTEGER,
+            },
+            fk_member_id:{
+                type: sequelize.DataTypes.STRING
+            }
         });
 
 
         csv().fromFile(csvFilePath)
             .on('json', (prodObj)=>{
+                console.log(prodObj);
                 Products.findOne({
                     where: {
-                        prod_id: prodObj.cat_id
+                        prod_id: prodObj.prod_id
                     }
                 }).then((done)=>{
                     if(done){

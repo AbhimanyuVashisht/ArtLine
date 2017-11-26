@@ -11,7 +11,7 @@ async function categoryController(){
 
 async function featuredController() {
     return await db.Products.findAll({
-        attributes: ['prod_id', 'product_name', 'description', 'product_path'],
+        attributes: ['prod_id', 'product_name', 'description', 'product_path', 'fk_category_id'],
         order: [
             ['views', 'DESC']
         ],
