@@ -11,16 +11,17 @@ let stripe = require('stripe')(keySecret);
 
 let storeLocal = {};
 
-// router.use((req, res, next)=>{
-//     console.log(req.body);
-//     next()
-// })
-router.post('/', async (req, res)=>{
-    // console.log(req.body);
-    // let userSession = req.session.passport.user.member_id
-    // TODO: to add the user session
+// Global Router to check weather the user is logged In or Not
+router.use((req, res, next)=>{
+    if(!req.user){
+        res.redirect('/users');
+    }else{
+        next();
+    }
+});
 
-    let userSession =  '109484023739009832780';
+router.post('/', async (req, res)=>{
+    let userSession =  req.session.passport.user.member_id;
     if( userSession ){
         let cartItems = await cartController(userSession);
         let total = 0;
@@ -38,8 +39,6 @@ router.post('/', async (req, res)=>{
 });
 
 router.post('/charge', async (req, res)=>{
-    // console.log(req.body);
-    // console.log(storeLocal);
     let amount = await storeLocal.total;
 
     stripe.customers.create({
@@ -60,8 +59,8 @@ router.post('/charge', async (req, res)=>{
                 charge: charge,
                 storeLocal: storeLocal,
                 stripeBody: req.body,
-                userID: '109484023739009832780', // need to add the user session   TODO: Add the usersession here
-                username: 'Abhimanyu Vashisht'  //req.session.passport.user.username
+                userID: req.session.passport.user.member_id,
+                username: req.session.passport.user.username
             };
             let invoiceFilename = req.body.stripeToken + '_'+ info.userID + '.pdf';
             await orderInfoController(info);
@@ -70,7 +69,6 @@ router.post('/charge', async (req, res)=>{
             console.log(err);
             res.send("Transaction failed");
         }
-
     });
 });
 

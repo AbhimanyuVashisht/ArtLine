@@ -17,7 +17,6 @@ router.get('/:id', async (req, res)=>{
         }else {
             let user = await fetchUserController(req.params.id);
             let userProductFeed = await fetchUserProductFeedController(req.params.id);
-            // TODO: user profile problem
             db.findByUser(req.params.id, (err, blog) => {
                 if (err) throw err;
                 res.render('profile', {user: user, product: userProductFeed, blog: blog});
@@ -27,7 +26,6 @@ router.get('/:id', async (req, res)=>{
 
         let user = await fetchUserController(req.params.id);
         let userProductFeed = await fetchUserProductFeedController(req.params.id);
-        // TODO: user profile problem
         db.findByUser(req.params.id, (err, blog) => {
             if (err) throw err;
             res.render('profile', {user: user, product: userProductFeed, blog: blog});

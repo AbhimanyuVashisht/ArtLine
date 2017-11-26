@@ -32,7 +32,7 @@ router.post('/insert', (req, res)=>{
 //     db.findAndUpdate()
 // })
 
-// TODO: delete router
+
 router.post('/delete', (req, res)=>{
     db.remove(req.body.id, req.user.member_id,(err, blogList)=>{
         // res.render('userBlogList', {blog: blogList})

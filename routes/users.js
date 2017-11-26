@@ -27,9 +27,6 @@ router.get('/', async function(req, res) {
       followingsList.push(i.fk_following_id);
   }
   console.log(followingsList);
-    // TODO: Integrate with the front end ones the front end is ready
-    // Fetching the user followed
-    // let list;
     db.findFollowedUser(followingsList, (err, list)=>{
         if(err) throw err;
         // console.log(list);

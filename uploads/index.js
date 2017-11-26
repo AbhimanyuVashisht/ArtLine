@@ -27,16 +27,14 @@ router.get('/', (req, res)=>{
 });
 
 router.post('/upload',multer({ storage: storage}).single('fileToUpload'), async (req, res)=>{
-
-    // TODO: userSession
     let userSession = req.session.passport.user;
     let uploadObj = {
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
         type: req.body.group,
-        userID: userSession.member_id || '109484023739009832780',
-        userEmail: userSession.email || 'abhimanyuvashisht.av@gmail.com',
+        userID: userSession.member_id,
+        userEmail: userSession.email,
         filename: req.file.filename,
         mobile: req.body.tell,
         price: req.body.price

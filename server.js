@@ -57,8 +57,6 @@ app.use('/blog', blogs);
 app.use('/cart', cart);
 
 
-// TODO: Manage routing
-
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 
 app.get('/gallery', async (req, res)=>{
