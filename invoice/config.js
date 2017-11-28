@@ -13,7 +13,7 @@ async function createInvoice(invoiceObj) {
     doc.pipe(fs.createWriteStream( path.join(__dirname + '/../public_static/generatedInvoice/' + orderId +'.pdf')));
     // doc.pipe(res);
     doc.fontSize(30)
-        .text('Artist-Hub', {
+        .text('ArtistLine', {
             align: 'center'
         })
         .fontSize(25)

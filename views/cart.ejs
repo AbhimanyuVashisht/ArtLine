@@ -62,14 +62,15 @@
                           <th class="product-img">PRODUCT</th>
                           <th class="product-name">NAME</th>
                           <th class="product-price">PRICE</th>
-                          <!--<th class="product-total">TOTAL</th>-->
+                          <th class="product-total">TOTAL</th>
                           <th class="product-remove">&nbsp;</th>
                         </tr>
                       </thead>
                       <tbody id="cartbody">
                       <% let total = 0;%>
                         <% for( let i of cart){%>
-                            <% total = total + i.dataValues.price %>
+                            <% let finalPrice = i.dataValues.price * (100 - global.discount)/100%>
+                            <% total = total + finalPrice %>
                             <tr class="cart-item">
                                 <td class="product-img"><a href="#">
                                         <div class="image overlay-container">
@@ -78,6 +79,7 @@
                                 </td>
                                 <td class="product-name"><a href="#"><%= i.dataValues.product_name%></a></td>
                                 <td class="product-price">$<%= i.dataValues.price%></td>
+                                <td class="product-total"><%= finalPrice%></td>
                                 <!--<td class="product-total">$200.00</td>-->
                                 <td class="product-remove"><a onclick="deleteCartEle(<%= i.dataValues.prod_id%>)">&#9587;</a></td>
                             </tr>

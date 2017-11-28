@@ -29,7 +29,7 @@ router.post('/', async (req, res)=>{
             total = total + i.dataValues.price
         }
         storeLocal.data = req.body;
-        storeLocal.total = total;
+        storeLocal.total = total * (100 - global.discount)/100;
         // console.log(total);
         res.render("checkout", {keyPublishable: keyPublishable, amount: total });
     }else{

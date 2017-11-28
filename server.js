@@ -57,25 +57,32 @@ app.use('/blog', blogs);
 app.use('/cart', cart);
 
 
+global.discount = 0;
+
+setInterval(require('./config/calDiscount'), 86400000 );
+
+
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
 
+
 app.get('/gallery', async (req, res)=>{
-   let categoryList = await categoryController();
+    let categoryList = await categoryController();
    let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 } || req.query;
    let firstProductList = await productController(filter);
    if(req.user){
        let cartCount = await countCartProductController(req.session.passport.user.member_id);
-       res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1), cartCount: cartCount});
+       res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: (Math.floor((firstProductList.count)/8)+1), cartCount: cartCount});
    }else{
-       res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: ((firstProductList.count)/8+1), cartCount: 0});
+       res.render('gallery', {category: categoryList, products: firstProductList.rows, pages: (Math.floor((firstProductList.count)/8)+1), cartCount: 0});
    }
 });
+
 
 app.get('/products', async (req, res)=>{
     filter = req.query;
     console.log(filter);
     let productList = await productController(filter);
-    console.log('Product Count'+productList.count);
+    console.log('Product Count '+productList.count);
 
     if( filter.catID == 2 || filter.catID == 3 || filter.catID == 5 || filter.catID == 6 ){ //Reserving Few categories to the video section
         res.render('productYT', {product: productList.rows});
@@ -86,13 +93,12 @@ app.get('/products', async (req, res)=>{
 });
 
 app.get('/modal', async (req, res)=>{
-    console.log(req.query.prodID);
     let modalView = await modalController(req.query.prodID);
     let modalContent = modalView[0][0];
     if(modalContent.fk_category_id == 2 || modalContent.fk_category_id == 3 || modalContent.fk_category_id == 5 || modalContent.fk_category_id == 6){
         res.render('modalYT', {product: modalContent});
     }else{
-        res.render('modal', { product: modalView[0][0] });
+        res.render('modal', { product: modalView[0][0], discount: global.discount });
     }
 });
 

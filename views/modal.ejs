@@ -18,14 +18,21 @@
                 <!--<p class="color-secondary">(1 customer review)</p>-->
             <!--</div>-->
             <div class="__price fz-4 font-heading">
+                <%if(discount){%>
+                <%let finalprice = product.price * (100 - discount)/100%>
+                <span class="color-primary" style="text-decoration: line-through">$<%= product.price %></span><br>
+                <span class="color-primary">Applied Discount: <%=discount%>%</span><br>
+                <span class="colol-primary">$<%=finalprice%></span>
+                <%}else{%>
                 <span class="color-primary">$<%= product.price %></span>
+                <%}%>
             </div>
             <div class="__text">
                 <p><%= product.description%></p>
             </div>
             <form>
                 <div class="__option-2 clearfix">
-                    <div class="__button"><a class="btn btn-primary" onclick="addToCart(<%= product.prod_id %>)"><i class="icon-shopping111"></i>ADD TO CART</a></div>
+                    <div class="__button"><a class="btn btn-primary" onclick="addToCart(<%= product.prod_id %>)">ADD TO CART</a></div>
                 </div>
             </form>
             <br>
