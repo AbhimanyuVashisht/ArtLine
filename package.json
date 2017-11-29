@@ -11,6 +11,7 @@
   "dependencies": {
     "@sendgrid/mail": "^6.1.4",
     "body-parser": "^1.18.2",
+    "child_process": "^1.0.2",
     "cookie-parser": "^1.4.3",
     "csvtojson": "^1.1.9",
     "ejs": "^2.5.7",
