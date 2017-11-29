@@ -26,10 +26,10 @@ router.post('/', async (req, res)=>{
         let cartItems = await cartController(userSession);
         let total = 0;
         for( let i of cartItems){
-            total = total + i.dataValues.price
+            total = total + ( i.dataValues.price * (100-i.dataValues.discount)/100);
         }
         storeLocal.data = req.body;
-        storeLocal.total = total * (100 - global.discount)/100;
+        storeLocal.total = total ;
         // console.log(total);
         res.render("checkout", {keyPublishable: keyPublishable, amount: total });
     }else{

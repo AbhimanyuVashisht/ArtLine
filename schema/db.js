@@ -53,6 +53,10 @@ const Products = db.define('products', {
         type: sequelize.DataTypes.INTEGER,
         allowNull: false
     },
+    discount: {
+        type: sequelize.DataTypes.INTEGER,
+        allowNull: false
+    },
     views: {
         type: sequelize.DataTypes.INTEGER,
     },

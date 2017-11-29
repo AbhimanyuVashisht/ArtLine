@@ -57,9 +57,8 @@ app.use('/blog', blogs);
 app.use('/cart', cart);
 
 
-global.discount = 0;
 
-setInterval(require('./config/calDiscount'), 86400000 );
+setInterval(require('./config/calDiscount'), 86400000);
 
 
 let filter = { catID: 1, lbp: 0, ubp:1000, sort:0, page: 1 };
@@ -98,7 +97,7 @@ app.get('/modal', async (req, res)=>{
     if(modalContent.fk_category_id == 2 || modalContent.fk_category_id == 3 || modalContent.fk_category_id == 5 || modalContent.fk_category_id == 6){
         res.render('modalYT', {product: modalContent});
     }else{
-        res.render('modal', { product: modalView[0][0], discount: global.discount });
+        res.render('modal', { product: modalView[0][0] });
     }
 });
 

@@ -302,6 +302,59 @@ async function userProfileFeedController(sessionUser) {
     }
 }
 
+async function setDiscountController(discount) {
+    try{
+        let productList = await db.Products.findAll({where: {
+            fk_category_id: {
+                $notIn: [2,3,5,6]
+            }
+        }});
+        let discount = 0;
+        // Applying Random discount
+        let date = new Date();
+        let day  = date.getDay();
+        if( day === 0  || day === 6 || day === 2){
+            for( let i of productList){
+                console.log('Inside discount');
+                // criteria
+                let view = i.views;
+                if( view > 50){
+                    discount = Math.floor((Math.random() * 20) + 1);
+                }else{
+                    discount = Math.floor((Math.random() * 10) + 1);
+                }
+                // console.log(discount);
+
+                await db.Products.update({
+                    discount: discount
+                },{
+                    where: {
+                        prod_id: i.prod_id
+                    }
+                })
+
+            }
+        }else{
+
+			await db.Products.update({
+	                discount: discount
+		            },{
+			    where: {
+			        fk_category_id: {
+			            $notIn: [2,3,5,6]
+                    }
+                }
+            });
+
+        }
+
+    }catch (err){
+        throw err;
+    }
+
+
+}
+
 module.exports = {
     categoryController,
     featuredController,
@@ -316,5 +369,6 @@ module.exports = {
     uploadController,
     fetchUserProductFeed,
     userProfileFeedController,
-    countCartItemController
+    countCartItemController,
+    setDiscountController
 };

@@ -201,8 +201,13 @@
                                             </li>
 
                                         </ul>
-                                        <div class="__price">$<span><%= k.price%></span>
-                                        </div>
+                                        <%if(k.discount){%>
+                                        <div class="__price" style="text-decoration: line-through;">$<span><%= k.price%></span></div>
+                                            <div class="__price">$<span><%= k.price * (100-k.discount)/100%></span></div>
+                                                <%}else{%>
+                                                <div class="__price" >$<span><%= k.price%></span></div>
+                                                <%}%>
+
                                     </div>
                                 </div>
                             </div>

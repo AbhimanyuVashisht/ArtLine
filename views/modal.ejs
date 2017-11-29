@@ -13,15 +13,11 @@
     <div class="col s12 xs12 l6 __content-right">
         <div class="product-detail">
             <h3 class="fz-3-l"><a><%= product.product_name%></a></h3>
-            <!--<div class="__rating clearfix">-->
-                <!--<div data-rating='4' class="star-ratings"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>-->
-                <!--<p class="color-secondary">(1 customer review)</p>-->
-            <!--</div>-->
             <div class="__price fz-4 font-heading">
-                <%if(discount){%>
-                <%let finalprice = product.price * (100 - discount)/100%>
+                <% if(product.discount){%>
+                <%let finalprice = product.price * (100 - product.discount)/100%>
                 <span class="color-primary" style="text-decoration: line-through">$<%= product.price %></span><br>
-                <span class="color-primary">Applied Discount: <%=discount%>%</span><br>
+                <span class="color-primary">Applied Discount: <%=product.discount%>%</span><br>
                 <span class="colol-primary">$<%=finalprice%></span>
                 <%}else{%>
                 <span class="color-primary">$<%= product.price %></span>
