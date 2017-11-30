@@ -2,11 +2,6 @@ VGG_MEAN = [104, 117, 123]
 
 
 def create_yahoo_image_loader():
-    """Yahoo open_nsfw image loading mechanism
-
-    Approximation of the image loading mechanism defined in
-    https://github.com/yahoo/open_nsfw/blob/79f77bcd45076b000df71742a59d726aa4a36ad1/classify_nsfw.py#L40
-    """
     import numpy as np
     import skimage
     import skimage.io
@@ -52,14 +47,6 @@ def create_yahoo_image_loader():
 
 
 def create_tensorflow_image_loader(session):
-    """Tensorflow image loader
-
-    Results seem to deviate a bit from yahoo image loader due to different
-    jpeg encoders/decoders and different image resize implementations between
-    PIL, skimage and tensorflow
-
-    Only supports jpeg images.
-    """
     import tensorflow as tf
 
     def load_image(image_path):
@@ -82,9 +69,6 @@ def load_base64_tensor(_input):
 
         return _image
 
-    # we have to do some preprocessing with map_fn, since functions like
-    # decode_*, resize_images and crop_to_bounding_box do not support
-    # processing of batches
     image = tf.map_fn(decode_and_process, _input,
                       back_prop=False, dtype=tf.float32)
 
@@ -94,8 +78,6 @@ def load_base64_tensor(_input):
 def __tf_jpeg_process(data):
     import tensorflow as tf
 
-    # The whole jpeg encode/decode dance is neccessary to generate a result
-    # that matches the original model's (caffe) preprocessing
     image = tf.image.decode_jpeg(data, channels=3,
                                  fancy_upscaling=True,
                                  dct_method="INTEGER_FAST")

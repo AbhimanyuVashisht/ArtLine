@@ -171,34 +171,3 @@ class OpenNsfwModel:
 
         return tf.nn.relu(x)
 
-    def __identity_block(self, stage, block, inputs,
-                         filter_depths, kernel_size):
-        filter_depth1, filter_depth2, filter_depth3 = filter_depths
-        conv_name_base = "conv_stage{}_block{}_branch".format(stage, block)
-        bn_name_base = "bn_stage{}_block{}_branch".format(stage, block)
-
-        x = self.__conv2d(
-            name="{}2a".format(conv_name_base),
-            inputs=inputs, filter_depth=filter_depth1, kernel_size=1,
-            stride=1, padding="same",
-        )
-
-        x = tf.nn.relu(x)
-
-        x = self.__conv2d(
-            name="{}2b".format(conv_name_base),
-            inputs=x, filter_depth=filter_depth2, kernel_size=kernel_size,
-            padding="same", stride=1
-        )
-        x = tf.nn.relu(x)
-
-        x = self.__conv2d(
-            name="{}2c".format(conv_name_base),
-            inputs=x, filter_depth=filter_depth3, kernel_size=1,
-            padding="same", stride=1
-        )
-        
-
-        x = tf.add(x, inputs)
-
-        return tf.nn.relu(x)
