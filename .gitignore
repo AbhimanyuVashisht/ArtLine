@@ -3,3 +3,5 @@ node_modules
 admin/importCategory.csv
 admin/importProduct.csv
 toBeIncluded.txt
+*.jpg
+ML/nsfw_uploads/__pycache__/
