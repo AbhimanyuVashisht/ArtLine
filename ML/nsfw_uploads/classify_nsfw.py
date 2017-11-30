@@ -3,7 +3,7 @@ import sys
 import argparse
 import tensorflow as tf
 
-from model import OpenNsfwModel, InputType
+from scrap import OpenNsfwModel, InputType
 from image_utils import create_tensorflow_image_loader
 from image_utils import create_yahoo_image_loader
 

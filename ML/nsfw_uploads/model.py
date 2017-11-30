@@ -41,7 +41,7 @@ class OpenNsfwModel:
         x = self.__conv2d("conv_1", x, filter_depth=64,
                           kernel_size=7, stride=2, padding='valid')
 
-        x = self.__batch_norm("bn_1", x)
+        
         x = tf.nn.relu(x)
 
         x = tf.layers.max_pooling2d(x, pool_size=3, strides=2, padding='same')
@@ -50,45 +50,20 @@ class OpenNsfwModel:
                               filter_depths=[32, 32, 128],
                               kernel_size=3, stride=1)
 
-        x = self.__identity_block(stage=0, block=1, inputs=x,
-                                  filter_depths=[32, 32, 128], kernel_size=3)
-        x = self.__identity_block(stage=0, block=2, inputs=x,
-                                  filter_depths=[32, 32, 128], kernel_size=3)
-
+        
         x = self.__conv_block(stage=1, block=0, inputs=x,
                               filter_depths=[64, 64, 256],
                               kernel_size=3, stride=2)
-        x = self.__identity_block(stage=1, block=1, inputs=x,
-                                  filter_depths=[64, 64, 256], kernel_size=3)
-        x = self.__identity_block(stage=1, block=2, inputs=x,
-                                  filter_depths=[64, 64, 256], kernel_size=3)
-        x = self.__identity_block(stage=1, block=3, inputs=x,
-                                  filter_depths=[64, 64, 256], kernel_size=3)
+        
 
         x = self.__conv_block(stage=2, block=0, inputs=x,
                               filter_depths=[128, 128, 512],
                               kernel_size=3, stride=2)
-        x = self.__identity_block(stage=2, block=1, inputs=x,
-                                  filter_depths=[128, 128, 512], kernel_size=3)
-        x = self.__identity_block(stage=2, block=2, inputs=x,
-                                  filter_depths=[128, 128, 512], kernel_size=3)
-        x = self.__identity_block(stage=2, block=3, inputs=x,
-                                  filter_depths=[128, 128, 512], kernel_size=3)
-        x = self.__identity_block(stage=2, block=4, inputs=x,
-                                  filter_depths=[128, 128, 512], kernel_size=3)
-        x = self.__identity_block(stage=2, block=5, inputs=x,
-                                  filter_depths=[128, 128, 512], kernel_size=3)
-
+        
         x = self.__conv_block(stage=3, block=0, inputs=x,
                               filter_depths=[256, 256, 1024], kernel_size=3,
                               stride=2)
-        x = self.__identity_block(stage=3, block=1, inputs=x,
-                                  filter_depths=[256, 256, 1024],
-                                  kernel_size=3)
-        x = self.__identity_block(stage=3, block=2, inputs=x,
-                                  filter_depths=[256, 256, 1024],
-                                  kernel_size=3)
-
+        
         x = tf.layers.average_pooling2d(x, pool_size=7, strides=1,
                                         padding="valid", name="pool")
 
@@ -149,18 +124,7 @@ class OpenNsfwModel:
             bias_initializer=tf.constant_initializer(
                 self.__get_weights(name, "biases"), dtype=tf.float32))
 
-    def __batch_norm(self, name, inputs, training=False):
-        return tf.layers.batch_normalization(
-            inputs, training=training, epsilon=self.bn_epsilon,
-            gamma_initializer=tf.constant_initializer(
-                self.__get_weights(name, "scale"), dtype=tf.float32),
-            beta_initializer=tf.constant_initializer(
-                self.__get_weights(name, "offset"), dtype=tf.float32),
-            moving_mean_initializer=tf.constant_initializer(
-                self.__get_weights(name, "mean"), dtype=tf.float32),
-            moving_variance_initializer=tf.constant_initializer(
-                self.__get_weights(name, "variance"), dtype=tf.float32),
-            name=name)
+    
 
     """ResNet blocks
     """
@@ -179,15 +143,13 @@ class OpenNsfwModel:
             padding="same"
         )
 
-        shortcut = self.__batch_norm("bn{}".format(shortcut_name_post),
-                                     shortcut)
 
         x = self.__conv2d(
             name="{}2a".format(conv_name_base),
             inputs=inputs, filter_depth=filter_depth1, kernel_size=1,
             stride=stride, padding="same",
         )
-        x = self.__batch_norm("{}2a".format(bn_name_base), x)
+        
         x = tf.nn.relu(x)
 
         x = self.__conv2d(
@@ -195,7 +157,7 @@ class OpenNsfwModel:
             inputs=x, filter_depth=filter_depth2, kernel_size=kernel_size,
             padding="same", stride=1
         )
-        x = self.__batch_norm("{}2b".format(bn_name_base), x)
+        
         x = tf.nn.relu(x)
 
         x = self.__conv2d(
@@ -203,7 +165,7 @@ class OpenNsfwModel:
             inputs=x, filter_depth=filter_depth3, kernel_size=1,
             padding="same", stride=1
         )
-        x = self.__batch_norm("{}2c".format(bn_name_base), x)
+        
 
         x = tf.add(x, shortcut)
 
@@ -221,7 +183,6 @@ class OpenNsfwModel:
             stride=1, padding="same",
         )
 
-        x = self.__batch_norm("{}2a".format(bn_name_base), x)
         x = tf.nn.relu(x)
 
         x = self.__conv2d(
@@ -229,7 +190,6 @@ class OpenNsfwModel:
             inputs=x, filter_depth=filter_depth2, kernel_size=kernel_size,
             padding="same", stride=1
         )
-        x = self.__batch_norm("{}2b".format(bn_name_base), x)
         x = tf.nn.relu(x)
 
         x = self.__conv2d(
@@ -237,7 +197,7 @@ class OpenNsfwModel:
             inputs=x, filter_depth=filter_depth3, kernel_size=1,
             padding="same", stride=1
         )
-        x = self.__batch_norm("{}2c".format(bn_name_base), x)
+        
 
         x = tf.add(x, inputs)
 
