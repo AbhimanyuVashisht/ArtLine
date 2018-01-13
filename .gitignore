@@ -5,3 +5,6 @@ admin/importProduct.csv
 toBeIncluded.txt
 *.jpg
 ML/nsfw_uploads/__pycache__/
+public_static/generatedInvoice/*
+admin/ProjectUser.sql
+projectsecrets.json
